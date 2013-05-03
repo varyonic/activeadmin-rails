@@ -130,6 +130,31 @@ describe ActiveAdmin, "Routing", type: :routing do
           expect({delete: "/admin/posts/1/do_something"}).to be_routable
         end
       end
+
+      context "with routing constraint" do
+        before do
+          ActiveAdmin.setup do |config|
+            config.routing_constraint = { :subdomain => 'admin' }
+          end
+        end
+
+        after do
+          ActiveAdmin.setup do |config|
+            config.routing_constraint = nil
+          end
+        end
+
+        let(:url)     { "http://admin.domain.com"   }
+        let(:bad_url) { "http://bad_url.domain.com" }
+
+        it "does map :admin namespace to the specified subdomain" do
+          expect(get(url)).to route_to('admin/dashboard#index')
+        end
+
+        it "should not route unrecongized constraint" do
+          expect(get(bad_url)).to_not be_routable
+        end
+      end
     end
   end
 

@@ -20,7 +20,13 @@ module ActiveAdmin
     def define_root_routes(router)
       router.instance_exec @application.namespaces do |namespaces|
         namespaces.each do |namespace|
-          if namespace.root?
+          if namespace.routing_constraint.present?
+            constraints namespace.routing_constraint do
+              scope :module => namespace.name, :as => namespace.name do
+                instance_eval(&aa_router.root_and_dashboard_routes(namespace))
+              end
+            end
+          elsif namespace.root?
             root namespace.root_to_options.merge(to: namespace.root_to)
           else
             namespace namespace.name, namespace.route_options.dup do
@@ -53,12 +59,29 @@ module ActiveAdmin
             end
           end
 
+<<<<<<< HEAD
           # Add on the namespace if required
           unless config.namespace.root?
             nested = routes
             routes = Proc.new do
               namespace config.namespace.name, config.namespace.route_options.dup do
                 instance_exec &nested
+=======
+          if config.namespace.routing_constraint.present?
+            routes_in_namespace = route_definition_block.dup
+            route_definition_block = Proc.new do
+              constraints config.namespace.routing_constraint do
+                scope :module => config.namespace.name, :as => config.namespace.name do
+                  instance_eval(&routes_in_namespace)
+                end
+              end
+            end
+          elsif !config.namespace.root?
+            routes_in_namespace = route_definition_block.dup
+            route_definition_block = Proc.new do
+              namespace config.namespace.name do
+                instance_eval(&routes_in_namespace)
+>>>>>>> New #routing_constraint setting for advanced namespace routing options
               end
             end
           end
