@@ -1,4 +1,5 @@
 require 'rails_helper'
+require "rspec/mocks/standalone"
 
 describe ActiveAdmin::FormBuilder do
 
@@ -33,7 +34,7 @@ describe ActiveAdmin::FormBuilder do
     options = {url: helpers.posts_path}.merge(options)
 
     render_arbre_component({form_object: form_object, form_options: options, form_block: block}, helpers) do
-      text_node active_admin_form_for(assigns[:form_object], assigns[:form_options], &assigns[:form_block])
+      active_admin_form_for(assigns[:form_object], assigns[:form_options], &assigns[:form_block])
     end.to_s
   end
 
@@ -187,7 +188,7 @@ describe ActiveAdmin::FormBuilder do
           f.input :title
           f.input :body
         end
-        f.instance_eval do
+        f.form_builder.instance_eval do
           @object.author = User.new
         end
         f.semantic_fields_for :author do |author|
@@ -237,7 +238,7 @@ describe ActiveAdmin::FormBuilder do
           f.input :title
           f.input :body
         end
-        f.instance_eval do
+        f.form_builder.instance_eval do
           @object.author = User.new
         end
         f.inputs name: 'Author', for: :author do |author|
