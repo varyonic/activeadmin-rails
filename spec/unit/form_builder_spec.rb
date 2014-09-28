@@ -51,6 +51,10 @@ describe ActiveAdmin::FormBuilder do
       end
     end
 
+    # Added to check strict backward compatibility during refactoring.
+    it "should generate html" do
+      expect(body.to_s).to eq "<form accept-charset=\"UTF-8\" action=\"/posts\" class=\"formtastic post\" id=\"new_post\" method=\"post\" novalidate=\"novalidate\"><div style=\"margin:0;padding:0;display:inline\"><input name=\"utf8\" type=\"hidden\" value=\"&#x2713;\" /></div><fieldset class=\"inputs\"><ol><li class=\"string input optional stringish\" id=\"post_title_input\"><label class=\"label\" for=\"post_title\">Title</label><input id=\"post_title\" maxlength=\"255\" name=\"post[title]\" type=\"text\" />\n\n</li><li class=\"text input optional\" id=\"post_body_input\"><label class=\"label\" for=\"post_body\">Body</label><textarea id=\"post_body\" name=\"post[body]\" rows=\"20\">\n</textarea>\n\n</li></ol></fieldset><fieldset class=\"actions\"><ol><li class=\"action input_action \" id=\"post_submit_action\"><input name=\"commit\" type=\"submit\" value=\"Submit Me\" /></li><li class=\"action input_action \" id=\"post_submit_action\"><input name=\"commit\" type=\"submit\" value=\"Another Button\" /></li></ol></fieldset></form>"
+    end
    it "should generate a text input" do
       expect(body).to have_tag("input", attributes: { type: "text",
                                                      name: "post[title]" })
@@ -66,6 +70,16 @@ describe ActiveAdmin::FormBuilder do
                                                           value: "Submit Me" })
       expect(body).to have_tag("input", attributes: {  type: "submit",
                                                           value: "Another Button" })
+    end
+    it "should generate the same as before" do
+      # puts body.html_safe
+      previous_output = %q{<form accept-charset="UTF-8" action="/posts" class="formtastic post" id="new_post" method="post" novalidate="novalidate"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div><fieldset class="inputs"><ol><li class="string input optional stringish" id="post_title_input"><label class="label" for="post_title">Title</label><input id="post_title" maxlength="255" name="post[title]" type="text" />
+
+</li><li class="text input optional" id="post_body_input"><label class="label" for="post_body">Body</label><textarea id="post_body" name="post[body]" rows="20">
+</textarea>
+
+</li></ol></fieldset><fieldset class="actions"><ol><li class="action input_action " id="post_submit_action"><input name="commit" type="submit" value="Submit Me" /></li><li class="action input_action " id="post_submit_action"><input name="commit" type="submit" value="Another Button" /></li></ol></fieldset></form>}
+      expect(body).to eq previous_output
     end
   end
 
@@ -262,6 +276,12 @@ describe ActiveAdmin::FormBuilder do
       it "should translate the association name in header" do
         with_translation activerecord: {models: {post: {one: 'Blog Post', other: 'Blog Posts'}}} do
           expect(body).to have_tag('h3', 'Blog Posts')
+          # puts body.html_safe
+          expect(body).to eq %q{<form accept-charset="UTF-8" action="/categories" class="formtastic category" id="new_category" method="post" novalidate="novalidate"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div><div class="has_many_container posts"><h3>Blog Posts</h3><fieldset class="inputs has_many_fields"><ol><li class="string input optional stringish" id="category_posts_attributes_0_title_input"><label class="label" for="category_posts_attributes_0_title">Title</label><input id="category_posts_attributes_0_title" maxlength="255" name="category[posts_attributes][0][title]" type="text" />
+
+</li><li><a href="#" class="button has_many_remove">Remove</a></li></ol></fieldset><a href="#" class="button has_many_add" data-html="&lt;fieldset class=&quot;inputs has_many_fields&quot;&gt;&lt;ol&gt;&lt;li class=&quot;string input optional stringish&quot; id=&quot;category_posts_attributes_NEW_POST_RECORD_title_input&quot;&gt;&lt;label class=&quot;label&quot; for=&quot;category_posts_attributes_NEW_POST_RECORD_title&quot;&gt;Title&lt;/label&gt;&lt;input id=&quot;category_posts_attributes_NEW_POST_RECORD_title&quot; maxlength=&quot;255&quot; name=&quot;category[posts_attributes][NEW_POST_RECORD][title]&quot; type=&quot;text&quot; /&gt;
+
+&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;#&quot; class=&quot;button has_many_remove&quot;&gt;Remove&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/fieldset&gt;" data-placeholder="NEW_POST_RECORD">Add New Blog Post</a></div></form>}
         end
       end
 
@@ -278,6 +298,12 @@ describe ActiveAdmin::FormBuilder do
       it "should translate the attribute name" do
         with_translation activerecord: {attributes: {post: {title: 'A very nice title'}}} do
           expect(body).to have_tag 'label', 'A very nice title'
+          # puts body.html_safe
+          expect(body).to eq %q{<form accept-charset="UTF-8" action="/categories" class="formtastic category" id="new_category" method="post" novalidate="novalidate"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div><div class="has_many_container posts"><h3>Post</h3><fieldset class="inputs has_many_fields"><ol><li class="string input optional stringish" id="category_posts_attributes_0_title_input"><label class="label" for="category_posts_attributes_0_title">A very nice title</label><input id="category_posts_attributes_0_title" maxlength="255" name="category[posts_attributes][0][title]" type="text" />
+
+</li><li><a href="#" class="button has_many_remove">Remove</a></li></ol></fieldset><a href="#" class="button has_many_add" data-html="&lt;fieldset class=&quot;inputs has_many_fields&quot;&gt;&lt;ol&gt;&lt;li class=&quot;string input optional stringish&quot; id=&quot;category_posts_attributes_NEW_POST_RECORD_title_input&quot;&gt;&lt;label class=&quot;label&quot; for=&quot;category_posts_attributes_NEW_POST_RECORD_title&quot;&gt;A very nice title&lt;/label&gt;&lt;input id=&quot;category_posts_attributes_NEW_POST_RECORD_title&quot; maxlength=&quot;255&quot; name=&quot;category[posts_attributes][NEW_POST_RECORD][title]&quot; type=&quot;text&quot; /&gt;
+
+&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;#&quot; class=&quot;button has_many_remove&quot;&gt;Remove&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/fieldset&gt;" data-placeholder="NEW_POST_RECORD">Add New Post</a></div></form>}
         end
       end
 
@@ -316,6 +342,12 @@ describe ActiveAdmin::FormBuilder do
 
       it "should accept a block with a second argument" do
         expect(body).to have_tag("label", "Title 1")
+        # puts body.html_safe
+        expect(body).to eq %q{<form accept-charset="UTF-8" action="/categories" class="formtastic category" id="new_category" method="post" novalidate="novalidate"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div><div class="has_many_container posts"><h3>Post</h3><fieldset class="inputs has_many_fields"><ol><li class="string input optional stringish" id="category_posts_attributes_0_title_input"><label class="label" for="category_posts_attributes_0_title">Title 1</label><input id="category_posts_attributes_0_title" maxlength="255" name="category[posts_attributes][0][title]" type="text" />
+
+</li><li><a href="#" class="button has_many_remove">Remove</a></li></ol></fieldset><a href="#" class="button has_many_add" data-html="&lt;fieldset class=&quot;inputs has_many_fields&quot;&gt;&lt;ol&gt;&lt;li class=&quot;string input optional stringish&quot; id=&quot;category_posts_attributes_NEW_POST_RECORD_title_input&quot;&gt;&lt;label class=&quot;label&quot; for=&quot;category_posts_attributes_NEW_POST_RECORD_title&quot;&gt;Title 1&lt;/label&gt;&lt;input id=&quot;category_posts_attributes_NEW_POST_RECORD_title&quot; maxlength=&quot;255&quot; name=&quot;category[posts_attributes][NEW_POST_RECORD][title]&quot; type=&quot;text&quot; /&gt;
+
+&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;#&quot; class=&quot;button has_many_remove&quot;&gt;Remove&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/fieldset&gt;" data-placeholder="NEW_POST_RECORD">Add New Post</a></div></form>}
       end
 
       it "should add a custom header" do
@@ -344,6 +376,11 @@ describe ActiveAdmin::FormBuilder do
 
       it "should render the nested form" do
         expect(body).to have_tag("input", attributes: {name: "category[posts_attributes][0][title]"})
+        # puts body.html_safe
+        previous_output = %q{<form accept-charset="UTF-8" action="/categories" class="formtastic category" id="new_category" method="post" novalidate="novalidate"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div><div class="has_many_container posts"><fieldset class="inputs has_many_fields"><ol><li class="string input optional stringish" id="category_posts_attributes_0_title_input"><label class="label" for="category_posts_attributes_0_title">Title</label><input id="category_posts_attributes_0_title" maxlength="255" name="category[posts_attributes][0][title]" type="text" />
+
+</li><li><a href="#" class="button has_many_remove">Remove</a></li></ol></fieldset></div></form>}
+        expect(body).to eq previous_output
       end
     end
 
@@ -495,6 +532,13 @@ describe ActiveAdmin::FormBuilder do
         end
 
         it "should wrap the has_many fieldset in an li" do
+          # puts body.html_safe
+          previous_output = %q{<form accept-charset="UTF-8" action="/categories" class="formtastic category" id="new_category" method="post" novalidate="novalidate"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div><fieldset class="inputs"><legend><span>Field Wrapper</span></legend><ol><li class="has_many_container posts"><h3>Post</h3><fieldset class="inputs has_many_fields"><ol><li class="string input optional stringish" id="category_posts_attributes_0_title_input"><label class="label" for="category_posts_attributes_0_title">Title</label><input id="category_posts_attributes_0_title" maxlength="255" name="category[posts_attributes][0][title]" type="text" />
+
+</li><li><a href="#" class="button has_many_remove">Remove</a></li></ol></fieldset><a href="#" class="button has_many_add" data-html="&lt;fieldset class=&quot;inputs has_many_fields&quot;&gt;&lt;ol&gt;&lt;li class=&quot;string input optional stringish&quot; id=&quot;category_posts_attributes_NEW_POST_RECORD_title_input&quot;&gt;&lt;label class=&quot;label&quot; for=&quot;category_posts_attributes_NEW_POST_RECORD_title&quot;&gt;Title&lt;/label&gt;&lt;input id=&quot;category_posts_attributes_NEW_POST_RECORD_title&quot; maxlength=&quot;255&quot; name=&quot;category[posts_attributes][NEW_POST_RECORD][title]&quot; type=&quot;text&quot; /&gt;
+
+&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;#&quot; class=&quot;button has_many_remove&quot;&gt;Remove&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/fieldset&gt;" data-placeholder="NEW_POST_RECORD">Add New Post</a></li></ol></fieldset></form>}
+          expect(body).to eq previous_output
           expect(Capybara.string(body)).to have_css("ol > li.has_many_container")
         end
 

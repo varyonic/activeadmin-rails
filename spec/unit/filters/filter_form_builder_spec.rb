@@ -47,6 +47,12 @@ describe ActiveAdmin::Filters::ViewHelper do
     end
 
     it "should generate a filter button" do
+      # puts body.html_safe
+      previous_output = %q{<form accept-charset="UTF-8" action="/posts" class="filter_form" id="new_q" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div><div class="filter_form_field filter_string select_and_search"><label class="label" for="q_title">Title</label><select id="" name=""><option value="title_contains" selected="selected">Contains</option>
+<option value="title_equals">Equals</option>
+<option value="title_starts_with">Starts with</option>
+<option value="title_ends_with">Ends with</option></select><input id="q_title" maxlength="255" name="q[title_contains]" type="text" /></div><div class="buttons"><input name="commit" type="submit" value="Filter" /><a href="#" class="clear_filters_btn">Clear Filters</a></div></form>}
+      expect(body.html_safe).to eq previous_output
       expect(body).to have_tag("input", attributes: { type: "submit",
                                                         value: "Filter" })
     end
