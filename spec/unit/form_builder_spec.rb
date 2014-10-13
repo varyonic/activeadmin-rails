@@ -137,10 +137,11 @@ describe ActiveAdmin::FormBuilder do
         h3 'Footer'
         f.actions
       end
-      expect(Capybara.string(body)).to have_css("div > h1")
-      expect(Capybara.string(body)).to have_css("h1", count: 1)
-      expect(Capybara.string(body)).to have_css(".inputs > ol > span")
-      expect(Capybara.string(body)).to have_css("span", count: 2)
+      page = Capybara.string(body)
+      expect(page).to have_css("div > h1")
+      expect(page).to have_css("h1", count: 1)
+      expect(page).to have_css(".inputs > ol > span")
+      expect(page).to have_css("span", count: 2)
     end
     it "should allow a simplified syntax" do
       body = build_form do |f|
@@ -155,10 +156,11 @@ describe ActiveAdmin::FormBuilder do
         h3 'Footer'
         actions
       end
-      expect(Capybara.string(body)).to have_css("div > h1")
-      expect(Capybara.string(body)).to have_css("h1", count: 1)
-      expect(Capybara.string(body)).to have_css(".inputs > ol > span")
-      expect(Capybara.string(body)).to have_css("span", count: 2)
+      page = Capybara.string(body)
+      expect(page).to have_css("div > h1")
+      expect(page).to have_css("h1", count: 1)
+      expect(page).to have_css(".inputs > ol > span")
+      expect(page).to have_css("span", count: 2)
     end
   end
 
