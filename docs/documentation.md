@@ -8,73 +8,55 @@ layout: default
     Active Admin Documentation
 </h2>
 
-<div class="docs-content">
-    <p>Active Admin is a framework for creating administration style interfaces. It abstracts common business
-        application patterns to make it simple for developers to implement beautiful and elegant interfaces with very
-        little effort.</p>
+Active Admin is a framework for creating administration style interfaces. It abstracts common business application patterns to make it simple for developers to implement beautiful and elegant interfaces with very
+little effort.
 
-    <h3 id='getting_started'>Getting Started</h3>
+### Getting Started
 
-    <p>Active Admin is released as a Ruby Gem. The gem is to be installed within a Ruby on Rails 3 application. To
+Active Admin is released as a Ruby Gem. The gem is to be installed within a Ruby on Rails 4 application. To
         install, simply add the following to your Gemfile:</p>
 
-    <div class='highlight'><pre><code class='ruby'> <span class='c1'># Gemfile</span>
-        <span class='n'>gem</span> <span class='s1'>&#39;activeadmin&#39;</span>
-    </code></pre>
-    </div>
-    <p>If you are using Rails &gt;= 3.1, you must also include a beta version of MetaSearch and sass-rails:</p>
+```ruby
+# Gemfile
+gem 'activeadmin', github: 'activeadmin'
+```
 
-    <div class='highlight'><pre><code class='ruby'> <span class='c1'># Gemfile in Rails &gt;= 3.1</span>
-        <span class='n'>gem</span> <span class='s1'>&#39;activeadmin&#39;</span>
-        <span class='n'>gem</span> <span class='s1'>&#39;sass-rails&#39;</span>
-        <span class='n'>gem</span> <span class='s2'>&quot;meta_search&quot;</span><span class='p'>,</span> <span
-                class='s1'>&#39;&gt;= 1.1.0.pre&#39;</span>
-    </code></pre>
-    </div>
-    <p>After updating your bundle, run the installer</p>
+After updating your bundle, run the installer
 
-    <div class='highlight'><pre><code class='bash'> <span class='nv'>$&gt;</span> rails generate active_admin:install
-    </code></pre>
-    </div>
-    <p>The installer creates an initializer used for configuring defaults used by Active Admin as well as a new folder
-        at <tt>app/admin</tt> to put all your admin configurations.</p>
+```bash
+rails generate active_admin:install
+```
 
-    <p>Migrate your db and start the server:</p>
+The installer creates an initializer used for configuring defaults used by Active Admin as well as a new folder at <tt>app/admin</tt> to put all your admin configurations.
 
-    <div class='highlight'><pre><code class='bash'> <span class='nv'>$&gt;</span> rake db:migrate
-        <span class='nv'>$&gt;</span> rails server
-    </code></pre>
-    </div>
-    <p>Visit http://localhost:3000/admin and log in using:</p>
+Migrate your db and start the server:
 
-    <ul>
-        <li><em>User</em>: admin@example.com</li>
+```bash
+$> rake db:migrate
+$> rails server
+```
 
-        <li><em>Password</em>: password</li>
-    </ul>
+Visit http://localhost:3000/admin and log in using:
 
-    <p>Voila! You&#8217;re on your brand new Active Admin dashboard.</p>
+* <em>User</em>: admin@example.com
+* <em>Password</em>: password
 
-    <p>To register your first model, run:</p>
+Voila! You&#8217;re on your brand new Active Admin dashboard.
 
-    <div class='highlight'><pre><code class='bash'> <span class='nv'>$&gt;</span> rails generate active_admin:resource
-        <span class='o'>[</span>MyModelName<span class='o'>]</span>
-    </code></pre>
-    </div>
-    <p>This creates a file at <tt>app/admin/my_model_names.rb</tt> for configuring the resource. Refresh your web
-        browser to see the interface.</p>
+To register your first model, run:
 
-    <h3 id='next_steps'>Next Steps</h3>
+```bash
+$> rails generate active_admin:resource
+        [MyModelName]
+```
 
-    <p>Now that you have a working Active Admin installation, learn how to customize it:</p>
+This creates a file at <tt>app/admin/my_model_names.rb</tt> for configuring the resource. Refresh your web browser to see the interface.</p>
 
-    <ul>
-        <li><a href='{{ site.baseurl }}/docs/3-index-pages.html'>Customize the Index Page</a></li>
+### Next Steps
 
-        <li><a href='{{ site.baseurl }}/docs/5-forms.html'>Customize the New and Edit Form</a></li>
+Now that you have a working Active Admin installation, learn how to customize it:
 
-        <li><a href='{{ site.baseurl }}/docs/6-show-screens.html'>Customize the Show Page</a></li>
-
-        <li><a href='{{ site.baseurl }}/docs/2-resource-customization.html'>Customize the Resource in General</a></li>
-    </ul>
-</div>
+* <a href='{{ site.baseurl }}/docs/3-index-pages.html'>Customize the Index Page</a>
+* <a href='{{ site.baseurl }}/docs/5-forms.html'>Customize the New and Edit Form</a>
+* <a href='{{ site.baseurl }}/docs/6-show-screens.html'>Customize the Show Page</a>
+* <a href='{{ site.baseurl }}/docs/2-resource-customization.html'>Customize the Resource in General</a>
