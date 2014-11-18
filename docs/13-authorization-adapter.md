@@ -104,7 +104,7 @@ class OnlyDashboard < ActiveAdmin::AuthorizationAdapter
   def authorized?(action, subject = nil)
     case subject
     when ActiveAdmin::Page
-      action == :read && subject.name == "Dashboard"
+      action == :read && subject.name == "Dashboard" && subject.namespace.name == :admin
     else
       false
     end
@@ -229,7 +229,7 @@ class Ability
     can :manage, Post
     can :read, User
     can :manage, User, :id => user.id
-    can :read, ActiveAdmin::Page, :name => "Dashboard"
+    can :read, ActiveAdmin::Page, :name => "Dashboard", :namespace_name => :admin
   end
 
 end
