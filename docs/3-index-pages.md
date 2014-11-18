@@ -175,7 +175,7 @@ scope ->{ Date.today.strftime '%A' }, :published_today
 scope("Inactive") { |scope| scope.where(active: false) }
 
 # conditionally show a custom controller scope
-scope "Published", :if => proc { current_admin_user.can? :manage, Posts } do |posts|
+scope "Published", if: proc { current_admin_user.can? :manage, Posts } do |posts|
   posts.published
 end
 ```
