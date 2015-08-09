@@ -58,6 +58,8 @@ index do
 end
 ```
 
+## Defining Actions
+
 To setup links to View, Edit and Delete a resource, use the `actions` method:
 
 ```ruby
