@@ -96,7 +96,7 @@ and will be scoped accordingly.
 
 ## Managing Access to Pages
 
-Pages, just like resources, get authorized also. When authorization a page, the
+Pages, just like resources, get authorized too. When authorizing a page, the
 subject will be an instance of `ActiveAdmin::Page`.
 
 ```ruby
