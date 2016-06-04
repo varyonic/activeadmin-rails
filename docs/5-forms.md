@@ -150,7 +150,7 @@ This is particularly useful to display errors on virtual or hidden attributes.
 
 # Tabs
 
-You can arrage content in tabs as shown below:
+You can arrange content in tabs as shown below:
 
 ```ruby
   form do |f|
