@@ -47,13 +47,12 @@ After do
   end
 end
 
-require "capybara/cuprite"
+require 'capybara/rails'
+require 'capybara/cucumber'
+require 'capybara/session'
+require 'selenium-webdriver'
 
-Capybara.register_driver(:cuprite) do |app|
-  Capybara::Cuprite::Driver.new(app, process_timeout: 30, timeout: 30)
-end
-
-Capybara.javascript_driver = :cuprite
+Capybara.javascript_driver = :selenium_chrome_headless
 
 Capybara.server = :webrick
 
