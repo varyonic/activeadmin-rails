@@ -45,5 +45,6 @@ group :test do
   gem 'launchy'
   gem 'rspec-rails'
   gem 'i18n-spec'
-  gem 'poltergeist'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
 end
