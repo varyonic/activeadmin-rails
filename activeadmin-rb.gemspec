@@ -30,4 +30,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'ransack', '>= 1.8.7'
   s.add_dependency 'sass-rails'
   s.add_dependency 'sprockets'
+  s.add_dependency 'sprockets-es6', '>= 0.9.2'
 end
