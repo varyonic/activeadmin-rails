@@ -10,7 +10,6 @@ Google 'why fork open source' for relevant articles.
 [![Quality         ][codeclimate_badge]][codeclimate]
 [![Coverage        ][codecov_badge]][codecov]
 [![Inch CI         ][inch_badge]][inch]
-[![Gratipay Team   ][gratipay_badge]][gratipay]
 
 ## Goals
 
@@ -37,12 +36,6 @@ Google Groups, IRC #activeadmin and Gitter are not actively monitored.
 
 The [contributing guide][contributing]
 is a good place to start. If you have questions, feel free to ask.
-
-## Want to support us?
-
-You can support us with a weekly tip via [Gratipay][gratipay.com].
-
-[![Support via Gratipay][gratipay_button]][gratipay]
 
 ## Dependencies
 
@@ -74,13 +67,9 @@ Tool                  | Description
 [codecov]: https://codecov.io/gh/activeadmin/activeadmin
 [inch_badge]: http://inch-ci.org/github/activeadmin/activeadmin.svg?branch=master
 [inch]: http://inch-ci.org/github/activeadmin/activeadmin
-[gratipay_badge]: https://img.shields.io/gratipay/team/Active-Admin.svg
-[gratipay]: https://gratipay.com/Active-Admin/
 
 [docs]: http://activeadmin.info/0-installation.html
 [demo]: http://demo.activeadmin.info/admin
 [wiki]: https://github.com/activeadmin/activeadmin/wiki
 [stackoverflow]: http://stackoverflow.com/questions/tagged/activeadmin
 [contributing]: https://github.com/activeadmin/activeadmin/blob/master/CONTRIBUTING.md
-[gratipay.com]: https://gratipay.com
-[gratipay_button]: https://cdn.rawgit.com/gratipay/gratipay-badge/2.1.3/dist/gratipay.png
