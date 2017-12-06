@@ -8,6 +8,7 @@ module ActiveAdmin
     include AutoLinkHelper
     include BreadcrumbHelper
     include DisplayHelper
+    include LayoutHelper
     include MethodOrProcHelper
     include SidebarHelper
     include FormHelper
