@@ -1,1 +1,1 @@
-insert_tag renderer_for(:new)
+insert_tag ActiveAdmin::Views::Pages::Form

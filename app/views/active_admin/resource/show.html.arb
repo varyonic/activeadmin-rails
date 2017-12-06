@@ -1,1 +1,1 @@
-insert_tag renderer_for(:show)
+insert_tag ActiveAdmin::Views::Pages::Show
