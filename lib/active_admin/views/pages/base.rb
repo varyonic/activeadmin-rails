@@ -4,6 +4,7 @@ module ActiveAdmin
       class Base < Arbre::HTML::Document
 
         def build(*args)
+          @main_content = args[0]
           build_active_admin_head
           build_page
         end
@@ -91,7 +92,7 @@ module ActiveAdmin
         def build_main_content_wrapper
           div id: "main_content_wrapper" do
             div id: "main_content" do
-              main_content
+              @main_content || main_content
             end
           end
         end
