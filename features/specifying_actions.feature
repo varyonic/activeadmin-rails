@@ -74,6 +74,7 @@ Feature: Specifying Actions
           end
 
           member_action :review do
+            @page_title = "My Page Title"
             @post = Post.find(params[:id])
           end
         end
@@ -88,7 +89,7 @@ Feature: Specifying Actions
     And I follow "View"
     And I follow "Review"
     Then I should see "Review: Hello World"
-    And I should see the page title "Review"
+    And I should see the page title "My Page Title"
     And I should see the Active Admin layout
 
   Scenario: Specify a custom member action with multiple http methods
