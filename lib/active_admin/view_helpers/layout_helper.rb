@@ -20,7 +20,23 @@ module ActiveAdmin
       end
 
       def page_title
+        params[:action].to_sym == :index ? page_page_title : custom_action_page_title
+      end
+
+      def page_page_title
+        if page_presenter[:title]
+          render_or_call_method_or_proc_on self, page_presenter[:title]
+        else
+          active_admin_config.name
+        end
+      end
+
+      def custom_action_page_title
         assigns[:page_title] ||= I18n.t("active_admin.#{params[:action]}", default: params[:action].to_s.titleize)
+      end
+
+      def page_presenter
+        active_admin_config.get_page_presenter(:index) || ActiveAdmin::PagePresenter.new
       end
 
       # Returns the sidebar sections to render for the current action
