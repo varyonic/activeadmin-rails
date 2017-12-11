@@ -20,7 +20,22 @@ module ActiveAdmin
       end
 
       def page_title
-        params[:action].to_sym == :index ? page_page_title : custom_action_page_title
+        if !ResourceController::ACTIVE_ADMIN_ACTIONS.include?(params[:action].to_sym)
+          custom_action_page_title
+        elsif active_admin_config.is_a?(Page)
+          page_page_title
+        else
+          resource_page_title
+        end
+      end
+
+      def resource_page_title
+        config = page_presenter
+        if Proc === config[:title]
+          instance_exec(&config[:title])
+        else
+          config[:title] || assigns[:page_title] || active_admin_config.plural_resource_label
+        end
       end
 
       def page_page_title
@@ -35,8 +50,13 @@ module ActiveAdmin
         assigns[:page_title] ||= I18n.t("active_admin.#{params[:action]}", default: params[:action].to_s.titleize)
       end
 
+      # Retrieves the given page presenter, or uses the default.
       def page_presenter
-        active_admin_config.get_page_presenter(:index) || ActiveAdmin::PagePresenter.new
+        if active_admin_config.is_a?(Page)
+          active_admin_config.get_page_presenter(:index) || ActiveAdmin::PagePresenter.new
+        else
+          active_admin_config.get_page_presenter(:index, params[:as]) || ActiveAdmin::PagePresenter.new(as: :table)
+        end
       end
 
       # Returns the sidebar sections to render for the current action

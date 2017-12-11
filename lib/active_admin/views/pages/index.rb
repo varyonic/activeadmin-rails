@@ -4,15 +4,9 @@ module ActiveAdmin
   module Views
     module Pages
 
-      class Index < Base
+      class Index < ActiveAdmin::Component
 
-        def title
-          if Proc === config[:title]
-            controller.instance_exec &config[:title]
-          else
-            config[:title] || assigns[:page_title] || active_admin_config.plural_resource_label
-          end
-        end
+        builder_method :index_page_main_content
 
         # Retrieves the given page presenter, or uses the default.
         def config
@@ -22,7 +16,7 @@ module ActiveAdmin
 
         # Renders the index configuration that was set in the
         # controller. Defaults to rendering the ActiveAdmin::Pages::Index::Table
-        def main_content
+        def build
           wrap_with_batch_action_form do
             build_table_tools
             build_collection
