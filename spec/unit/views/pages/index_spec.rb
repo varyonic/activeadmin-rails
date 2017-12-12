@@ -1,58 +1,91 @@
 require 'rails_helper'
 
-RSpec.describe ActiveAdmin::Views::Pages::Index do
+RSpec.describe ActiveAdmin::Views::Pages::Index, type: :request do
+  include Rails.application.routes.url_helpers
+
   describe "#title" do
     let!(:application){ ActiveAdmin::Application.new }
-    let(:namespace){ ActiveAdmin::Namespace.new(application, "Admin") }
-    let!(:params){ ActionController::Parameters.new(controller: "UsersController", action: "edit") }
-    let(:helpers) do
-      helpers = mock_action_view
-      allow(helpers).to receive(:active_admin_config).and_return(namespace.register(Post))
-      allow(helpers).to receive(:params).and_return(params)
-      helpers
-    end
+    let(:namespace){ application.namespace(:test) }
+    let(:page) { Capybara.string(response.body) }
 
-    let(:arbre_context) do
-      OpenStruct.new(params: params, helpers: helpers, assigns: {})
+    around do |example|
+      with_temp_application(application) { example.call }
+      namespace.unload!
+      ActiveSupport::Dependencies.clear
     end
 
     context "when config[:title] is assigned" do
       context "with a Proc" do
+        let(:resource) do
+          namespace.register User do
+            index(title: ->{ "My Page Title" })
+          end
+        end
+
         it "should return the value of the assigned Proc" do
-          page = ActiveAdmin::Views::Pages::Index.new(arbre_context)
-          allow(page).to receive(:config).and_return(title: ->{ "My Page Title" })
+          load_resources { resource }
+          get resource.route_collection_path
           expect(page.title).to eq "My Page Title"
         end
       end
 
       context "with a String" do
+        let(:resource) do
+          namespace.register User do
+            index(title: "My Page Title")
+          end
+        end
+
         it "should return the assigned String" do
-          page = ActiveAdmin::Views::Pages::Index.new(arbre_context)
-          allow(page).to receive(:config).and_return(title: ->{ "My Page Title" })
+          load_resources { resource }
+          get resource.route_collection_path
           expect(page.title).to eq "My Page Title"
         end
       end
 
       context "with a Integer" do
+        let(:resource) do
+          namespace.register User do
+            index(title: 1)
+          end
+        end
+
         it "should return the Integer" do
-          page = ActiveAdmin::Views::Pages::Index.new(arbre_context)
-          allow(page).to receive(:config).and_return(title: 1)
-          expect(page.title).to eq 1
+          load_resources { resource }
+          get resource.route_collection_path
+          expect(page.title).to eq '1'
         end
       end
     end
 
     context "when page_title is assigned" do
+      let(:resource) do
+        namespace.register User do
+          controller do
+            def index
+              @page_title = "My Page Title"
+              index!
+            end
+          end
+        end
+      end
+
       it "should return the set page title" do
-        arbre_context.assigns[:page_title] = "My Page Title"
-        page = ActiveAdmin::Views::Pages::Index.new(arbre_context)
+        load_resources { resource }
+        get resource.route_collection_path
         expect(page.title).to eq "My Page Title"
       end
     end
 
     context "when page_title is not assigned" do
+      let(:resource) do
+        namespace.register Post do
+        end
+      end
+
       it "should return the correct I18n text" do
-        page = ActiveAdmin::Views::Pages::Index.new(arbre_context)
+        load_resources { resource }
+        get resource.route_collection_path
         expect(page.title).to eq "Posts"
       end
     end
