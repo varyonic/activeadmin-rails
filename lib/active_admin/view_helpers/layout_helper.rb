@@ -24,8 +24,10 @@ module ActiveAdmin
           custom_action_page_title
         elsif active_admin_config.is_a?(Page)
           page_page_title
-        else
+        elsif params[:action].to_sym == :index
           resource_page_title
+        else
+          form_page_title
         end
       end
 
@@ -35,6 +37,14 @@ module ActiveAdmin
           instance_exec(&config[:title])
         else
           config[:title] || assigns[:page_title] || active_admin_config.plural_resource_label
+        end
+      end
+
+      def form_page_title
+        if form_presenter[:title]
+          render_or_call_method_or_proc_on(resource, form_presenter[:title])
+        else
+          assigns[:page_title] || ActiveAdmin::Localizers.resource(active_admin_config).t("#{normalized_action}_model")
         end
       end
 
@@ -56,6 +66,29 @@ module ActiveAdmin
           active_admin_config.get_page_presenter(:index) || ActiveAdmin::PagePresenter.new
         else
           active_admin_config.get_page_presenter(:index, params[:as]) || ActiveAdmin::PagePresenter.new(as: :table)
+        end
+      end
+
+      def form_presenter
+        active_admin_config.get_page_presenter(:form) || default_form_config
+      end
+
+      def default_form_config
+        ActiveAdmin::PagePresenter.new do |f|
+          f.semantic_errors # show errors on :base by default
+          f.inputs
+          f.actions
+        end
+      end
+
+      def normalized_action
+        case params[:action]
+        when "create"
+          "new"
+        when "update"
+          "edit"
+        else
+          params[:action]
         end
       end
 

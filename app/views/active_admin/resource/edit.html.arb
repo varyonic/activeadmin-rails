@@ -1,1 +1,1 @@
-insert_tag renderer_for(:edit)
+form_page_main_content

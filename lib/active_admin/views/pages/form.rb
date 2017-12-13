@@ -2,21 +2,11 @@ module ActiveAdmin
   module Views
     module Pages
 
-      class Form < Base
+      class Form < ActiveAdmin::Component
 
-        def title
-          if form_presenter[:title]
-            helpers.render_or_call_method_or_proc_on(resource, form_presenter[:title])
-          else
-            assigns[:page_title] || ActiveAdmin::Localizers.resource(active_admin_config).t("#{normalized_action}_model")
-          end
-        end
+        builder_method :form_page_main_content
 
-        def form_presenter
-          active_admin_config.get_page_presenter(:form) || default_form_config
-        end
-
-        def main_content
+        def build
           options = default_form_options.merge form_presenter.options
 
           if options[:partial]
@@ -37,25 +27,6 @@ module ActiveAdmin
 
         def default_form_path
           resource.persisted? ? resource_path(resource) : collection_path
-        end
-
-        def default_form_config
-          ActiveAdmin::PagePresenter.new do |f|
-            f.semantic_errors # show errors on :base by default
-            f.inputs
-            f.actions
-          end
-        end
-
-        def normalized_action
-          case params[:action]
-          when "create"
-            "new"
-          when "update"
-            "edit"
-          else
-            params[:action]
-          end
         end
       end
 
