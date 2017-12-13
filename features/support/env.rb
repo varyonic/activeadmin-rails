@@ -95,10 +95,6 @@ After do
 end
 
 Before do
-  # We are caching classes, but need to manually clear references to
-  # the controllers. If they aren't clear, the router stores references
-  ActiveSupport::Dependencies.clear
-
   # Reload Active Admin
   ActiveAdmin.unload!
   ActiveAdmin.load!
