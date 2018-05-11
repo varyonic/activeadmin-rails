@@ -6,6 +6,8 @@
 
 #### Minor
 
+* Allow proc label in datepicker input [#5408][] by [@tiagotex][]
+
 * Translations:
   * I18n for Comments. [#5458][], [#5461][] by [@mauriciopasquier][]
   * Change batch_actions.delete_confirmation in zh-CN.yml. [#5453][] by [@ShallmentMo][]
@@ -308,6 +310,7 @@ Please check [0-6-stable](https://github.com/activeadmin/activeadmin/blob/0-6-st
 [#5368]: https://github.com/activeadmin/activeadmin/pull/5368
 [#5399]: https://github.com/activeadmin/activeadmin/pull/5399
 [#5401]: https://github.com/activeadmin/activeadmin/pull/5401
+[#5408]: https://github.com/activeadmin/activeadmin/pull/5408
 [#5464]: https://github.com/activeadmin/activeadmin/pull/5464
 
 [@5t111111]: https://github.com/5t111111
@@ -341,6 +344,7 @@ Please check [0-6-stable](https://github.com/activeadmin/activeadmin/blob/0-6-st
 [@RobinvanderVliet]: https://github.com/RobinvanderVliet
 [@seanlinsley]: https://github.com/seanlinsley
 [@shekibobo]: https://github.com/shekibobo
+[@tiagotex]: https://github.com/tiagotex
 [@timoschilling]: https://github.com/timoschilling
 [@TimPetricola]: https://github.com/TimPetricola
 [@varyonic]: https://github.com/varyonic
