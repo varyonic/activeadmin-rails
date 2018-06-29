@@ -13,6 +13,7 @@ end
 require 'active_record'
 require 'active_admin'
 require 'devise'
+require 'activeadmin/core'
 ActiveAdmin.application.load_paths = [ENV['RAILS_ROOT'] + "/app/admin"]
 
 require ENV['RAILS_ROOT'] + '/config/environment'

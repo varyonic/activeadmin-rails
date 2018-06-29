@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'activeadmin-core', path: 'activeadmin-core'
+
 # Optional dependencies
 gem 'cancan'
 gem 'pundit'
