@@ -31,6 +31,7 @@
 * Fixed docs on the column `sortable` attribute (which actually doesn't have to be explicitly specified when a block is passed to column) [#5464][] by [@chumakoff][]
 * Fixed `if:` scope option when a lambda is passed [#5501][] by [@deivid-rodriguez][]
 * Comment validation adding redundant errors when resource is missing [#5516][] by [@deivid-rodriguez][]
+* Fixed resource filtering by association when the resource has custom primary key [#5446][] by [@wasifhossain][]
 
 ## 1.3.1 [☰](https://github.com/activeadmin/activeadmin/compare/v1.3.0...v1.3.1)
 ### Bug Fixes
@@ -315,6 +316,7 @@ Please check [0-6-stable](https://github.com/activeadmin/activeadmin/blob/0-6-st
 [#5399]: https://github.com/activeadmin/activeadmin/pull/5399
 [#5401]: https://github.com/activeadmin/activeadmin/pull/5401
 [#5408]: https://github.com/activeadmin/activeadmin/pull/5408
+[#5446]: https://github.com/activeadmin/activeadmin/pull/5446
 [#5464]: https://github.com/activeadmin/activeadmin/pull/5464
 [#5501]: https://github.com/activeadmin/activeadmin/pull/5501
 [#5516]: https://github.com/activeadmin/activeadmin/pull/5516
@@ -355,5 +357,6 @@ Please check [0-6-stable](https://github.com/activeadmin/activeadmin/blob/0-6-st
 [@timoschilling]: https://github.com/timoschilling
 [@TimPetricola]: https://github.com/TimPetricola
 [@varyonic]: https://github.com/varyonic
+[@wasifhossain]: https://github.com/wasifhossain
 [@wspurgin]: https://github.com/wspurgin
 [@zorab47]: https://github.com/zorab47
