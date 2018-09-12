@@ -11,7 +11,7 @@
   * Change batch_actions.delete_confirmation in zh-CN.yml. [#5453][] by [@ShallmentMo][]
   * Update it.yml. [#5433][] by [@stefsava][]
   * enhance zh_CN translation. [#5413][] by [@shouya][]
-  * Add missing filter predicate translations to nb. [#5377][] by [@rogerkk][]
+  * Add missing filter predicate translations to nb. [#5357][] by [@rogerkk][]
   * Add missing nb comments translations. [#5375] by [@rogerkk][]
   * Add missing dutch translations. [#5368][] by [@dennisvdvliet][]
   * Add missing de locale / german translations. [#5341][] by [@eikes][]
@@ -24,7 +24,7 @@
 ## 1.3.1 [☰](https://github.com/activeadmin/activeadmin/compare/v1.3.0...v1.3.1)
 ### Bug Fixes
 
-* gemspec should have more permissive ransack dependency [#][] by [@varyonic][5447]
+* gemspec should have more permissive ransack dependency [#5448][] by [@varyonic][]
 
 ## 1.3.0 [☰](https://github.com/activeadmin/activeadmin/compare/v1.2.1...v1.3.0)
 
@@ -53,8 +53,8 @@
 * Mitigate memory bloat [#4118][] with CSV exports [#5251][] by [@f1sherman][]
 * Fix issue applying custom decorations [#5253][] by [@faucct][]
 * Translations:
-  * Brazilian locale upated [#5125][] by [@renotocn][]
-  * Japanese locale updated [#5143][] by [@5t111111][], [#5157][] by [innparusu95][]
+  * Brazilian locale updated [#5125][] by [@renotocn][]
+  * Japanese locale updated [#5143][] by [@5t111111][], [#5157][] by [@innparusu95][]
   * Italian locale updated [#5180][] by [@blocknotes][]
   * Swedish locale updated [#5187][] by [@jawa][]
   * Vietnamese locale updated [#5194][] by [@Nguyenanh][]
@@ -183,8 +183,8 @@
 index download_links: ->{ can?(:view_all_download_links) || [:pdf] }
 ```
 
-* Comments menu can be customized via configuration passed to `config.comments_menu` [#4187][] by [@drn][]
-* Added `config.route_options` to namespace to customize routes [#4467][] by [@stereoscott[]]
+* Comments menu can be customized via configuration passed to `config.comments_menu`. [#4187][] by [@drn][]
+* Added `config.route_options` to namespace to customize routes. [#4731][] by [@stereoscott[]]
 
 ### Security Fixes
 
@@ -249,7 +249,9 @@ Please check [0-6-stable](https://github.com/activeadmin/activeadmin/blob/0-6-st
 [#5043]: https://github.com/activeadmin/activeadmin/issues/5043
 [#5198]: https://github.com/activeadmin/activeadmin/issues/5198
 
+[#3435]: https://github.com/activeadmin/activeadmin/pull/3435
 [#4477]: https://github.com/activeadmin/activeadmin/pull/4477
+[#4731]: https://github.com/activeadmin/activeadmin/pull/4731
 [#4759]: https://github.com/activeadmin/activeadmin/pull/4759
 [#4768]: https://github.com/activeadmin/activeadmin/pull/4768
 [#4848]: https://github.com/activeadmin/activeadmin/pull/4848
@@ -277,6 +279,7 @@ Please check [0-6-stable](https://github.com/activeadmin/activeadmin/blob/0-6-st
 [#5125]: https://github.com/activeadmin/activeadmin/pull/5125
 [#5137]: https://github.com/activeadmin/activeadmin/pull/5137
 [#5143]: https://github.com/activeadmin/activeadmin/pull/5143
+[#5157]: https://github.com/activeadmin/activeadmin/pull/5157
 [#5167]: https://github.com/activeadmin/activeadmin/pull/5167
 [#5180]: https://github.com/activeadmin/activeadmin/pull/5180
 [#5187]: https://github.com/activeadmin/activeadmin/pull/5187
@@ -284,9 +287,20 @@ Please check [0-6-stable](https://github.com/activeadmin/activeadmin/blob/0-6-st
 [#5208]: https://github.com/activeadmin/activeadmin/pull/5208
 [#5210]: https://github.com/activeadmin/activeadmin/pull/5210
 [#5251]: https://github.com/activeadmin/activeadmin/pull/5251
+[#5223]: https://github.com/activeadmin/activeadmin/pull/5223
+[#5238]: https://github.com/activeadmin/activeadmin/pull/5238
+[#5240]: https://github.com/activeadmin/activeadmin/pull/5240
 [#5253]: https://github.com/activeadmin/activeadmin/pull/5253
 [#5272]: https://github.com/activeadmin/activeadmin/pull/5272
+[#5275]: https://github.com/activeadmin/activeadmin/pull/5275
 [#5284]: https://github.com/activeadmin/activeadmin/pull/5284
+[#5299]: https://github.com/activeadmin/activeadmin/pull/5299
+[#5341]: https://github.com/activeadmin/activeadmin/pull/5341
+[#5343]: https://github.com/activeadmin/activeadmin/pull/5343
+[#5357]: https://github.com/activeadmin/activeadmin/pull/5357
+[#5368]: https://github.com/activeadmin/activeadmin/pull/5368
+[#5399]: https://github.com/activeadmin/activeadmin/pull/5399
+[#5401]: https://github.com/activeadmin/activeadmin/pull/5401
 
 [@5t111111]: https://github.com/5t111111
 [@aarek]: https://github.com/aarek
@@ -295,7 +309,9 @@ Please check [0-6-stable](https://github.com/activeadmin/activeadmin/blob/0-6-st
 [@bolshakov]: https://github.com/bolshakov
 [@blocknotes]: https://github.com/blocknotes
 [@chancancode]: https://github.com/chancancode
+[@chumakoff]: https://github.com/chumakoff
 [@craigmcnamara]: https://github.com/craigmcnamara
+[@DanielHeath]: https://github.com/DanielHeath
 [@deivid-rodriguez]: https://github.com/deivid-rodriguez
 [@dhyegofernando]: https://github.com/dhyegofernando
 [@dmitry]: https://github.com/dmitry
@@ -320,4 +336,5 @@ Please check [0-6-stable](https://github.com/activeadmin/activeadmin/blob/0-6-st
 [@timoschilling]: https://github.com/timoschilling
 [@TimPetricola]: https://github.com/TimPetricola
 [@varyonic]: https://github.com/varyonic
+[@wspurgin]: https://github.com/wspurgin
 [@zorab47]: https://github.com/zorab47
