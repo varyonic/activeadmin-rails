@@ -49,5 +49,4 @@ group :test do
   gem 'rspec-rails'
   gem 'i18n-spec'
   gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
 end
