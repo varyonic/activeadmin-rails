@@ -47,6 +47,10 @@ After do
   end
 end
 
+After '@debug' do |scenario|
+  save_and_open_page if scenario.failed?
+end
+
 require 'capybara/rails'
 require 'capybara/cucumber'
 require 'capybara/session'
@@ -66,6 +70,8 @@ end
 Capybara.javascript_driver = :chrome
 
 Capybara.server = :webrick
+
+Capybara.asset_host = 'http://localhost:3000'
 
 Capybara.asset_host = 'http://localhost:3000'
 
