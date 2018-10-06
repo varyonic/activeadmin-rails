@@ -29,6 +29,7 @@
 * Fixed "create anoter" checkbox styling. [#5324][] by [@faucct][]
 * Fixed the string representation of the resolved `sort_key` when no explicit `sortable` attribute is passed [#5464][] by [@chumakoff][]
 * Fixed docs on the column `sortable` attribute (which actually doesn't have to be explicitly specified when a block is passed to column) [#5464][] by [@chumakoff][]
+* Fixed `if:` scope option when a lambda is passed [#5501][] by [@deivid-rodriguez][]
 
 ## 1.3.1 [☰](https://github.com/activeadmin/activeadmin/compare/v1.3.0...v1.3.1)
 ### Bug Fixes
@@ -314,6 +315,7 @@ Please check [0-6-stable](https://github.com/activeadmin/activeadmin/blob/0-6-st
 [#5401]: https://github.com/activeadmin/activeadmin/pull/5401
 [#5408]: https://github.com/activeadmin/activeadmin/pull/5408
 [#5464]: https://github.com/activeadmin/activeadmin/pull/5464
+[#5501]: https://github.com/activeadmin/activeadmin/pull/5501
 
 [@5t111111]: https://github.com/5t111111
 [@aarek]: https://github.com/aarek
