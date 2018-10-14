@@ -46,7 +46,6 @@ group :test do
   gem 'rails-i18n' # Provides default i18n for many languages
   gem 'rspec-rails'
   gem 'i18n-spec'
-  gem 'shoulda-matchers', '<= 2.8.0'
   gem 'sqlite3', '< 1.4', platforms: :mri
   gem 'poltergeist'
 end
