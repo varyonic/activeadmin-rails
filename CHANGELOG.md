@@ -5,6 +5,7 @@
 ### Enhancements
 
 #### Minor
+* Add `group` attribute to scopes in order to show them in grouped [#5359][] by [@leio10][]
 
 * Allow proc label in datepicker input [#5408][] by [@tiagotex][]
 
@@ -307,6 +308,7 @@ Please check [0-6-stable](https://github.com/activeadmin/activeadmin/blob/0-6-st
 [#5341]: https://github.com/activeadmin/activeadmin/pull/5341
 [#5343]: https://github.com/activeadmin/activeadmin/pull/5343
 [#5357]: https://github.com/activeadmin/activeadmin/pull/5357
+[#5359]: https://github.com/activeadmin/activeadmin/pull/5359
 [#5368]: https://github.com/activeadmin/activeadmin/pull/5368
 [#5399]: https://github.com/activeadmin/activeadmin/pull/5399
 [#5401]: https://github.com/activeadmin/activeadmin/pull/5401
@@ -335,6 +337,7 @@ Please check [0-6-stable](https://github.com/activeadmin/activeadmin/blob/0-6-st
 [@javierjulio]: https://github.com/javierjulio
 [@jawa]: https://github.com/jawa
 [@johnnyshields]: https://github.com/johnnyshields
+[@leio10]: https://github.com/leio10
 [@markstory]: https://github.com/markstory
 [@Nguyenanh]: https://github.com/Nguyenanh
 [@PChambino]: https://github.com/PChambino
