@@ -1,5 +1,6 @@
 .ruby-version
 ## Project (general)
+tags
 tmp
 coverage
 rdoc
