@@ -21,6 +21,10 @@
   * Update tr.yml. [#5295][] by [@kobeumut][]
   * Update zh-CN.yml. [#5266][] by [@jasl][]
 
+### Bug Fixes
+
+* Fixed "create anoter" checkbox styling. [#5324][] by [@faucct][]
+
 ## 1.3.1 [☰](https://github.com/activeadmin/activeadmin/compare/v1.3.0...v1.3.1)
 ### Bug Fixes
 
@@ -295,6 +299,7 @@ Please check [0-6-stable](https://github.com/activeadmin/activeadmin/blob/0-6-st
 [#5275]: https://github.com/activeadmin/activeadmin/pull/5275
 [#5284]: https://github.com/activeadmin/activeadmin/pull/5284
 [#5299]: https://github.com/activeadmin/activeadmin/pull/5299
+[#5324]: https://github.com/activeadmin/activeadmin/pull/5324
 [#5341]: https://github.com/activeadmin/activeadmin/pull/5341
 [#5343]: https://github.com/activeadmin/activeadmin/pull/5343
 [#5357]: https://github.com/activeadmin/activeadmin/pull/5357
