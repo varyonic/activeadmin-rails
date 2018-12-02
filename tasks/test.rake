@@ -10,7 +10,7 @@ end
 
 desc "Run the specs in parallel"
 task :spec do
-  system("parallel_rspec --serialize-stdout --verbose spec/")
+  sh("parallel_rspec --serialize-stdout --combine-stderr --verbose spec/")
 end
 
 desc "Run the cucumber scenarios"
@@ -20,12 +20,12 @@ namespace :cucumber do
 
   desc "Run the standard cucumber scenarios in parallel"
   task :regular do
-    system("parallel_cucumber --serialize-stdout --verbose features/")
+    sh("parallel_cucumber --serialize-stdout --combine-stderr --verbose features/")
   end
 
   desc "Run the cucumber scenarios that test reloading"
   task :reloading do
-    system("cucumber --profile class-reloading")
+    sh("cucumber --profile class-reloading")
   end
 
 end
