@@ -1,13 +1,10 @@
 .ruby-version
-## Project (general)
 tmp
 coverage
 rdoc
 doc
 .yardoc
 pkg
-
-## Project (specific)
 .bundle
 spec/rails
 Gemfile.lock
