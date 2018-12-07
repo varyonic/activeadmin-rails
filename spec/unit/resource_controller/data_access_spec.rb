@@ -56,7 +56,7 @@ RSpec.describe ActiveAdmin::ResourceController::DataAccess do
 
       it "reorders chain" do
         chain = double "ChainObj"
-        expect(chain).to receive(:reorder).with('"posts"."id" asc').once.and_return(Post.search)
+        expect(chain).to receive(:reorder).with('"posts"."id" asc').once.and_return(Post.ransack)
         controller.send :apply_sorting, chain
       end
     end
@@ -86,7 +86,7 @@ RSpec.describe ActiveAdmin::ResourceController::DataAccess do
         let(:http_params) {{ order: "published_date_desc" }}
         it "reorders chain" do
           chain = double "ChainObj"
-          expect(chain).to receive(:reorder).with('"posts"."published_date" desc NULLS LAST').once.and_return(Post.search)
+          expect(chain).to receive(:reorder).with('"posts"."published_date" desc NULLS LAST').once.and_return(Post.ransack)
           controller.send :apply_sorting, chain
         end
       end
@@ -94,7 +94,7 @@ RSpec.describe ActiveAdmin::ResourceController::DataAccess do
         let(:http_params) {{ order: "published_date_asc" }}
         it "reorders chain" do
           chain = double "ChainObj"
-          expect(chain).to receive(:reorder).with('"posts"."published_date" asc').once.and_return(Post.search)
+          expect(chain).to receive(:reorder).with('"posts"."published_date" asc').once.and_return(Post.ransack)
           controller.send :apply_sorting, chain
         end
       end
