@@ -7,7 +7,7 @@ Feature: Show - Tabs
 
   @javascript
   Scenario: Set a method to be called on the resource as the title
-    Given a show configuration of:
+    And a show configuration of:
     """
       ActiveAdmin.register Post do
         show do
