@@ -14,9 +14,11 @@ task :spec do
 end
 
 desc "Run the cucumber scenarios"
-task cucumber: [:"cucumber:regular", :"cucumber:reloading"]
+task cucumber: :"cucumber:all"
 
 namespace :cucumber do
+  desc "Run all cucumber suites"
+  task all: [:regular, :reloading]
 
   desc "Run the standard cucumber scenarios in parallel"
   task :regular do
