@@ -1,3 +1,6 @@
+This is a fork of the original Active Admin project starting with v1.3.1 and abandoning v2.0.0.alpha started one year earlier.
+Google 'why fork open source' for relevant articles.
+
 # Active Admin
 
 [Active Admin](https://www.activeadmin.info) is a Ruby on Rails framework for creating elegant backends for website administration.
