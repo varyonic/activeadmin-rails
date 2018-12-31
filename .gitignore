@@ -43,6 +43,7 @@ viewcumber
 .test-rails-apps
 public
 .rspec
+.rspec_failures
 .rails-version
 .rbenv-version
 .localeapp/*
