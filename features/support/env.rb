@@ -107,9 +107,13 @@ Rails.logger.level = 4
 
 Around '@silent_unpermitted_params_failure' do |scenario, block|
   original = ActionController::Parameters.action_on_unpermitted_parameters
-  ActionController::Parameters.action_on_unpermitted_parameters = false
-  block.call
-  ActionController::Parameters.action_on_unpermitted_parameters = original
+
+  begin
+    ActionController::Parameters.action_on_unpermitted_parameters = false
+    block.call
+  ensure
+    ActionController::Parameters.action_on_unpermitted_parameters = original
+  end
 end
 
 Around '@locale_manipulation' do |scenario, block|
