@@ -1,7 +1,7 @@
 require File.join(File.dirname(__FILE__), "lib", "active_admin", "version")
 
 Gem::Specification.new do |s|
-  s.name          = 'activeadmin'
+  s.name          = 'activeadmin-rb'
   s.license       = 'MIT'
   s.version       = ActiveAdmin::VERSION
   s.homepage      = 'http://activeadmin.info'

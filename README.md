@@ -57,19 +57,19 @@ Tool                  | Description
 [Kaminari]: https://github.com/kaminari/kaminari
 [Ransack]: https://github.com/activerecord-hackery/ransack
 
-[rubygems_badge]: http://img.shields.io/gem/v/activeadmin.svg
-[rubygems]: https://rubygems.org/gems/activeadmin
-[travis_badge]: http://img.shields.io/travis/activeadmin/activeadmin/master.svg
-[travis]: https://travis-ci.org/activeadmin/activeadmin
+[rubygems_badge]: http://img.shields.io/gem/v/activeadmin-rb.svg
+[rubygems]: https://rubygems.org/gems/activeadmin-rb
+[travis_badge]: http://img.shields.io/travis/varyonic/activeadmin/master.svg
+[travis]: https://travis-ci.org/varyonic/activeadmin
 [codeclimate_badge]: https://api.codeclimate.com/v1/badges/779e407d22bacff19733/maintainability
-[codeclimate]: https://codeclimate.com/github/activeadmin/activeadmin/maintainability
-[codecov_badge]: https://codecov.io/gh/activeadmin/activeadmin/branch/master/graph/badge.svg
-[codecov]: https://codecov.io/gh/activeadmin/activeadmin
-[inch_badge]: http://inch-ci.org/github/activeadmin/activeadmin.svg?branch=master
-[inch]: http://inch-ci.org/github/activeadmin/activeadmin
+[codeclimate]: https://codeclimate.com/github/varyonic/activeadmin/maintainability
+[codecov_badge]: https://codecov.io/gh/varyonic/activeadmin/branch/master/graph/badge.svg
+[codecov]: https://codecov.io/gh/varyonic/activeadmin
+[inch_badge]: http://inch-ci.org/github/varyonic/activeadmin.svg?branch=master
+[inch]: http://inch-ci.org/github/varyonic/activeadmin
 
 [docs]: http://activeadmin.info/0-installation.html
 [demo]: http://demo.activeadmin.info/admin
-[wiki]: https://github.com/activeadmin/activeadmin/wiki
+[wiki]: https://github.com/varyonic/activeadmin/wiki
 [stackoverflow]: http://stackoverflow.com/questions/tagged/activeadmin
-[contributing]: https://github.com/activeadmin/activeadmin/blob/master/CONTRIBUTING.md
+[contributing]: https://github.com/varyonic/activeadmin/blob/master/CONTRIBUTING.md
