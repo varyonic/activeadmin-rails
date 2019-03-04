@@ -53,6 +53,6 @@ group :test do
   gem 'rspec-rails'
   gem 'i18n-spec'
   gem 'shoulda-matchers', '<= 2.8.0'
-  gem 'sqlite3', platforms: :mri
+  gem 'sqlite3', '< 1.4', platforms: :mri
   gem 'poltergeist'
 end
