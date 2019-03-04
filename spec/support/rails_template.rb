@@ -121,7 +121,7 @@ RUBY
 
 # Add our local Active Admin to the application
 gem 'activeadmin-rb', path: '../..'
-gem 'devise'
+gem 'devise', '~> 4.6'
 
 run 'bundle install'
 
