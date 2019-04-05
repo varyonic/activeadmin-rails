@@ -34,6 +34,7 @@ gemfile:
   - gemfiles/rails_50.gemfile
   - gemfiles/rails_51.gemfile
   - gemfiles/rails_52.gemfile
+  - gemfiles/rails_60.gemfile
 
 env:
   global:
@@ -44,6 +45,8 @@ matrix:
   fast_finish: true
 
   exclude:
+    - rvm: 2.4
+      gemfile: gemfiles/rails_60.gemfile
     - rvm: 2.6
       gemfile: gemfiles/rails_42.gemfile
 

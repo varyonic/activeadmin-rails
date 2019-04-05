@@ -11,7 +11,7 @@ pkg
 .bundle
 spec/rails
 Gemfile.lock
-gemfiles/rails_[3-5][0-9].gemfile.lock
+gemfiles/rails_*.gemfile.lock
 .test-rails-apps
 public
 .rspec
