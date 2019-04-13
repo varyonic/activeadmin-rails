@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-rails', '>= 4.2.0'
   s.add_dependency 'jquery-ui-rails', '~> 6.0'
   s.add_dependency 'kaminari', '>= 0.15'
-  s.add_dependency 'railties', '>= 4.2', '< 5.3'
+  s.add_dependency 'railties', '>= 4.2'
   s.add_dependency 'ransack', '>= 1.8.7'
   s.add_dependency 'sass', '~> 3.1'
   s.add_dependency 'sprockets', '< 4.1'

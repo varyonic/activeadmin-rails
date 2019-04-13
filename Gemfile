@@ -43,7 +43,6 @@ group :test do
   gem 'database_cleaner'
   gem 'jasmine'
   gem 'launchy'
-  gem 'rails-i18n' # Provides default i18n for many languages
   gem 'rspec-rails'
   gem 'i18n-spec'
   gem 'sqlite3', '< 1.4', platforms: :mri
