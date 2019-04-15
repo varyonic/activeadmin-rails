@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.5.0 [☰](https://github.com/varyonic/activeadmin-rb/compare/v1.4.0...v1.5.0)
+
+### Enhancements
+
+#### Major
+
+* Rails 6.0 support. [#5702] by [@ionut998]
+ 
 ## 1.4.0 [☰](https://github.com/varyonic/activeadmin-rb/compare/v1.3.1...v1.4.0)
 
 ### Enhancements
@@ -328,6 +336,7 @@ Please check [0-6-stable] for previous changes.
 [#5501]: https://github.com/activeadmin/activeadmin/pull/5501
 [#5516]: https://github.com/activeadmin/activeadmin/pull/5516
 [#5583]: https://github.com/activeadmin/activeadmin/pull/5583
+[#5702]: https://github.com/activeadmin/activeadmin/pull/5702
 
 [@5t111111]: https://github.com/5t111111
 [@aarek]: https://github.com/aarek
@@ -354,6 +363,7 @@ Please check [0-6-stable] for previous changes.
 [@glebtv]: https://github.com/glebtv
 [@gonzedge]: https://github.com/gonzedge
 [@innparusu95]: https://github.com/innparusu95
+[@ionut998]: https://github.com/ionut998
 [@jasl]: https://github.com/jasl
 [@javierjulio]: https://github.com/javierjulio
 [@jawa]: https://github.com/jawa
