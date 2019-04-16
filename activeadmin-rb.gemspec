@@ -28,6 +28,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'kaminari', '>= 0.15'
   s.add_dependency 'railties', '>= 4.2'
   s.add_dependency 'ransack', '>= 1.8.7'
-  s.add_dependency 'sass', '~> 3.1'
-  s.add_dependency 'sprockets', '< 4.1'
+  s.add_dependency 'sass-rails'
+  s.add_dependency 'sprockets'
 end
