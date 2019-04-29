@@ -45,6 +45,5 @@ group :test do
   gem 'launchy'
   gem 'rspec-rails'
   gem 'i18n-spec'
-  gem 'sqlite3', '< 1.4', platforms: :mri
   gem 'poltergeist'
 end
