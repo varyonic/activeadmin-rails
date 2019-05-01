@@ -13,6 +13,7 @@ pkg
 spec/rails
 Gemfile.lock
 gemfiles/rails_*.gemfile.lock
+gemfiles/vendor/bundle
 .test-rails-apps
 public
 .rspec
