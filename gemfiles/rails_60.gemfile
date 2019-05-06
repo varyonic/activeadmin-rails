@@ -5,6 +5,7 @@ eval_gemfile(File.expand_path(File.join("..", "Gemfile"), __dir__))
 gem "rails", ">= 6.0.x"
 gem "rails-i18n", ">= 6.0.x"
 gem "sass-rails", ">= 6.0.x"
+gem "sprockets", ">= 4.0.x"
 gem "bootsnap"
 gem "devise", "~> 4.4"
 gem "draper", "~> 3.0"
