@@ -32,7 +32,9 @@ module ActiveAdmin
 
     def initialize(options = {}, &block)
       @resource = options.delete(:resource)
-      @columns, @options, @block = [], options, block
+      @columns = []
+      @options = ActiveAdmin.application.csv_options.merge options
+      @block = block
     end
 
     def column(name, options = {}, &block)
@@ -42,7 +44,6 @@ module ActiveAdmin
     def build(controller, csv)
       @collection  = controller.send :find_collection, except: :pagination
       columns      = exec_columns controller.view_context
-      options      = ActiveAdmin.application.csv_options.merge self.options
       bom          = options.delete :byte_order_mark
       column_names = options.delete(:column_names) { true }
       csv_options  = options.except :encoding_options, :humanize_name
