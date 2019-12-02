@@ -111,6 +111,14 @@ gsub_file 'config/environments/test.rb', /  config.cache_classes = .*$/, <<-RUBY
 
   config.active_record.maintain_test_schema = false
 
+  if Rails::VERSION::MAJOR >= 6
+    config.hosts = [
+      IPAddr.new("0.0.0.0/0"), # All IPv4 addresses.
+      IPAddr.new("::/0"),      # All IPv6 addresses.
+      "www.example.com",
+      "localhost"              # The localhost reserved domain.
+    ]
+  end
 RUBY
 
 # TODO: remove this line after the STI pre-loading is fixed
