@@ -103,7 +103,7 @@ create_file 'app/models/tagging.rb', <<-RUBY.strip_heredoc, force: true
   end
 RUBY
 
-gsub_file 'config/environments/test.rb', /  config.cache_classes = true/, <<-RUBY
+gsub_file 'config/environments/test.rb', /  config.cache_classes = .*$/, <<-RUBY
 
   config.cache_classes = !ENV['CLASS_RELOADING']
   config.action_mailer.default_url_options = {host: 'example.com'}
