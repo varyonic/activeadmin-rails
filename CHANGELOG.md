@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.1 [☰](https://github.com/varyonic/activeadmin-rb/compare/v1.5.0...v1.5.1)
+
+* More fixes to support final release of Rails 6.0.
+
 ## 1.5.0 [☰](https://github.com/varyonic/activeadmin-rb/compare/v1.4.0...v1.5.0)
 
 ### Enhancements
