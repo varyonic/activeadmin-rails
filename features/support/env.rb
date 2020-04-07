@@ -50,10 +50,20 @@ end
 require 'capybara/rails'
 require 'capybara/cucumber'
 require 'capybara/session'
-require 'capybara/poltergeist'
-require 'phantomjs/poltergeist'
 
-Capybara.javascript_driver = :poltergeist
+Capybara.register_driver :chrome do |app|
+  Capybara::Selenium::Driver.load_selenium
+
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.args << '--headless'
+
+  http_client = Selenium::WebDriver::Remote::Http::Default.new
+  http_client.read_timeout = 180
+
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options, http_client: http_client)
+end
+
+Capybara.javascript_driver = :chrome
 
 Capybara.server = :webrick
 
