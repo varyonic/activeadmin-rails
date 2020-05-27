@@ -41,7 +41,7 @@ module ActiveAdmin
             title = I18n.t("active_admin.batch_actions.labels.#{batch_action.sym}", default: default_title)
             label = I18n.t("active_admin.batch_actions.action_label", title: title)
 
-            item label, "#", options
+            item label, "#", **options
           end
         end
       end
