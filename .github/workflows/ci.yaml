@@ -1,0 +1,50 @@
+---
+
+name: ci
+
+on: [push]
+
+jobs:
+  test:
+    name: test (${{ matrix.ruby.name }}, ${{ matrix.deps }})
+    runs-on: ${{ matrix.os }}
+
+    timeout-minutes: 15
+
+    strategy:
+      fail-fast: false
+
+      matrix:
+        ruby: [{ name: 2.7, value: 2.7.2 }]
+
+        os: [ubuntu-20.04]
+
+        deps: [rails_52, rails_60, rails_61]
+
+    env:
+      COVERAGE: false
+      SUPPRESS_JASMINE_DEPRECATION: true
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Configure bundler
+        run: |
+          echo "BUNDLE_GEMFILE=gemfiles/${{ matrix.deps }}.gemfile" >> $GITHUB_ENV
+          echo "BUNDLE_PATH=$(pwd)/gemfiles/${{ matrix.deps }}/vendor/bundle" >> $GITHUB_ENV
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby.value }}
+          bundler-cache: true
+
+      - name: Install a specific rubygems version
+        run: gem update --system 3.2.17
+
+      - name: Setup git
+        run: |
+          git config --global user.email activeadmin@ci.dummy
+          git config --global user.name ActiveAdmin
+
+      - name: Run tests
+        run: bundle exec rake
