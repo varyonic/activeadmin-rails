@@ -6,7 +6,7 @@ Google 'why fork open source' for relevant articles.
 [Active Admin](https://www.activeadmin.info) is a Ruby on Rails framework for creating elegant backends for website administration.
 
 [![Version         ][rubygems_badge]][rubygems]
-[![Travis CI       ][travis_badge]][travis]
+[![Github Actions  ][actions_badge]][actions]
 [![Quality         ][codeclimate_badge]][codeclimate]
 [![Coverage        ][codecov_badge]][codecov]
 [![Inch CI         ][inch_badge]][inch]
@@ -59,8 +59,8 @@ Tool                  | Description
 
 [rubygems_badge]: http://img.shields.io/gem/v/activeadmin-rb.svg
 [rubygems]: https://rubygems.org/gems/activeadmin-rb
-[travis_badge]: http://img.shields.io/travis/varyonic/activeadmin/master.svg
-[travis]: https://travis-ci.org/varyonic/activeadmin
+[actions_badge]: https://github.com/varyonic/activeadmin/workflows/ci/badge.svg
+[actions]: https://github.com/varyonic/activeadmin/actions
 [codeclimate_badge]: https://api.codeclimate.com/v1/badges/779e407d22bacff19733/maintainability
 [codeclimate]: https://codeclimate.com/github/varyonic/activeadmin/maintainability
 [codecov_badge]: https://codecov.io/gh/varyonic/activeadmin/branch/master/graph/badge.svg
