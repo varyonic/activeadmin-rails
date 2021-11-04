@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.2 [☰](https://github.com/varyonic/activeadmin-rb/compare/v1.5.1...v1.5.2)
+
+* Fix Ruby 2.7 warnings about keyword args. [#6000], [#6237] by [@vcsjones] and [@deivid-rodriguez]
+* Fix CSVBuilder not respecting `ActiveAdmin.application.csv_options = { humanize_name: false }` setting. [#5800] by [@HappyKadaver]
+
 ## 1.5.1 [☰](https://github.com/varyonic/activeadmin-rb/compare/v1.5.0...v1.5.1)
 
 * More fixes to support final release of Rails 6.0.
@@ -346,6 +351,9 @@ Please check [0-6-stable] for previous changes.
 [#5516]: https://github.com/activeadmin/activeadmin/pull/5516
 [#5583]: https://github.com/activeadmin/activeadmin/pull/5583
 [#5702]: https://github.com/activeadmin/activeadmin/pull/5702
+[#5800]: https://github.com/activeadmin/activeadmin/pull/5800
+[#6000]: https://github.com/activeadmin/activeadmin/pull/6000
+[#6237]: https://github.com/activeadmin/activeadmin/pull/6237
 
 [@5t111111]: https://github.com/5t111111
 [@aarek]: https://github.com/aarek
@@ -371,6 +379,7 @@ Please check [0-6-stable] for previous changes.
 [@Fivell]: https://github.com/Fivell
 [@glebtv]: https://github.com/glebtv
 [@gonzedge]: https://github.com/gonzedge
+[@HappyKadaver]: https://github.com/HappyKadaver
 [@innparusu95]: https://github.com/innparusu95
 [@ionut998]: https://github.com/ionut998
 [@jasl]: https://github.com/jasl
@@ -401,6 +410,7 @@ Please check [0-6-stable] for previous changes.
 [@timoschilling]: https://github.com/timoschilling
 [@TimPetricola]: https://github.com/TimPetricola
 [@varyonic]: https://github.com/varyonic
+[@vcsjones]: https://github.com/vcsjones
 [@wasifhossain]: https://github.com/wasifhossain
 [@Wowu]: https://github.com/Wowu
 [@wspurgin]: https://github.com/wspurgin
