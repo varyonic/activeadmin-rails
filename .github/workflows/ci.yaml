@@ -19,7 +19,7 @@ jobs:
 
         os: [ubuntu-20.04]
 
-        deps: [rails_61, rails_60]
+        deps: [rails_70, rails_61]
 
     env:
       COVERAGE: false

@@ -95,7 +95,7 @@ end
 Before do
   # We are caching classes, but need to manually clear references to
   # the controllers. If they aren't clear, the router stores references
-  ActiveSupport::Dependencies.clear
+  ActiveSupport::Dependencies.clear if Rails::VERSION::MAJOR < 7
 
   # Reload Active Admin
   ActiveAdmin.unload!
