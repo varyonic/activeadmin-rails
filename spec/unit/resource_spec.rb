@@ -241,8 +241,8 @@ module ActiveAdmin
       let(:resource) { namespace.register(Post) }
       let(:post) { double }
       before do
-        allow(Post).to receive(:find_by).with("id" => "12345") { post }
-        allow(Post).to receive(:find_by).with("id" => "54321") { nil }
+        allow(Post).to receive(:find_by).with({"id" => "12345"}) { post }
+        allow(Post).to receive(:find_by).with({"id" => "54321"}) { nil }
       end
 
       it 'can find the resource' do
@@ -265,7 +265,7 @@ module ActiveAdmin
         before do
           allow(Post).to receive(:primary_key).and_return 'something_else'
           allow(Post).to receive(:find_by).
-              with("something_else" => "55555") { different_post }
+              with({"something_else" => "55555"}) { different_post }
         end
 
         it 'can find the post by the custom primary key' do
