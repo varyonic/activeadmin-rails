@@ -96,11 +96,11 @@ module ActiveAdmin
     # The class this resource wraps. If you register the Post model, Resource#resource_class
     # will point to the Post class
     def resource_class
-      ActiveSupport::Dependencies.constantize(resource_class_name)
+      resource_class_name.constantize
     end
 
     def decorator_class
-      ActiveSupport::Dependencies.constantize(decorator_class_name) if decorator_class_name
+      decorator_class_name&.constantize
     end
 
     def resource_table_name
