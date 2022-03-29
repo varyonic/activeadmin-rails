@@ -35,6 +35,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'cuprite'
   gem 'capybara'
   gem 'simplecov', require: false # Test coverage generator. Go to /coverage/ after running tests
   gem 'codecov', require: false # Test coverage website. Go to https://codecov.io
@@ -45,5 +46,4 @@ group :test do
   gem 'launchy'
   gem 'rspec-rails'
   gem 'i18n-spec'
-  gem 'poltergeist'
 end

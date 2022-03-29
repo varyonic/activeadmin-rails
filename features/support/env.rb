@@ -47,13 +47,13 @@ After do
   end
 end
 
-require 'capybara/rails'
-require 'capybara/cucumber'
-require 'capybara/session'
-require 'capybara/poltergeist'
-require 'phantomjs/poltergeist'
+require "capybara/cuprite"
 
-Capybara.javascript_driver = :poltergeist
+Capybara.register_driver(:cuprite) do |app|
+  Capybara::Cuprite::Driver.new(app, process_timeout: 30, timeout: 30)
+end
+
+Capybara.javascript_driver = :cuprite
 
 Capybara.server = :webrick
 
