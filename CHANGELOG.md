@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.6.0 [☰](https://github.com/varyonic/activeadmin-rb/compare/v1.5.2...v1.6.0)
+
+### Enhancements
+
+* Add Rails 7 Support. [#7235] by [@tagliala]
+
+### Bug Fixes
+
+* Fix frozen string error when downloading CSV and streaming disabled. [#7332] by [@deivid-rodriguez]
+
 ## 1.5.2 [☰](https://github.com/varyonic/activeadmin-rb/compare/v1.5.1...v1.5.2)
 
 * Fix Ruby 2.7 warnings about keyword args. [#6000], [#6237] by [@vcsjones] and [@deivid-rodriguez]
@@ -354,6 +364,8 @@ Please check [0-6-stable] for previous changes.
 [#5800]: https://github.com/activeadmin/activeadmin/pull/5800
 [#6000]: https://github.com/activeadmin/activeadmin/pull/6000
 [#6237]: https://github.com/activeadmin/activeadmin/pull/6237
+[#7235]: https://github.com/activeadmin/activeadmin/pull/7235
+[#7332]: https://github.com/activeadmin/activeadmin/pull/7332
 
 [@5t111111]: https://github.com/5t111111
 [@aarek]: https://github.com/aarek
@@ -405,6 +417,7 @@ Please check [0-6-stable] for previous changes.
 [@shekibobo]: https://github.com/shekibobo
 [@shouya]: https://github.com/shouya
 [@stefsava]: https://github.com/stefsava
+[@tagliala]: https://github.com/tagliala
 [@stereoscott]: https://github.com/stereoscott
 [@tiagotex]: https://github.com/tiagotex
 [@timoschilling]: https://github.com/timoschilling
