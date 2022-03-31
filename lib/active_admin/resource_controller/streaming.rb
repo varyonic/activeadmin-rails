@@ -22,7 +22,7 @@ module ActiveAdmin
         headers['Cache-Control'] = 'no-cache'
 
         if ActiveAdmin.application.disable_streaming_in.include? Rails.env
-          self.response_body = block['']
+          self.response_body = block[String.new]
         else
           self.response_body = Enumerator.new &block
         end
