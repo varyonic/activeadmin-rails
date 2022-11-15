@@ -9,7 +9,6 @@ gem "sprockets", ">= 4.0.x"
 gem "bootsnap"
 gem "devise", "~> 4.4"
 gem "draper"
-gem "inherited_resources", github: "varyonic/inherited_resources", branch: "rails-7"
 gem "ransack", ">= 2.0" # 2.x for Rails 5.2+ only.
 gem 'sqlite3', platforms: :mri
 gem "activerecord-jdbcsqlite3-adapter", ">= 60.0.x", platform: :jruby
