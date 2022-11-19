@@ -15,6 +15,14 @@ module ActiveAdmin
         @closing_tag || ""
       end
 
+      def render_in(context = arbre_context)
+        pos = context.output_buffer.length
+        context.output_buffer << opening_tag.html_safe
+        children.map { |element| element.render_in(context) }
+        context.output_buffer << closing_tag.html_safe
+        pos > 0 ? context.output_buffer[pos..] : context.output_buffer
+      end
+
       def to_s
         opening_tag + children.to_s + closing_tag
       end
