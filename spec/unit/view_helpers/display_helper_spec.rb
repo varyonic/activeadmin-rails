@@ -182,7 +182,7 @@ RSpec.describe ActiveAdmin::ViewHelpers::DisplayHelper do
 
       value = format_attribute post, :starred
 
-      expect(value.to_s).to eq "<span class=\"status_tag yes\">Yes</span>\n"
+      expect(value.render_in).to eq "<span class=\"status_tag yes\">Yes</span>\n"
     end
 
     it 'calls status_tag for boolean non-database values' do
@@ -194,9 +194,9 @@ RSpec.describe ActiveAdmin::ViewHelpers::DisplayHelper do
         false
       end
       true_value = format_attribute post, :true_method
-      expect(true_value.to_s).to eq "<span class=\"status_tag yes\">Yes</span>\n"
+      expect(true_value.render_in).to eq "<span class=\"status_tag yes\">Yes</span>\n"
       false_value = format_attribute post, :false_method
-      expect(false_value.to_s).to eq "<span class=\"status_tag no\">No</span>\n"
+      expect(false_value.render_in).to eq "<span class=\"status_tag no\">No</span>\n"
     end
 
   end

@@ -42,7 +42,9 @@ RSpec.describe ActiveAdmin::FormBuilder do
 
     form = render_arbre_component({form_object: form_object, form_options: options, form_block: block}, helpers) do
       active_admin_form_for(assigns[:form_object], assigns[:form_options], &assigns[:form_block])
-    end.to_s
+    end
+    expect(form.render_in).to eq form.to_s
+    html = form.to_s
   end
 
   def build_form(options = {}, form_object = Post.new, &block)
