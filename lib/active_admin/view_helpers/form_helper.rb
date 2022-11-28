@@ -5,7 +5,7 @@ module ActiveAdmin
       def active_admin_form_for(resource, options = {}, &block)
         Arbre::Context.new({}, self) do
           active_admin_form_for resource, options, &block
-        end.content
+        end.render_in.html_safe
       end
 
       def hidden_field_tags_for(params, options = {})
