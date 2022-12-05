@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'arbre', git: 'https://github.com/varyonic/arbre'
+
 # Optional dependencies
 gem 'cancan'
 gem 'pundit'
