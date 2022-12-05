@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'arbre', git: 'https://github.com/varyonic/arbre', branch: 'render_in'
+gem 'arbre', git: 'https://github.com/varyonic/arbre'
 
 # Optional dependencies
 gem 'cancan'
