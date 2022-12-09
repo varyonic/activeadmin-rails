@@ -5,9 +5,14 @@ RSpec.describe "Controller Authorization", type: :controller do
   let(:authorization){ controller.send(:active_admin_authorization) }
 
   before do
+    ActionView::LookupContext::DetailsKey.clear
     load_resources { ActiveAdmin.register Post }
     @controller = Admin::PostsController.new
     allow(authorization).to receive(:authorized?)
+  end
+
+  after do
+    ActionView::LookupContext::DetailsKey.clear
   end
 
   it "should authorize the index action" do
