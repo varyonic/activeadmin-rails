@@ -31,6 +31,8 @@ RSpec.describe ActiveAdmin::Views::Pages::Layout do
       insert_tag ActiveAdmin::Views::Pages::Layout
     end
   end
+  let(:html) { layout.render_in layout.arbre_context }
+  let(:page) { Capybara.string(html) }
 
   it "should be the @page_title if assigned in the controller" do
     assigns[:page_title] = "My Page Title"
@@ -42,6 +44,14 @@ RSpec.describe ActiveAdmin::Views::Pages::Layout do
     helpers.params[:action] = "edit"
 
     expect(layout.title).to eq "Edit"
+  end
+
+  describe "the head" do
+
+    it "should have title tag" do
+      expect(page).to have_css 'head title', text: /Edit \|/, count: 1, visible: false
+    end
+
   end
 
   describe "the body" do
