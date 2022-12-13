@@ -1,0 +1,16 @@
+<title>
+  <%= [title, helpers.active_admin_namespace.site_title(self)].compact.join(" | ") %>
+</title>
+<% active_admin_application.stylesheets.each do |style, options| %>
+  <%= stylesheet_link_tag(style, options).html_safe %>
+<% end %>
+<% active_admin_namespace.meta_tags.each do |name, content| %>
+  <meta name="<%= name %>" content="<%= content %>">
+<% end %>
+<% active_admin_application.javascripts.each do |path| %>
+  <%= javascript_include_tag(path) %>
+<% end %>
+<% if active_admin_namespace.favicon %>
+  <%= favicon_link_tag(active_admin_namespace.favicon) %>
+<% end %>
+<%= csrf_meta_tag %>
