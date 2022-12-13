@@ -40,9 +40,7 @@ module ActiveAdminIntegrationSpecHelper
   end
 
   def render_arbre_component(assigns = {}, helpers = mock_action_view, &block)
-    clear_lookup_context_template_cache do
-      arbre(assigns, helpers, &block).children.first
-    end
+    arbre(assigns, helpers, &block).children.first
   end
 
   # A mock action view to test view helpers
@@ -83,11 +81,5 @@ module ActiveAdminIntegrationSpecHelper
     yield
   ensure
     I18n.backend.reload!
-  end
-
-  # FIXME: Find more elegant way to disable template caching in MockActionView.
-  def clear_lookup_context_template_cache
-    ActionView::LookupContext::DetailsKey.clear
-    yield.tap { ActionView::LookupContext::DetailsKey.clear }
   end
 end

@@ -50,6 +50,9 @@ RSpec.configure do |config|
     ActiveAdminIntegrationSpecHelper.load_defaults!
     ActiveAdminIntegrationSpecHelper.reload_routes!
   end
+
+  # Clear cached ActionView template partials.
+  config.after { ActionView::LookupContext::DetailsKey.clear }
 end
 
 # Force deprecations to raise an exception.
