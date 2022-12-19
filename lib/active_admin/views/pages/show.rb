@@ -1,18 +1,20 @@
 module ActiveAdmin
   module Views
     module Pages
-      class Show < Base
+      class Show < Arbre::Element
+
+        def build(*args)
+          div id: "main_content" do
+            main_content
+          end
+        end
 
         def config
           active_admin_config.get_page_presenter(:show) || super
         end
 
         def title
-          if config[:title]
-            render_or_call_method_or_proc_on(resource, config[:title])
-          else
-            assigns[:page_title] || default_title
-          end
+          helpers.page_title
         end
 
         def main_content
@@ -37,16 +39,6 @@ module ActiveAdmin
         end
 
         protected
-
-        def default_title
-          title = display_name(resource)
-
-          if title.blank?
-            title = "#{active_admin_config.resource_label} ##{resource.id}"
-          end
-
-          title
-        end
 
         module DefaultMainContent
           def default_main_content(&block)

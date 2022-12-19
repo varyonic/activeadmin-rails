@@ -69,7 +69,7 @@ module ActiveAdmin
     #   2.  If we're rendering a custom action, we'll use the active_admin layout so
     #       that users can render any template inside Active Admin.
     def determine_active_admin_layout
-      ACTIVE_ADMIN_ACTIONS.include?(params[:action].to_sym) ? false : 'active_admin'
+      [:index, :new, :create, :edit, :update, :destroy].include?(params[:action].to_sym) ? false : 'active_admin'
     end
 
     def active_admin_root

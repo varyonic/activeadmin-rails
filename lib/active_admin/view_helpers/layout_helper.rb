@@ -20,7 +20,22 @@ module ActiveAdmin
       end
 
       def page_title
-        assigns[:page_title] ||= I18n.t("active_admin.#{params[:action]}", default: params[:action].to_s.titleize)
+        case params[:action].to_sym
+        when :show
+          config = active_admin_config.get_page_presenter(:show) || {}
+
+          if config[:title]
+            render_or_call_method_or_proc_on(resource, config[:title])
+          else
+            assigns[:page_title] || begin
+              title = display_name(resource)
+              title = "#{active_admin_config.resource_label} ##{resource.id}" if title.blank?
+              title
+            end
+          end
+        else
+          assigns[:page_title] || I18n.t("active_admin.#{params[:action]}", default: params[:action].to_s.titleize)
+        end
       end
 
       # Returns the sidebar sections to render for the current action
