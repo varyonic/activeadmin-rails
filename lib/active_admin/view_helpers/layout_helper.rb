@@ -21,6 +21,24 @@ module ActiveAdmin
 
       def page_title
         case params[:action].to_sym
+        when :index
+          if PageController === controller
+            page_presenter = active_admin_config.get_page_presenter(:index) || ActiveAdmin::PagePresenter.new
+
+            if page_presenter[:title]
+              render_or_call_method_or_proc_on self, page_presenter[:title]
+            else
+              active_admin_config.name
+            end
+          else
+            config = active_admin_config.get_page_presenter(:index, params[:as]) || ActiveAdmin::PagePresenter.new(as: :table)
+
+            if Proc === config[:title]
+              controller.instance_exec &config[:title]
+            else
+              config[:title] || assigns[:page_title] || active_admin_config.plural_resource_label
+            end
+          end
         when :show
           config = active_admin_config.get_page_presenter(:show) || {}
 

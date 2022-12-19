@@ -4,14 +4,16 @@ module ActiveAdmin
   module Views
     module Pages
 
-      class Index < Base
+      class Index < Arbre::Element
+
+        def build(*args)
+          div id: "main_content" do
+            main_content
+          end
+        end
 
         def title
-          if Proc === config[:title]
-            controller.instance_exec &config[:title]
-          else
-            config[:title] || assigns[:page_title] || active_admin_config.plural_resource_label
-          end
+          helpers.page_title
         end
 
         # Retrieves the given page presenter, or uses the default.
