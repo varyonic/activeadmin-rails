@@ -1,6 +1,4 @@
-<title>
-  <%= [title, helpers.active_admin_namespace.site_title(self)].compact.join(" | ") %>
-</title>
+<title><%= [title, helpers.active_admin_namespace.site_title(self)].compact.join(" | ") %></title>
 <% active_admin_application.stylesheets.each do |style, options| %>
   <%= stylesheet_link_tag(style, options).html_safe %>
 <% end %>
