@@ -1,53 +1,72 @@
 require 'rails_helper'
 
-RSpec.describe ActiveAdmin::Views::Pages::Form do
+RSpec.describe ActiveAdmin::Views::Pages::Form, type: :request do
+  include Rails.application.routes.url_helpers
+
   describe "#title" do
-    let!(:application){ ActiveAdmin::Application.new }
-    let(:namespace){ ActiveAdmin::Namespace.new(application, "Admin") }
-    let!(:http_params){ { controller: "UsersController", action: "edit" } }
-    let!(:params) { ActionController::Parameters.new(http_params) }
+    let!(:application) { ActiveAdmin::Application.new }
+    let(:namespace) { application.namespace(:root) { |n| n.site_title = nil } }
+    let(:page) { Capybara.string(response.body) }
 
-    let(:helpers) do
-      helpers = mock_action_view
-      allow(helpers).to receive(:active_admin_config).and_return(namespace.register(Post))
-      allow(helpers).to receive(:params).and_return(params)
-      helpers
-    end
-
-    let(:arbre_context) do
-      OpenStruct.new(params: params, helpers: helpers, assigns: {})
+    around do |example|
+      with_temp_application(application) do
+        load_resources { resource }
+        example.call
+      end
+      namespace.unload!
     end
 
     context "when :title is set" do
-      it "should show the set page title" do
+      let(:resource) do
+        namespace.register User do
+          form(title: "My Page Title")
+        end
+      end
 
-        page = ActiveAdmin::Views::Pages::Form.new(arbre_context)
-        expect(page).to receive(:resource)
-        expect(page).to receive(:form_presenter).twice.and_return({ title: "My Page Title" })
+      it "should show the set page title" do
+        get new_user_path
         expect(page.title).to eq "My Page Title"
       end
     end
 
     context "when page_title is assigned" do
+      let(:resource) do
+        namespace.register User do
+          controller do
+            def new
+              @page_title = "My Page Title"
+              new!
+            end
+          end
+        end
+      end
+
       it "should show the set page title" do
-        arbre_context.assigns[:page_title] = "My Page Title"
-        page = ActiveAdmin::Views::Pages::Form.new(arbre_context)
+        get new_user_path
         expect(page.title).to eq "My Page Title"
       end
     end
 
     context "when page_title is not assigned" do
-      {
-        "new" => "New Post",
-        "create" => "New Post",
-        "edit" => "Edit Post",
-        "update" => "Edit Post"
-      }.each do |action, title|
-        it "should show the correct I18n text on the #{action} action" do
-          params[:action] = action
-          page = ActiveAdmin::Views::Pages::Form.new(arbre_context)
-          expect(page.title).to eq title
+      let(:resource) do
+        namespace.register Post do
         end
+      end
+      let(:post){ Post.create! }
+
+      it "should show the correct I18n text on the new action" do
+        get new_post_path
+        expect(page).to have_css 'head title', text: /New Post/, count: 1, visible: false
+        expect(page.title).to eq 'New Post'
+      end
+
+      it "should show the correct I18n text on the edit action" do
+        get edit_post_path(post)
+
+        expect(page).to have_css 'head title', text: /Edit Post/, count: 1, visible: false
+        expect(page).to have_css 'body.active_admin', count: 1
+        expect(page).to have_css "body.#{namespace.name}_namespace", count: 1
+        expect(page.title).to eq 'Edit Post'
       end
     end
   end
