@@ -33,6 +33,28 @@ module ActiveAdmin
               title
             end
           end
+        when :new, :edit
+          form_presenter = active_admin_config.get_page_presenter(:form) || begin
+            ActiveAdmin::PagePresenter.new do |f|
+              f.semantic_errors # show errors on :base by default
+              f.inputs
+              f.actions
+            end
+          end
+
+          if form_presenter[:title]
+            render_or_call_method_or_proc_on(resource, form_presenter[:title])
+          else
+            normalized_action = case params[:action]
+            when "create"
+              "new"
+            when "update"
+              "edit"
+            else
+              params[:action]
+            end
+            assigns[:page_title] || ActiveAdmin::Localizers.resource(active_admin_config).t("#{normalized_action}_model")
+          end
         else
           assigns[:page_title] || I18n.t("active_admin.#{params[:action]}", default: params[:action].to_s.titleize)
         end
