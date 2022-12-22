@@ -40,4 +40,20 @@ RSpec.describe 'layout', type: :request do
 
   end
 
+  context "unsupported browser" do
+    let(:user_agent) { "Mozilla/5.0 (compatible; MSIE 7.0; Windows NT 6.2; Trident/6.0)" }
+
+    it "should display appropriate text" do
+      get edit_user_path(user), headers: { 'HTTP_USER_AGENT' => user_agent }
+
+      expect(page).to have_css 'div.unsupported_browser h1', text: /no longer supports Internet Explorer versions 8/
+      expect(page).to have_css 'div.unsupported_browser p', text: /upgrade your browser/
+      expect(page).to have_css 'div.unsupported_browser p', text: /turn off "Compatibility View"/
+    end
+  end
+
+  it "should not display browser warning by default" do
+    get edit_user_path(user)
+    expect(page).not_to have_css 'div.unsupported_browser'
+  end
 end
