@@ -1,67 +1,41 @@
 require 'rails_helper'
 
-RSpec.describe ActiveAdmin::Views::Pages::Layout do
+RSpec.describe 'layout', type: :request do
+  include Rails.application.routes.url_helpers
 
-  let(:assigns){ {} }
-  let(:helpers) do
-    helpers = mock_action_view
+  let(:application){ ActiveAdmin::Application.new }
+  let(:namespace) { application.namespace(:root) }
+  let(:resource) { namespace.register User }
+  let(:page) { Capybara.string(response.body) }
+  let(:user) { User.create! }
 
-    { active_admin_application:   active_admin_application,
-      active_admin_config:        double('Config', action_items?: nil, breadcrumb: nil, sidebar_sections?: nil),
-      active_admin_namespace:     active_admin_namespace,
-      csrf_meta_tag:              '',
-      current_active_admin_user:  nil,
-      current_active_admin_user?: false,
-      current_menu:               double('Menu', items: []),
-      params:                     {controller: 'UsersController', action: 'edit'},
-      env:                        {}
-    }.each do |method, returns|
-      allow(helpers).to receive(method).and_return returns
+  around do |example|
+    with_temp_application(application) do
+      load_resources { resource }
+      example.call
     end
-
-    helpers
-  end
-
-  let(:active_admin_namespace){ ActiveAdmin::Namespace.new(ActiveAdmin::Application.new, :myspace) }
-  let(:active_admin_application){ ActiveAdmin.application }
-  let(:view_factory) { ActiveAdmin::ViewFactory.new }
-
-  let(:layout) do
-    render_arbre_component assigns, helpers do
-      insert_tag ActiveAdmin::Views::Pages::Layout
-    end
-  end
-  let(:html) { layout.render_in layout.arbre_context }
-  let(:page) { Capybara.string(html) }
-
-  it "should be the @page_title if assigned in the controller" do
-    assigns[:page_title] = "My Page Title"
-
-    expect(layout.title).to eq "My Page Title"
-  end
-
-  it "should be the default translation" do
-    helpers.params[:action] = "edit"
-
-    expect(layout.title).to eq "Edit"
+    namespace.unload!
   end
 
   describe "the head" do
 
     it "should have title tag" do
-      expect(page).to have_css 'head title', text: /Edit \|/, count: 1, visible: false
-    end
+      get edit_user_path(user)
 
+      expect(page).to have_css 'head title', text: /Edit User \|/, count: 1, visible: false
+    end
   end
 
   describe "the body" do
 
     it "should have class 'active_admin'" do
-      expect(layout.build.class_list).to include 'active_admin'
+      get edit_user_path(user)
+      expect(page).to have_css 'body.active_admin', count: 1
     end
 
     it "should have namespace class" do
-      expect(layout.build.class_list).to include "#{active_admin_namespace.name}_namespace"
+      get edit_user_path(user)
+      expect(page).to have_css "body.#{namespace.name}_namespace", count: 1
     end
 
   end
