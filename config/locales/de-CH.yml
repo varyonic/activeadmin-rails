@@ -34,7 +34,6 @@
     status_tag:
       "yes": "Ja"
       "no": "Nicht"
-    main_content: "Bitte implementieren Sie %{model}#main_content, um Inhalte anzuzeigen."
     logout: "Abmelden"
     powered_by: "Powered by %{active_admin} %{version}"
     sidebars:

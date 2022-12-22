@@ -34,7 +34,6 @@ sk:
     status_tag:
       "yes": "Áno"
       "no": "Nie"
-    main_content: "Implementujte prosím %{model}#main_content pre zobrazenie obsahu."
     logout: "Odhlásiť"
     powered_by: "%{active_admin} %{version}"
     sidebars:

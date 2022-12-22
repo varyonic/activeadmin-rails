@@ -34,7 +34,6 @@
     status_tag:
       "yes": "Sim"
       "no": "Não"
-    main_content: "Por favor implemente %{model}#main_content para mostrar o conteúdo."
     logout: "Sair"
     powered_by: "Powered by %{active_admin} %{version}"
     sidebars:

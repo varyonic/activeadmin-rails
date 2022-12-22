@@ -34,7 +34,6 @@ bg:
     status_tag:
       "yes": "Да"
       "no": "не"
-    main_content: "Добавете %{model}#main_content за да видите съдържание."
     logout: "Изход"
     powered_by: "Задвижва се от %{active_admin} %{version}"
     sidebars:
