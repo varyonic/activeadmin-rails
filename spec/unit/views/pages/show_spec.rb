@@ -1,30 +1,36 @@
 require 'rails_helper'
 
-RSpec.describe ActiveAdmin::Views::Pages::Show do
+RSpec.describe ActiveAdmin::Views::Pages::Show, type: :request do
+  include Rails.application.routes.url_helpers
+
+  let!(:application) { ActiveAdmin::Application.new }
+  let(:namespace) { application.namespace(:root) { |n| n.site_title = nil } }
+  let(:page) { Capybara.string(response.body) }
+  let(:post) { Post.create! }
+
+  around do |example|
+    with_temp_application(application) do
+      load_resources { resource }
+      example.call
+    end
+    namespace.unload!
+  end
 
   describe "the resource" do
-    let(:helpers) { double resource: resource }
-    let(:arbre_context) { Arbre::Context.new({}, helpers) }
-    subject(:page) { ActiveAdmin::Views::Pages::Show.new(arbre_context) }
-
-    context 'when the resource does not respond to #decorator' do
-      let(:resource) { 'Test Resource' }
-
-      it "normally returns the resource" do
-        expect(page.resource).to eq 'Test Resource'
+    let(:resource) do
+      namespace.register Post do
+        show do |post|
+          attributes_table_for(post) do
+            row :field
+          end
+        end
       end
     end
 
-    context 'when you pass a block to main content' do
-      let(:block) { lambda { } }
-      let(:resource) { double('resource') }
-
-      before { allow(page).to receive(:active_admin_config).and_return(double(comments?: false, resource_columns: [:field]))}
-
-      it 'appends it to the output' do
-        expect(page).to receive(:attributes_table).with(:field).and_yield
-        page.default_main_content(&block)
-      end
+    it "renders the page" do
+      get post_path(post)
+      expect(page).to have_css 'div#main_content', count: 1
+      expect(page).to have_css 'div.attributes_table tr.row-field th', text: /Field/
     end
 
   end
