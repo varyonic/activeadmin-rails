@@ -20,7 +20,6 @@ module ActiveAdmin
               show_page:  ActiveAdmin::Views::Pages::Show,
               new_page:   ActiveAdmin::Views::Pages::Form,
               edit_page:  ActiveAdmin::Views::Pages::Form,
-              layout:     ActiveAdmin::Views::Pages::Layout,
               page:       ActiveAdmin::Views::Pages::Page
 
   end

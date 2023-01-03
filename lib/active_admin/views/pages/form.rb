@@ -2,14 +2,16 @@ module ActiveAdmin
   module Views
     module Pages
 
-      class Form < Base
+      class Form < Arbre::Element
+
+        def build(*args)
+          div id: "main_content" do
+            main_content
+          end
+        end
 
         def title
-          if form_presenter[:title]
-            helpers.render_or_call_method_or_proc_on(resource, form_presenter[:title])
-          else
-            assigns[:page_title] || ActiveAdmin::Localizers.resource(active_admin_config).t("#{normalized_action}_model")
-          end
+          helpers.page_title
         end
 
         def form_presenter
@@ -44,17 +46,6 @@ module ActiveAdmin
             f.semantic_errors # show errors on :base by default
             f.inputs
             f.actions
-          end
-        end
-
-        def normalized_action
-          case params[:action]
-          when "create"
-            "new"
-          when "update"
-            "edit"
-          else
-            params[:action]
           end
         end
       end

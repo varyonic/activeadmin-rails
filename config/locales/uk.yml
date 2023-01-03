@@ -39,7 +39,6 @@ uk:
     status_tag:
       "yes": "Так"
       "no": "Ні"
-    main_content: "Створіть %{model}#main_content для відображення вмісту."
     logout: "Вийти"
     powered_by: "Powered by %{active_admin} %{version}"
     sidebars:

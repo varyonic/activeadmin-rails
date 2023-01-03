@@ -109,6 +109,10 @@ module ActiveAdmin
     # Removes all defined controllers from memory. Useful in
     # development, where they are reloaded on each request.
     def unload!
+      # We are caching classes, but need to manually clear references to
+      # the controllers. If they aren't clear, the router stores references
+      ActiveSupport::Dependencies.clear if Rails::VERSION::MAJOR < 7
+
       namespaces.each &:unload!
       @@loaded = false
     end

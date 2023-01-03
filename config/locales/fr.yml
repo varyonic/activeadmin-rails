@@ -44,7 +44,6 @@ fr:
     status_tag:
       "yes": "Oui"
       "no": "Non"
-    main_content: "Veuillez implémenter %{model}#main_content pour afficher le contenu."
     logout: "Déconnexion"
     powered_by: "Propulsé par %{active_admin} %{version}"
     sidebars:

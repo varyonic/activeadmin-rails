@@ -1,11 +1,18 @@
 module ActiveAdmin
   module Views
     module Pages
-      class Page < Base
+      class Page < Arbre::Element
+
+        def build(*args)
+          div id: "main_content" do
+            main_content
+          end
+        end
 
         def main_content
           if page_presenter.block
-            instance_exec &page_presenter.block
+            block_result = instance_exec(&page_presenter.block)
+            text_node block_result unless block_result.is_a? Arbre::Element
           else
             nil
           end
@@ -18,11 +25,7 @@ module ActiveAdmin
         end
 
         def title
-          if page_presenter[:title]
-            render_or_call_method_or_proc_on self, page_presenter[:title]
-          else
-            active_admin_config.name
-          end
+          helpers.page_title
         end
       end
     end
