@@ -301,6 +301,21 @@ module ActiveAdmin
         apply_decorator(resource)
       end
 
+      def permitted_params
+        permitted_params =
+          active_admin_namespace.permitted_params +
+            Array.wrap(active_admin_config.belongs_to_param)
+
+        permitted_params << :create_another if active_admin_config.create_another
+
+        param_key = active_admin_config.param_key
+
+        attr_names = active_admin_config.permitted_attr_names
+        permitted_attr_names = attr_names.is_a?(Proc) ? instance_exec(&attr_names) : attr_names
+
+        params.permit(*permitted_params, param_key.to_sym => permitted_attr_names)
+      end
+
       # @return [String]
       def smart_resource_url
         if create_another?

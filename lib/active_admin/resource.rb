@@ -65,6 +65,9 @@ module ActiveAdmin
     # nil to not decorate.
     attr_accessor :decorator_class_name
 
+    # An array or proc returning whitelisted resource attribute names.
+    attr_accessor :permitted_attr_names
+
     module Base
       def initialize(namespace, resource_class, options = {})
         @namespace = namespace
