@@ -310,10 +310,14 @@ module ActiveAdmin
 
         param_key = active_admin_config.param_key
 
-        attr_names = active_admin_config.permitted_attr_names
-        permitted_attr_names = attr_names.is_a?(Proc) ? instance_exec(&attr_names) : attr_names
-
         params.permit(*permitted_params, param_key.to_sym => permitted_attr_names)
+      end
+
+      # @return [Array] names
+      #
+      def permitted_attr_names
+        attr_names = active_admin_config.permitted_attr_names
+        attr_names.is_a?(Proc) ? instance_exec(&attr_names) : attr_names
       end
 
       # @return [String]
