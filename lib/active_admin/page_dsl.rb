@@ -20,8 +20,15 @@ module ActiveAdmin
 
     def page_action(name, options = {}, &block)
       config.page_actions << ControllerAction.new(name, options)
-      controller do
-        define_method(name, &block || Proc.new{})
+
+      if block_given?
+        controller do
+          define_method(name, &block)
+        end
+      elsif !controller.method_defined?(name)
+        controller do
+          define_method(name, Proc.new{})
+        end
       end
     end
 
