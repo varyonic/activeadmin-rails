@@ -131,14 +131,25 @@ module ActiveAdmin
     # action.
     #
     def action(set, name, options = {}, &block)
-      warn "Warning: method `#{name}` already defined" if controller.method_defined?(name)
-
       set << ControllerAction.new(name, options)
       title = options.delete(:title)
 
-      controller do
-        before_action(only: [name]) { @page_title = title } if title
-        define_method(name, &block || Proc.new{})
+      if title
+        controller do
+          before_action(only: [name]) { @page_title = title }
+        end
+      end
+  
+      if block_given?
+        warn "Warning: method `#{name}` already defined in #{controller.name}" if controller.method_defined?(name)
+
+        controller do
+          define_method(name, &block)
+        end
+      elsif !controller.method_defined?(name)
+        controller do
+          define_method(name, Proc.new{})
+        end
       end
     end
 

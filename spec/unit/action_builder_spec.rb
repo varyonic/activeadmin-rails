@@ -132,7 +132,9 @@ RSpec.describe 'defining actions from registration blocks', type: :controller do
     describe 'defining member action' do
       let :action! do
         ActiveAdmin.register Post do
-          member_action :process
+          member_action :process do
+            # Do nothing
+          end
         end
       end
 
@@ -144,7 +146,9 @@ RSpec.describe 'defining actions from registration blocks', type: :controller do
     describe 'defining collection action' do
       let :action! do
         ActiveAdmin.register Post do
-          collection_action :process
+          collection_action :process do
+            # Do nothing
+          end
         end
       end
 
