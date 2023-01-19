@@ -1,1 +1,29 @@
-insert_tag renderer_for(:show)
+# Tmporarily provide backward compatibility if
+# this method is invoked within page presenter block.
+def attributes_table(*args, &block)
+  opts = args.extract_options!
+  table_title = if opts.has_key?(:title)
+                  render_or_call_method_or_proc_on(resource, opts[:title])
+                else
+                  ActiveAdmin::Localizers.resource(active_admin_config).t(:details)
+                end
+  panel(table_title) do
+    attributes_table_for resource, *args, &block
+  end
+end
+
+div id: "main_content" do
+  config = active_admin_config.get_page_presenter(:show) || ActiveSupport::OrderedOptions.new
+
+  if config.block
+    # Eval the show config from the controller
+    instance_exec resource, &config.block
+  else
+    # attributes_table(*active_admin_config.resource_columns)
+    table_title = ActiveAdmin::Localizers.resource(active_admin_config).t(:details)
+    panel(table_title) do
+      attributes_table_for(resource, *active_admin_config.resource_columns)
+      active_admin_comments_for(resource) if active_admin_config.comments?
+    end
+  end
+end
