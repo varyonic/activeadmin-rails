@@ -19,11 +19,6 @@ div id: "main_content" do
     # Eval the show config from the controller
     instance_exec resource, &config.block
   else
-    # attributes_table(*active_admin_config.resource_columns)
-    table_title = ActiveAdmin::Localizers.resource(active_admin_config).t(:details)
-    panel(table_title) do
-      attributes_table_for(resource, *active_admin_config.resource_columns)
-      active_admin_comments_for(resource) if active_admin_config.comments?
-    end
+    attributes_panel
   end
 end

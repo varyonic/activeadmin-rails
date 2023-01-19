@@ -20,7 +20,7 @@ RSpec.describe 'views/resource/show', type: :request do
     let(:resource) do
       namespace.register Post do
         show do |post|
-          attributes_table_for(post) do
+          attributes_table do
             row :field
           end
         end
