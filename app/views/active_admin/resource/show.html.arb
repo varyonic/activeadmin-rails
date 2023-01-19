@@ -19,6 +19,6 @@ div id: "main_content" do
     # Eval the show config from the controller
     instance_exec resource, &config.block
   else
-    attributes_panel
+    render partial: 'show'
   end
 end
