@@ -9,7 +9,12 @@ module ActiveAdmin
           inputs     = JSON.parse params[:batch_action_inputs]  || '{}'
           valid_keys = StringSymbolOrProcSetting.new(current_batch_action.inputs).value(self).try(:keys)
           inputs     = inputs.with_indifferent_access.slice *valid_keys
-          instance_exec selection, inputs, &current_batch_action.block
+          method_name = "batch_action_#{params[:batch_action]}"
+          if respond_to?(method_name, true)
+            send method_name, selection, inputs
+          else
+            instance_exec selection, inputs, &current_batch_action.block
+          end
         else
           raise "Couldn't find batch action \"#{params[:batch_action]}\""
         end

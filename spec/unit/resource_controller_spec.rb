@@ -268,6 +268,23 @@ RSpec.describe "A specific resource controller", type: :controller do
       end
     end
 
+    describe "batch_action method defined in controller" do
+      let(:batch_action) { ActiveAdmin::BatchAction.new :flag, "Flag" }
+      let(:http_params) do
+        { batch_action: "flag", collection_selection: ["1"] }
+      end
+
+      before do
+        controller.class.define_method :batch_action_flag do |selection, inputs|
+          @block_context = self.class
+        end
+      end
+
+      it "should call the defined controller method" do
+        controller.batch_action
+        expect(controller.instance_variable_get(:@block_context)).to eq Admin::PostsController
+      end
+    end
   end
 
 end
