@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ActiveAdmin::Views::Pages::Show, type: :request do
+RSpec.describe 'views/resource/show', type: :request do
   include Rails.application.routes.url_helpers
 
   let!(:application) { ActiveAdmin::Application.new }
@@ -20,7 +20,7 @@ RSpec.describe ActiveAdmin::Views::Pages::Show, type: :request do
     let(:resource) do
       namespace.register Post do
         show do |post|
-          attributes_table_for(post) do
+          attributes_table do
             row :field
           end
         end
