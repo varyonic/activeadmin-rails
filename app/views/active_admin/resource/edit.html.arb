@@ -13,11 +13,7 @@ div id: "main_content" do
     if form_presenter.block
       active_admin_form_for resource, options, &form_presenter.block
     else
-      active_admin_form_for(resource, options) do |f|
-        f.semantic_errors # show errors on :base by default
-        f.inputs
-        f.actions
-      end
+      render partial: 'form'
     end
   end
 end
