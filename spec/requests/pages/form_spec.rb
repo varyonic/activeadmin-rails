@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ActiveAdmin::Views::Pages::Form, type: :request do
+RSpec.describe 'views/resources/edit, new', type: :request do
   include Rails.application.routes.url_helpers
 
   describe "#title" do

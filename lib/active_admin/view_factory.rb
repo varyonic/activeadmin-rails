@@ -17,8 +17,6 @@ module ActiveAdmin
 
     # Register All The Pages
     register  index_page: ActiveAdmin::Views::Pages::Index,
-              new_page:   ActiveAdmin::Views::Pages::Form,
-              edit_page:  ActiveAdmin::Views::Pages::Form,
               page:       ActiveAdmin::Views::Pages::Page
 
   end
