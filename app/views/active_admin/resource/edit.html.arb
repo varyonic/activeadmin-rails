@@ -1,19 +1,15 @@
 div id: "main_content" do
   form_presenter = active_admin_config.get_page_presenter(:form) || ActiveAdmin::PagePresenter.new
 
-  if form_presenter.options[:partial]
-    render form_presenter.options[:partial]
-  else
+  if form_presenter.block
     options = {
       url: resource.persisted? ? resource_path(resource) : collection_path,
       as: active_admin_config.param_key
     }
     options.merge!(form_presenter.options)
 
-    if form_presenter.block
-      active_admin_form_for resource, options, &form_presenter.block
-    else
-      render partial: 'form'
-    end
+    active_admin_form_for resource, options, &form_presenter.block
+  else
+    render form_presenter.options[:partial] || 'form'
   end
 end
