@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ActiveAdmin::Views::Pages::Index, type: :request do
+RSpec.describe 'views/resource/index', type: :request do
   include Rails.application.routes.url_helpers
 
   let(:application){ ActiveAdmin::Application.new }

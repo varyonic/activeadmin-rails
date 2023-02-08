@@ -12,12 +12,10 @@ module ActiveAdmin
               title_bar:           ActiveAdmin::Views::TitleBar,
               header:              ActiveAdmin::Views::Header,
               footer:              ActiveAdmin::Views::Footer,
-              index_scopes:        ActiveAdmin::Views::Scopes,
-              blank_slate:         ActiveAdmin::Views::BlankSlate
+              index_scopes:        ActiveAdmin::Views::Scopes
 
     # Register All The Pages
-    register  index_page: ActiveAdmin::Views::Pages::Index,
-              page:       ActiveAdmin::Views::Pages::Page
+    register  page:       ActiveAdmin::Views::Pages::Page
 
   end
 end
