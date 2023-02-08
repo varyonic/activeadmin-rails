@@ -50,6 +50,9 @@ World(ActiveAdminContentsRollback)
 
 After do
   rollback!
+
+  # Clear cached ActionView template partials.
+  ActionView::LookupContext::DetailsKey.clear
 end
 
 Given /^a(?:n? (index|show))? configuration of:$/ do |action, config_content|
