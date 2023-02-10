@@ -7,6 +7,6 @@ div id: "main_content" do
     block_result = instance_exec(&page_presenter.block)
     text_node block_result unless block_result.is_a? Arbre::Element
   else
-    nil
+    render 'content'
   end
 end
