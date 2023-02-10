@@ -1,0 +1,22 @@
+def page_presenter
+  active_admin_config.get_page_presenter(:index, params[:as]) ||
+  ActiveAdmin::PagePresenter.new(as: :table)
+end
+
+table_options = {
+  id: "index_table_#{active_admin_config.resource_name.plural}",
+  class: "index_table index",
+  i18n: active_admin_config.resource_class,
+  sortable: true,
+  paginator: page_presenter[:paginator] != false,
+  row_class: page_presenter[:row_class]
+}
+
+index_table_for(collection, table_options) do |t|
+  selectable_column
+  id_column if resource_class.primary_key
+  active_admin_config.resource_columns.each do |attribute|
+    column attribute
+  end
+  actions
+end

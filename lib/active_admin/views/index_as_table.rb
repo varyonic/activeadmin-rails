@@ -226,33 +226,20 @@ module ActiveAdmin
     class IndexAsTable < ActiveAdmin::Component
 
       def build(page_presenter, collection)
-        table_options = {
-          id: "index_table_#{active_admin_config.resource_name.plural}",
-          sortable: true,
-          class: "index_table index",
-          i18n: active_admin_config.resource_class,
-          paginator: page_presenter[:paginator] != false,
-          row_class: page_presenter[:row_class]
-        }
-
-        table_for collection, table_options do |t|
-          table_config_block = page_presenter.block || default_table
-          instance_exec(t, &table_config_block)
-        end
-      end
-
-      def table_for(*args, &block)
-        insert_tag IndexTableFor, *args, &block
-      end
-
-      def default_table
-        proc do
-          selectable_column
-          id_column if resource_class.primary_key
-          active_admin_config.resource_columns.each do |attribute|
-            column attribute
+        if page_presenter.block
+          table_options = {
+            id: "index_table_#{active_admin_config.resource_name.plural}",
+            class: "index_table index",
+            i18n: active_admin_config.resource_class,
+            sortable: true,
+            paginator: page_presenter[:paginator] != false,
+            row_class: page_presenter[:row_class]
+          }
+          insert_tag IndexTableFor, collection, table_options do |t|
+            instance_exec(t, &page_presenter.block)
           end
-          actions
+        else
+          render partial: 'index_as_table'
         end
       end
 
@@ -265,6 +252,7 @@ module ActiveAdmin
       # methods for quickly displaying items on the index page
       #
       class IndexTableFor < ::ActiveAdmin::Views::TableFor
+        builder_method :index_table_for
 
         # Display a column for checkbox
         def selectable_column
