@@ -13,9 +13,5 @@ module ActiveAdmin
               header:              ActiveAdmin::Views::Header,
               footer:              ActiveAdmin::Views::Footer,
               index_scopes:        ActiveAdmin::Views::Scopes
-
-    # Register All The Pages
-    register  page:       ActiveAdmin::Views::Pages::Page
-
   end
 end
