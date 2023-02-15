@@ -20,47 +20,53 @@ module ActiveAdmin
       end
 
       def page_title
-        case params[:action].to_sym
-        when :index
-          if PageController === controller
-            if page_presenter[:title]
-              render_or_call_method_or_proc_on self, page_presenter[:title]
-            else
-              active_admin_config.name
-            end
-          else
-            if Proc === page_presenter[:title]
-              controller.instance_exec &page_presenter[:title]
-            else
-              page_presenter[:title] || assigns[:page_title] || active_admin_config.plural_resource_label
-            end
-          end
-        when :show
+        case controller
+        when ResourceController
           if page_presenter[:title]
-            render_or_call_method_or_proc_on(resource, page_presenter[:title])
-          else
-            assigns[:page_title] || begin
-              title = display_name(resource)
-              title = "#{active_admin_config.resource_label} ##{resource.id}" if title.blank?
-              title
-            end
-          end
-        when :new, :edit
-          if page_presenter[:title]
-            render_or_call_method_or_proc_on(resource, page_presenter[:title])
-          else
-            normalized_action = case params[:action]
-            when "create"
-              "new"
-            when "update"
-              "edit"
+            case params[:action].to_sym
+            when :index
+              case page_presenter[:title]
+              when Symbol, Proc
+                controller.instance_exec(&page_presenter[:title])
+              else
+                page_presenter[:title]
+              end
             else
-              params[:action]
+              render_or_call_method_or_proc_on(resource, page_presenter[:title])
             end
-            assigns[:page_title] || ActiveAdmin::Localizers.resource(active_admin_config).t("#{normalized_action}_model")
+          else
+            default_page_title
           end
         else
-          assigns[:page_title] || I18n.t("active_admin.#{params[:action]}", default: params[:action].to_s.titleize)
+          if page_presenter[:title]
+            render_or_call_method_or_proc_on(self, page_presenter[:title])
+          else
+            default_page_title
+          end
+        end
+      end
+
+      def default_page_title
+        case controller
+        when ResourceController
+          case params[:action].to_sym
+          when :index
+            active_admin_config.plural_resource_label
+          when :show
+            display_name(resource).present? ?
+              display_name(resource) :
+              "#{active_admin_config.resource_label} ##{resource.id}"
+          when :new, :edit
+            normalized_action = params[:action]
+            normalized_action = 'new' if normalized_action == 'create'
+            normalized_action = 'edit' if normalized_action == 'update'
+
+            ActiveAdmin::Localizers.resource(active_admin_config).t("#{normalized_action}_model")
+          else
+            I18n.t("active_admin.#{params[:action]}", default: params[:action].to_s.titleize)
+          end
+        else
+          active_admin_config.name
         end
       end
 
