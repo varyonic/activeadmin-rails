@@ -42,9 +42,8 @@ module ActiveAdmin
 
     # Returns the renderer class to use for the given action.
     def renderer_for(action)
-      active_admin_namespace.view_factory["#{action}_page"]
+      Deprecation.warn "This method does not do anything and will be removed."
     end
-
     helper_method :renderer_for
 
     def restrict_format_access!
