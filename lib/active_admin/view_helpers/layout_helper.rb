@@ -23,27 +23,21 @@ module ActiveAdmin
         case params[:action].to_sym
         when :index
           if PageController === controller
-            page_presenter = active_admin_config.get_page_presenter(:index) || ActiveAdmin::PagePresenter.new
-
             if page_presenter[:title]
               render_or_call_method_or_proc_on self, page_presenter[:title]
             else
               active_admin_config.name
             end
           else
-            config = active_admin_config.get_page_presenter(:index, params[:as]) || ActiveAdmin::PagePresenter.new(as: :table)
-
-            if Proc === config[:title]
-              controller.instance_exec &config[:title]
+            if Proc === page_presenter[:title]
+              controller.instance_exec &page_presenter[:title]
             else
-              config[:title] || assigns[:page_title] || active_admin_config.plural_resource_label
+              page_presenter[:title] || assigns[:page_title] || active_admin_config.plural_resource_label
             end
           end
         when :show
-          config = active_admin_config.get_page_presenter(:show) || {}
-
-          if config[:title]
-            render_or_call_method_or_proc_on(resource, config[:title])
+          if page_presenter[:title]
+            render_or_call_method_or_proc_on(resource, page_presenter[:title])
           else
             assigns[:page_title] || begin
               title = display_name(resource)
@@ -52,16 +46,8 @@ module ActiveAdmin
             end
           end
         when :new, :edit
-          form_presenter = active_admin_config.get_page_presenter(:form) || begin
-            ActiveAdmin::PagePresenter.new do |f|
-              f.semantic_errors # show errors on :base by default
-              f.inputs
-              f.actions
-            end
-          end
-
-          if form_presenter[:title]
-            render_or_call_method_or_proc_on(resource, form_presenter[:title])
+          if page_presenter[:title]
+            render_or_call_method_or_proc_on(resource, page_presenter[:title])
           else
             normalized_action = case params[:action]
             when "create"
@@ -75,6 +61,26 @@ module ActiveAdmin
           end
         else
           assigns[:page_title] || I18n.t("active_admin.#{params[:action]}", default: params[:action].to_s.titleize)
+        end
+      end
+
+      def page_presenter
+        case params[:action].to_sym
+        when :index
+          if PageController === controller
+            active_admin_config.get_page_presenter(:index) || ActiveAdmin::PagePresenter.new
+          else
+            active_admin_config.get_page_presenter(:index, params[:as]) || ActiveAdmin::PagePresenter.new(as: :table)
+          end
+        when :show
+          active_admin_config.get_page_presenter(:show) || ActiveAdmin::PagePresenter.new
+        when :new, :edit
+          active_admin_config.get_page_presenter(:form) ||
+          ActiveAdmin::PagePresenter.new do |f|
+            f.semantic_errors # show errors on :base by default
+            f.inputs
+            f.actions
+          end
         end
       end
 
