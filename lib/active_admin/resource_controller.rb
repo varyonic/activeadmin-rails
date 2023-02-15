@@ -40,6 +40,28 @@ module ActiveAdmin
 
     private
 
+    def page_presenter
+      case params[:action].to_sym
+      when :index
+        active_admin_config.get_page_presenter(params[:action], params[:as])
+      when :new, :edit
+        active_admin_config.get_page_presenter(:form)
+      end || super
+    end
+
+    def default_page_presenter
+      case params[:action].to_sym
+      when :index
+        PagePresenter.new(as: :table)
+      when :new, :edit
+        PagePresenter.new do |f|
+          f.semantic_errors # show errors on :base by default
+          f.inputs
+          f.actions
+        end
+      end || super
+    end
+
     # Returns the renderer class to use for the given action.
     def renderer_for(action)
       Deprecation.warn "This method does not do anything and will be removed."

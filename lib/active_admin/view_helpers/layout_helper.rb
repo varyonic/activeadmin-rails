@@ -64,34 +64,6 @@ module ActiveAdmin
         end
       end
 
-      def page_presenter(action = params[:action].to_sym)
-        case controller
-        when ResourceController
-          case action
-          when :index
-            active_admin_config.get_page_presenter(action, params[:as])
-          when :new, :edit
-            active_admin_config.get_page_presenter(:form)
-          end
-        end || active_admin_config.get_page_presenter(action) || default_page_presenter(action)
-      end
-
-      def default_page_presenter(action)
-        case controller
-        when ResourceController
-          case action
-          when :index
-            ActiveAdmin::PagePresenter.new(as: :table)
-          when :new, :edit
-            ActiveAdmin::PagePresenter.new do |f|
-              f.semantic_errors # show errors on :base by default
-              f.inputs
-              f.actions
-            end
-          end
-        end || ActiveAdmin::PagePresenter.new
-      end
-
       # Returns the sidebar sections to render for the current action
       def sidebar_sections_for_action
         if active_admin_config && active_admin_config.sidebar_sections?
