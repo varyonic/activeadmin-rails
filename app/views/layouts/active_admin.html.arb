@@ -1,6 +1,10 @@
 insert_tag Arbre::HTML::Document do
   head do
-    render partial: 'active_admin/head', locals: { title: page_title, helpers: helpers }
+    render partial: 'active_admin/head',
+           locals: {
+              page_title: page_title,
+              site_title: helpers.active_admin_namespace.site_title(self)
+            }
   end
   body(class: body_classes) do
     div id: "wrapper" do
