@@ -1,1 +1,12 @@
-insert_tag active_admin_application.view_factory["page"]
+def page_presenter
+  active_admin_config.get_page_presenter(:index) || ActiveAdmin::PagePresenter.new
+end
+
+div id: "main_content" do
+  if page_presenter.block
+    block_result = instance_exec(&page_presenter.block)
+    text_node block_result unless block_result.is_a? Arbre::Element
+  else
+    render 'content'
+  end
+end
