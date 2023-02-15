@@ -1,9 +1,3 @@
-# Retrieves the given page presenter, or uses the default.
-def config
-  active_admin_config.get_page_presenter(:index, params[:as]) ||
-  ActiveAdmin::PagePresenter.new(as: :table)
-end
-
 def wrap_with_batch_action_form(&block)
   if active_admin_config.batch_actions.any?
     batch_action_form(&block)
@@ -36,8 +30,8 @@ def find_index_renderer_class(klass)
 end
 
 def blank_slate_link
-  if config.options.has_key?(:blank_slate_link)
-    blank_slate_link = config.options[:blank_slate_link]
+  if page_presenter.options.has_key?(:blank_slate_link)
+    blank_slate_link = page_presenter.options[:blank_slate_link]
     instance_exec(&blank_slate_link) if blank_slate_link.is_a?(Proc)
   else
     link_to(I18n.t("active_admin.blank_slate.link"), new_resource_path)
@@ -55,7 +49,7 @@ div id: "main_content" do
 
       if active_admin_config.scopes.any?
         scope_options = {
-          scope_count: config.fetch(:scope_count, true)
+          scope_count: page_presenter.fetch(:scope_count, true)
         }
         scopes_renderer active_admin_config.scopes, scope_options
       end
@@ -74,11 +68,11 @@ div id: "main_content" do
     end if any_table_tools?
 
     if collection_size(collection) != 0
-      renderer_class = find_index_renderer_class(config[:as])
-      paginator        = config.fetch(:paginator, true)
-      download_links   = config.fetch(:download_links, active_admin_config.namespace.download_links)
-      pagination_total = config.fetch(:pagination_total, true)
-      per_page         = config.fetch(:per_page, active_admin_config.per_page)
+      renderer_class = find_index_renderer_class(page_presenter[:as])
+      paginator        = page_presenter.fetch(:paginator, true)
+      download_links   = page_presenter.fetch(:download_links, active_admin_config.namespace.download_links)
+      pagination_total = page_presenter.fetch(:pagination_total, true)
+      per_page         = page_presenter.fetch(:per_page, active_admin_config.per_page)
 
       paginated_collection(collection, entry_name:       active_admin_config.resource_label,
                                        entries_name:     active_admin_config.plural_resource_label(count: collection_size),
@@ -87,7 +81,7 @@ div id: "main_content" do
                                        per_page:         per_page,
                                        pagination_total: pagination_total) do
         div class: 'index_content' do
-          insert_tag(renderer_class, config, collection)
+          insert_tag(renderer_class, page_presenter, collection)
         end
       end
     else
