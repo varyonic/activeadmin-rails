@@ -2,7 +2,7 @@ insert_tag Arbre::HTML::Document do
   head do
     render partial: 'active_admin/head',
            locals: {
-              page_title: page_title,
+              page_title: content_for(:page_title) || page_title,
               site_title: helpers.active_admin_namespace.site_title(self)
             }
   end
@@ -12,7 +12,7 @@ insert_tag Arbre::HTML::Document do
         unsupported_browser
       end
       header active_admin_namespace, current_menu
-      title_bar page_title, action_items_for_action
+      title_bar content_for(:page_title) || page_title, action_items_for_action
       div class: 'flashes' do
         flash_messages.each do |type, message|
           div message, class: "flash flash_#{type}"
