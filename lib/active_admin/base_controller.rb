@@ -66,5 +66,13 @@ module ActiveAdmin
       {controller: controller, action: action}
     end
 
+    def page_presenter
+      active_admin_config.get_page_presenter(params[:action].to_sym) || default_page_presenter
+    end
+    helper_method :page_presenter
+
+    def default_page_presenter
+      PagePresenter.new
+    end
   end
 end
