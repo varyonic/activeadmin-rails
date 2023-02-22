@@ -54,11 +54,7 @@ module ActiveAdmin
       when :index
         PagePresenter.new(as: :table)
       when :new, :edit
-        PagePresenter.new do |f|
-          f.semantic_errors # show errors on :base by default
-          f.inputs
-          f.actions
-        end
+        PagePresenter.new
       end || super
     end
 
