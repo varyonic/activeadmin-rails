@@ -74,5 +74,18 @@ module ActiveAdmin
     def default_page_presenter
       PagePresenter.new
     end
+
+    def page_title
+      if page_presenter[:title]
+        helpers.render_or_call_method_or_proc_on(self, page_presenter[:title])
+      else
+        default_page_title
+      end
+    end
+    helper_method :page_title
+
+    def default_page_title
+      active_admin_config.name
+    end
   end
 end
