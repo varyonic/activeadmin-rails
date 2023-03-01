@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.5'
 
   s.add_dependency 'arbre', '>= 1.1.1'
-  s.add_dependency 'coffee-rails'
   s.add_dependency 'formtastic'
   s.add_dependency 'formtastic_i18n'
   s.add_dependency 'inherited_resources', '>= 1.13.1'
@@ -30,4 +29,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'ransack', '>= 1.8.7'
   s.add_dependency 'sass-rails'
   s.add_dependency 'sprockets'
+  s.add_dependency 'sprockets-es6', '>= 0.9.2'
 end
