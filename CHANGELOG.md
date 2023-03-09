@@ -1,5 +1,51 @@
 # Changelog
 
+## 1.7.0 [☰](https://github.com/varyonic/activeadmin-rails/compare/v1.6.0...v1.7.0)
+
+This release replaces Arbre::Pages with a conventional Rails layout and view partials.
+It also allows and encourages implementing Rails controllers explicitly instead of depending on Active Admin meta-programming.
+
+### Enhancements
+
+#### Major
+
+* Add Webpacker compatibility with opt-in config switch and installation generator. [#5855] by [@sgara]
+* Rewrite CoffeeScript components in ES6. [#5081] by [@javierjulio]
+
+* Rails 7.1 support. [#43] by [@varyonic]
+* Add `ActiveAdmin.configure_resource` and `configure_page`. Don't unload manually defined Rails Controller classes. [#40], [#45] by [@varyonic]
+* Extract partial `breadcrumbs`. [#39] by [@varyonic]
+* Add `Page#add_page_route`, `Resource#add_member_route` and `add_collection_route`. [#37] by [@varyonic]
+* Add `Resource#set_page_options`, `add_sidebar_section`. [#35], [#36] by [@varyonic]
+* Use Arbo in place of Arbre. [#31] by [@varyonic]
+* Extract partial `filters_form`. [#28] by [@varyonic]
+* Use Rails partial `_action_items.html.arb` instead of Views::ActionItems component. [#27] by [@varyonic]
+* Add Hotwire support. [#25] by [@varyonic]
+* Make rendering a partial the default behavior for `show`, `new`, `edit`, `index as: table` and `content` [#19], [#20], [#21], [#22], [#23], [#33] by [@varyonic]
+* Use Rails layout for all pages. [#16] by [@varyonic]
+
+#### Minor
+
+* Fix double modal issue in applications using turbolinks 5. [#5842] by [@sgara]
+* Tabs are not correctly created when using non-transliteratable characters as title. [#5650] by [@panasyuk]
+* Update JS components. [#5121] by [@javierjulio]
+* Remove unused flash JS component. [#5107] by [@javierjulio]
+
+* Ransack 4 support. [#42] by [@varyonic]
+* ActionLink view component. [#41] by [@varyonic]
+* Verify Ruby 3.2 support. [#38] by [@varyonic]
+* Extract protected method ResourceController::csv_builder. [#29] by [@varyonic]
+* Accept content_for(:page_title). [#26] by [@varyonic]
+* Invoke named batch action method if defined in controller. [#19] by [@varyonic]
+* Simplify permitted_params implementation. [#18] by [@varyonic]
+* Don't clobber defined controller action method if action DSL block not given. [#17] by [@varyonic]
+* Use template partial to render content of head. [#15] by [@varyonic]
+* Use new render_in strategy added to varyonic/arbre. [#14] by [@varyonic]
+
+### Security Fixes
+
+* Prevent leaking hashed passwords via user CSV export and adds a config option for sensitive attributes. [#5486] by [@chrp]
+
 ## 1.6.0 [☰](https://github.com/varyonic/activeadmin-rails/compare/v1.5.2...v1.6.0)
 
 ### Enhancements
@@ -62,6 +108,7 @@
 * Fix menu item link with method delete. [#5583] by [@tiagotex]
 
 ## 1.3.1 [☰](https://github.com/activeadmin/activeadmin/compare/v1.3.0...v1.3.1)
+
 ### Bug Fixes
 
 * gemspec should have more permissive ransack dependency. [#5448] by [@varyonic]
@@ -313,11 +360,14 @@ Please check [0-6-stable] for previous changes.
 [#5046]: https://github.com/activeadmin/activeadmin/pull/5046
 [#5060]: https://github.com/activeadmin/activeadmin/pull/5060
 [#5069]: https://github.com/activeadmin/activeadmin/pull/5069
+[#5081]: https://github.com/activeadmin/activeadmin/pull/5081
 [#5088]: https://github.com/activeadmin/activeadmin/pull/5088
 [#5093]: https://github.com/activeadmin/activeadmin/pull/5093
 [#5104]: https://github.com/activeadmin/activeadmin/pull/5104
+[#5107]: https://github.com/activeadmin/activeadmin/pull/5107
 [#5119]: https://github.com/activeadmin/activeadmin/pull/5119
 [#5120]: https://github.com/activeadmin/activeadmin/pull/5120
+[#5121]: https://github.com/activeadmin/activeadmin/pull/5121
 [#5125]: https://github.com/activeadmin/activeadmin/pull/5125
 [#5137]: https://github.com/activeadmin/activeadmin/pull/5137
 [#5143]: https://github.com/activeadmin/activeadmin/pull/5143
@@ -357,15 +407,46 @@ Please check [0-6-stable] for previous changes.
 [#5458]: https://github.com/activeadmin/activeadmin/pull/5458
 [#5461]: https://github.com/activeadmin/activeadmin/pull/5461
 [#5464]: https://github.com/activeadmin/activeadmin/pull/5464
+[#5486]: https://github.com/activeadmin/activeadmin/pull/5486
 [#5501]: https://github.com/activeadmin/activeadmin/pull/5501
 [#5516]: https://github.com/activeadmin/activeadmin/pull/5516
 [#5583]: https://github.com/activeadmin/activeadmin/pull/5583
+[#5842]: https://github.com/activeadmin/activeadmin/pull/5842
+[#5650]: https://github.com/activeadmin/activeadmin/pull/5650
 [#5702]: https://github.com/activeadmin/activeadmin/pull/5702
 [#5800]: https://github.com/activeadmin/activeadmin/pull/5800
 [#6000]: https://github.com/activeadmin/activeadmin/pull/6000
 [#6237]: https://github.com/activeadmin/activeadmin/pull/6237
 [#7235]: https://github.com/activeadmin/activeadmin/pull/7235
 [#7332]: https://github.com/activeadmin/activeadmin/pull/7332
+
+[#14]: https://github.com/varyonic/activeadmin-rails/pull/14
+[#15]: https://github.com/varyonic/activeadmin-rails/pull/15
+[#16]: https://github.com/varyonic/activeadmin-rails/pull/16
+[#17]: https://github.com/varyonic/activeadmin-rails/pull/17
+[#18]: https://github.com/varyonic/activeadmin-rails/pull/18
+[#19]: https://github.com/varyonic/activeadmin-rails/pull/19
+[#20]: https://github.com/varyonic/activeadmin-rails/pull/20
+[#21]: https://github.com/varyonic/activeadmin-rails/pull/21
+[#22]: https://github.com/varyonic/activeadmin-rails/pull/22
+[#23]: https://github.com/varyonic/activeadmin-rails/pull/23
+[#25]: https://github.com/varyonic/activeadmin-rails/pull/25
+[#26]: https://github.com/varyonic/activeadmin-rails/pull/26
+[#27]: https://github.com/varyonic/activeadmin-rails/pull/27
+[#28]: https://github.com/varyonic/activeadmin-rails/pull/28
+[#29]: https://github.com/varyonic/activeadmin-rails/pull/29
+[#31]: https://github.com/varyonic/activeadmin-rails/pull/31
+[#33]: https://github.com/varyonic/activeadmin-rails/pull/33
+[#35]: https://github.com/varyonic/activeadmin-rails/pull/35
+[#36]: https://github.com/varyonic/activeadmin-rails/pull/36
+[#37]: https://github.com/varyonic/activeadmin-rails/pull/37
+[#38]: https://github.com/varyonic/activeadmin-rails/pull/38
+[#39]: https://github.com/varyonic/activeadmin-rails/pull/39
+[#40]: https://github.com/varyonic/activeadmin-rails/pull/40
+[#41]: https://github.com/varyonic/activeadmin-rails/pull/41
+[#42]: https://github.com/varyonic/activeadmin-rails/pull/42
+[#43]: https://github.com/varyonic/activeadmin-rails/pull/43
+[#45]: https://github.com/varyonic/activeadmin-rails/pull/45
 
 [@5t111111]: https://github.com/5t111111
 [@aarek]: https://github.com/aarek
@@ -376,6 +457,7 @@ Please check [0-6-stable] for previous changes.
 [@bolshakov]: https://github.com/bolshakov
 [@buren]: https://github.com/buren
 [@chancancode]: https://github.com/chancancode
+[@chrp]: https://github.com/chrp
 [@chumakoff]: https://github.com/chumakoff
 [@craigmcnamara]: https://github.com/craigmcnamara
 [@DanielHeath]: https://github.com/DanielHeath
@@ -406,6 +488,7 @@ Please check [0-6-stable] for previous changes.
 [@mauriciopasquier]: https://github.com/mauriciopasquier
 [@mconiglio]: https://github.com/mconiglio
 [@Nguyenanh]: https://github.com/Nguyenanh
+[@panasyuk]: https://github.com/panasyuk
 [@PChambino]: https://github.com/PChambino
 [@potatosalad]: https://github.com/potatosalad
 [@pranas]: https://github.com/pranas
@@ -413,6 +496,7 @@ Please check [0-6-stable] for previous changes.
 [@RobinvanderVliet]: https://github.com/RobinvanderVliet
 [@rogerkk]: https://github.com/rogerkk
 [@seanlinsley]: https://github.com/seanlinsley
+[@sgara]: https://github.com/sgara
 [@ShallmentMo]: https://github.com/ShallmentMo
 [@shekibobo]: https://github.com/shekibobo
 [@shouya]: https://github.com/shouya
