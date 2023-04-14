@@ -48,4 +48,5 @@ group :test do
   gem 'launchy'
   gem 'rspec-rails'
   gem 'i18n-spec'
+  gem 'selenium-webdriver'
 end
