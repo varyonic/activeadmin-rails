@@ -2,8 +2,16 @@
 
 copy_file File.expand_path('../templates/manifest.js', __FILE__), 'app/assets/config/manifest.js', force: true
 
-create_file 'app/assets/stylesheets/some-random-css.css'
-create_file 'app/assets/javascripts/some-random-js.js'
+webpacker_app = ENV["BUNDLE_GEMFILE"] == File.expand_path("../../gemfiles/rails_61_webpacker.gemfile", __dir__)
+
+if webpacker_app
+  create_file 'app/javascript/packs/some-random-css.css'
+  create_file 'app/javascript/packs/some-random-js.js'
+else
+  create_file 'app/assets/stylesheets/some-random-css.css'
+  create_file 'app/assets/javascripts/some-random-js.js'
+end
+
 create_file 'app/assets/images/a/favicon.ico'
 
 generate :model, 'post title:string body:text published_date:date author_id:integer ' +
@@ -131,8 +139,14 @@ gem 'devise', '~> 4.6'
 
 run 'bundle install'
 
+# Setup webpacker if necessary
+if webpacker_app
+  rails_command "webpacker:install"
+  gsub_file 'config/webpacker.yml', /^(.*)extract_css.*$/, '\1extract_css: true' if ENV['RAILS_ENV'] == 'test'
+end
+
 # Setup Active Admin
-generate 'active_admin:install'
+generate "active_admin:install#{" --use-webpacker" if webpacker_app}"
 
 # Force strong parameters to raise exceptions
 inject_into_file 'config/application.rb', after: 'class Application < Rails::Application' do
@@ -146,7 +160,17 @@ append_file 'config/locales/en.yml', File.read(File.expand_path('../templates/en
 directory File.expand_path('../templates/admin', __FILE__), 'app/admin'
 
 # Add predefined policies
-directory File.expand_path('../templates/policies', __FILE__), 'app/policies'
+directory File.expand_path('templates/policies', __dir__), 'app/policies'
+
+# Setup webpacker if necessary
+if ENV["BUNDLE_GEMFILE"] == File.expand_path("../../gemfiles/rails_61_webpacker.gemfile", __dir__)
+  rake "webpacker:install"
+end
+
+# Require turbolinks if necessary
+if ENV["BUNDLE_GEMFILE"] == File.expand_path("../../gemfiles/rails_61_turbolinks.gemfile", __dir__)
+  append_file 'app/assets/javascripts/active_admin.js', "//= require turbolinks\n"
+end
 
 if ENV['RAILS_ENV'] != 'test'
   inject_into_file 'config/routes.rb', "\n  root to: redirect('admin')", after: /.*routes.draw do/
@@ -158,3 +182,6 @@ rake "db:drop db:create db:migrate", env: 'test'
 if ENV['INSTALL_PARALLEL']
   inject_into_file 'config/database.yml', "<%= ENV['TEST_ENV_NUMBER'] %>", after: 'test.sqlite3'
 end
+
+git add: "."
+git commit: "-m 'Bare application'"

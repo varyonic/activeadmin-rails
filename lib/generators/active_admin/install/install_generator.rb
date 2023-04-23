@@ -7,12 +7,14 @@ module ActiveAdmin
       argument :name, type: :string, default: "AdminUser"
 
       hook_for :users, default: "devise", desc: "Admin user generator to run. Skip with --skip-users"
+      class_option :use_webpacker, type: :boolean, default: false, desc: "Use Webpacker assets instead of Sprockets"
 
       source_root File.expand_path("../templates", __FILE__)
 
       def copy_initializer
         @underscored_user_name = name.underscore.gsub('/', '_')
         @use_authentication_method = options[:users].present?
+        @use_webpacker = options[:use_webpacker]
         template 'active_admin.rb.erb', 'config/initializers/active_admin.rb'
       end
 
@@ -34,7 +36,11 @@ module ActiveAdmin
       end
 
       def create_assets
-        generate "active_admin:assets"
+        if options[:use_webpacker]
+          generate "active_admin:webpacker"
+        else
+          generate "active_admin:assets"
+        end
       end
 
       def create_migrations
