@@ -1,9 +1,17 @@
-This is a fork of the original Active Admin project starting with v1.3.1 and abandoning v2.0.0.alpha started one year earlier.
-Google 'why fork open source' for relevant articles.
+# Active Admin for Rails Developers
 
-# Active Admin
+[Active Admin](https://www.activeadmin.org) is a Ruby on Rails framework for creating elegant backends for website administration.
 
-[Active Admin](https://www.activeadmin.info) is a Ruby on Rails framework for creating elegant backends for website administration.
+This is a significant fork of the original Active Admin project
+starting in 2018 with v1.3.1 and abandoning v2.0.0.alpha started one year earlier.
+
+This fork aims to make it simpler and more Rails-like without dropping the
+rich functionality that made Active Admin a leading choice for a decade.
+See [CHANGELOG] for more details.
+
+Active Admin is open source software, [free as in puppy].
+As of writing this software is in production with at least one mid-size business,
+but Varyonic has no plans to provide commercial support - let us know if you do.
 
 [![Version         ][rubygems_badge]][rubygems]
 [![Github Actions  ][actions_badge]][actions]
@@ -14,8 +22,7 @@ Google 'why fork open source' for relevant articles.
 ## Goals
 
 1. Enable developers to quickly create good-looking administration interfaces.
-2. Build a DSL for developers and an interface for businesses.
-3. Ensure that developers can easily customize every nook and cranny.
+2. Follow Rails conventions that make the framework easy to understand and customize.
 
 ## Getting started
 
@@ -72,4 +79,6 @@ Tool                  | Description
 [demo]: http://demo.activeadmin.org/admin
 [wiki]: https://github.com/varyonic/activeadmin/wiki
 [stackoverflow]: http://stackoverflow.com/questions/tagged/activeadmin
+[CHANGELOG]: https://github.com/varyonic/activeadmin/blob/main/CHANGELOG.md
 [contributing]: https://github.com/varyonic/activeadmin/blob/main/CONTRIBUTING.md
+[free as in puppy]: https://www.zdnet.com/article/open-source-free-as-in-beer-puppy-or-mattress/
