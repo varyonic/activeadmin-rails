@@ -1,13 +1,12 @@
+@javascript
 Feature: Show - Tabs
 
   Add tabs with different content to the page
 
-  Background:
+  Scenario: Set a method to be called on the resource as the title
     Given a post with the title "Hello World" written by "Jane Doe" exists
 
-  @javascript
-  Scenario: Set a method to be called on the resource as the title
-    Given a show configuration of:
+    And a show configuration of:
     """
       ActiveAdmin.register Post do
         show do
