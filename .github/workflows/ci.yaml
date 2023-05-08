@@ -19,7 +19,7 @@ jobs:
 
         os: [ubuntu-22.04]
 
-        deps: [rails_70, rails_61]
+        deps: [rails_70, rails_70_hotwire, rails_61, rails_61_turbolinks]
 
     env:
       COVERAGE: false
