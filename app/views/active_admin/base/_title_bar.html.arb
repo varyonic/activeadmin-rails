@@ -11,6 +11,6 @@ div id: :title_bar, class: :title_bar do
     h2(page_title, id: 'page_title')
   end
   div id: "titlebar_right" do
-    insert_tag(view_factory.action_items, action_items_for_action)
+    render partial: 'action_items', locals: { action_items: action_items_for_action }
   end
 end
