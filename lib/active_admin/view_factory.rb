@@ -9,7 +9,6 @@ module ActiveAdmin
               site_title:          ActiveAdmin::Views::SiteTitle,
               unsupported_browser: ActiveAdmin::Views::UnsupportedBrowser,
               action_items:        ActiveAdmin::Views::ActionItems,
-              title_bar:           ActiveAdmin::Views::TitleBar,
               header:              ActiveAdmin::Views::Header,
               footer:              ActiveAdmin::Views::Footer,
               index_scopes:        ActiveAdmin::Views::Scopes
