@@ -1,0 +1,16 @@
+div id: :title_bar, class: :title_bar do
+  div id: "titlebar_left" do
+    if (links = breadcrumb_links) && links.size > 0
+      span class: "breadcrumb" do
+        links.each do |link|
+          text_node link
+          span("/", class: "breadcrumb_sep")
+        end
+      end
+    end
+    h2(page_title, id: 'page_title')
+  end
+  div id: "titlebar_right" do
+    render partial: 'action_items', locals: { action_items: action_items_for_action }
+  end
+end

@@ -12,7 +12,7 @@ insert_tag Arbre::HTML::Document do
         unsupported_browser
       end
       header active_admin_namespace, current_menu
-      title_bar content_for(:page_title) || page_title, action_items_for_action
+      render partial: 'title_bar', locals: { page_title: content_for(:page_title) || page_title }
       div class: 'flashes' do
         flash_messages.each do |type, message|
           div message, class: "flash flash_#{type}"
