@@ -19,12 +19,12 @@ insert_tag Arbre::HTML::Document do
         end
       end
       # div with main content plus possibly sidebars
-      @skip_sidebar = sidebar_sections_for_action.empty? || assigns[:skip_sidebar] == true
-      div id: "active_admin_content", class: (@skip_sidebar ? "without_sidebar" : "with_sidebar") do
-        div id: "main_content_wrapper" do
+      sidebar_sections = sidebar_sections_for_action unless skip_sidebar?
+      div id: 'active_admin_content', class: (sidebar_sections.present? ? 'with_sidebar' : 'without_sidebar') do
+        div id: 'main_content_wrapper' do
           yield
         end
-        render partial: 'sidebar', locals: { sections: sidebar_sections_for_action } unless @skip_sidebar
+        render partial: 'sidebar', locals: { sections: sidebar_sections } if sidebar_sections.present?
       end
       footer active_admin_namespace
     end
