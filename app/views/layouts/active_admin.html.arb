@@ -24,7 +24,7 @@ insert_tag Arbre::HTML::Document do
         div id: "main_content_wrapper" do
           yield
         end
-        sidebar sidebar_sections_for_action, id: 'sidebar' unless @skip_sidebar
+        render partial: 'sidebar', locals: { sections: sidebar_sections_for_action } unless @skip_sidebar
       end
       footer active_admin_namespace
     end

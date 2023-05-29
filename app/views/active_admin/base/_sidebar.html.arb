@@ -1,0 +1,3 @@
+div id: :sidebar, class: :sidebar do
+  sections.map(&method(:sidebar_section))
+end

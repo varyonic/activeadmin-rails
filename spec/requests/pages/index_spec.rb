@@ -85,4 +85,12 @@ RSpec.describe 'views/resource/index', type: :request do
       end
     end
   end
+
+  describe "#sidebar" do
+    it "displays sidebar by default" do
+      get resource.route_collection_path
+      expect(page).to have_css 'div.sidebar#sidebar'
+      expect(page).to have_css 'form.filter_form[method=get]'
+    end
+  end
 end
