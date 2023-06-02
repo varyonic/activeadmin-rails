@@ -28,6 +28,10 @@ module ActiveAdmin
         end
       end
 
+      def csv_builder
+        active_admin_config.csv_builder
+      end
+
       def csv_filename
         "#{resource_collection_name.to_s.gsub('_', '-')}-#{Time.zone.now.to_date.to_formatted_s(:default)}.csv"
       end
@@ -35,7 +39,7 @@ module ActiveAdmin
       def stream_csv
         headers['Content-Type'] = 'text/csv; charset=utf-8' # In Rails 5 it's set to HTML??
         headers['Content-Disposition'] = %{attachment; filename="#{csv_filename}"}
-        stream_resource &active_admin_config.csv_builder.method(:build).to_proc.curry[self]
+        stream_resource &csv_builder.method(:build).to_proc.curry[self]
       end
 
     end
