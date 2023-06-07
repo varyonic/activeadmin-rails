@@ -9,7 +9,7 @@ insert_tag Arbre::HTML::Document do
   body(class: body_classes) do
     div id: "wrapper" do
       if active_admin_namespace.unsupported_browser_matcher =~ controller.request.user_agent
-        unsupported_browser
+        render partial: 'unsupported_browser'
       end
       header active_admin_namespace, current_menu
       render partial: 'title_bar', locals: { page_title: content_for(:page_title) || page_title }
