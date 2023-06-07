@@ -7,7 +7,6 @@ module ActiveAdmin
     register  global_navigation:   ActiveAdmin::Views::TabbedNavigation,
               utility_navigation:  ActiveAdmin::Views::TabbedNavigation,
               site_title:          ActiveAdmin::Views::SiteTitle,
-              footer:              ActiveAdmin::Views::Footer,
               index_scopes:        ActiveAdmin::Views::Scopes
   end
 end
