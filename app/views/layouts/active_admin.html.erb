@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render partial: 'active_admin/head',
+               locals: {
+                  page_title: content_for(:page_title) || @page_title || page_title,
+                  site_title: active_admin_namespace.site_title(self)
+                } %>
+  </head>
+  <body class="<%=(body_classes)%>" >
+    <div id="wrapper">
+      <% if active_admin_namespace.unsupported_browser_matcher =~ controller.request.user_agent %>
+        <%= render partial: 'unsupported_browser' %>
+      <% end %>
+      <%= render partial: 'header', locals: { namespace: active_admin_namespace, menu: current_menu } %>
+      <%= render partial: 'title_bar', locals: { page_title: content_for(:page_title) || @page_title || page_title } %>
+      <div class='flashes'>
+        <% flash_messages.each do |type, message| %>
+          <div class="flash flash_<%=(type)%>"><%=(message)%></div>
+        <% end %>
+      </div>
+
+      <% sidebar_sections = sidebar_sections_for_action unless skip_sidebar? %>
+      <div id="active_admin_content" class=<%=(sidebar_sections.present? ? 'with_sidebar' : 'without_sidebar')%>>
+        <div id="main_content_wrapper">
+          <%= yield %>
+        </div>
+        <%= render partial: 'sidebar', locals: { sections: sidebar_sections } if sidebar_sections.present? %>
+      </div>
+      <%= render partial: 'footer', locals: { namespace: active_admin_namespace } %>
+    </div>
+  </body>
+</html>
