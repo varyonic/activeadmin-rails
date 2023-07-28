@@ -4,7 +4,7 @@ RSpec.describe ActiveAdmin::Views::Columns do
 
   describe "Rendering zero columns" do
     let(:cols) do
-      render_arbre_component do
+      render_component do
         columns do
         end
       end
@@ -21,7 +21,7 @@ RSpec.describe ActiveAdmin::Views::Columns do
 
   describe "Rendering one column" do
     let(:cols) do
-      render_arbre_component do
+      render_component do
         columns do
           column { span "Hello World" }
         end
@@ -44,7 +44,7 @@ RSpec.describe ActiveAdmin::Views::Columns do
 
   describe "Rendering two columns" do
     let(:cols) do
-      render_arbre_component do
+      render_component do
         columns do
           column { span "Hello World" }
           column { span "Hello World" }
@@ -67,7 +67,7 @@ RSpec.describe ActiveAdmin::Views::Columns do
 
   describe "Rendering four columns" do
     let(:cols) do
-      render_arbre_component do
+      render_component do
         columns do
           column { span "Hello World" }
           column { span "Hello World" }
@@ -94,7 +94,7 @@ RSpec.describe ActiveAdmin::Views::Columns do
 
   describe "Column Spans" do
     let(:cols) do
-      render_arbre_component do
+      render_component do
         columns do
           column(span: 2){ "Hello World" }
           column(){ "Hello World" }
@@ -115,7 +115,7 @@ RSpec.describe ActiveAdmin::Views::Columns do
   describe "Column max width" do
 
     let(:cols) do
-      render_arbre_component do
+      render_component do
         columns do
           column(max_width: "100px"){ "Hello World" }
           column(){ "Hello World" }
@@ -133,7 +133,7 @@ RSpec.describe ActiveAdmin::Views::Columns do
 
     context "when passed an integer value" do
       let(:cols) do
-        render_arbre_component do
+        render_component do
           columns do
             column(max_width: 100){ "Hello World" }
             column(){ "Hello World" }
@@ -151,7 +151,7 @@ RSpec.describe ActiveAdmin::Views::Columns do
   describe "Column min width" do
 
     let(:cols) do
-      render_arbre_component do
+      render_component do
         columns do
           column(min_width: "100px"){ "Hello World" }
           column(){ "Hello World" }
@@ -169,7 +169,7 @@ RSpec.describe ActiveAdmin::Views::Columns do
 
     context "when passed an integer value" do
       let(:cols) do
-        render_arbre_component do
+        render_component do
           columns do
             column(min_width: 100){ "Hello World" }
             column(){ "Hello World" }

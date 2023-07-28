@@ -39,7 +39,7 @@ module ActiveAdminIntegrationSpecHelper
     Arbre::Context.new(assigns, helpers, &block)
   end
 
-  def render_arbre_component(assigns = {}, helpers = mock_action_view, &block)
+  def render_component(assigns = {}, helpers = mock_action_view, &block)
     arbre(assigns, helpers, &block).children.first
   end
 

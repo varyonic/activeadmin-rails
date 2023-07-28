@@ -18,19 +18,19 @@ RSpec.describe ActiveAdmin::Views::AttributesTable do
     # and ensure that they produce the same results
     {
       "when attributes are passed in to the builder methods" => proc {
-        render_arbre_component(assigns) {
+        render_component(assigns) {
           attributes_table_for post, :id, :title, :body
         }
       },
       "when attributes are built using the block" => proc {
-        render_arbre_component(assigns) {
+        render_component(assigns) {
           attributes_table_for post do
             rows :id, :title, :body
           end
         }
       },
       "when each attribute is passed in by itself" => proc {
-        render_arbre_component(assigns) {
+        render_component(assigns) {
           attributes_table_for post do
             row :id
             row :title
@@ -39,7 +39,7 @@ RSpec.describe ActiveAdmin::Views::AttributesTable do
         }
       },
       "when you create each row with a custom block" => proc {
-        render_arbre_component(assigns) {
+        render_component(assigns) {
           attributes_table_for post do
             row("Id")   { post.id }
             row("Title"){ post.title }
@@ -48,7 +48,7 @@ RSpec.describe ActiveAdmin::Views::AttributesTable do
         }
       },
       "when you create each row with a custom block that returns nil" => proc {
-        render_arbre_component(assigns) {
+        render_component(assigns) {
           attributes_table_for post do
             row("Id")   { text_node post.id; nil }
             row("Title"){ text_node post.title; nil }
@@ -98,7 +98,7 @@ RSpec.describe ActiveAdmin::Views::AttributesTable do
     end # describe dsl styles
 
     it "should add a class for each row based on the col name" do
-      table = render_arbre_component(assigns) {
+      table = render_component(assigns) {
         attributes_table_for(post) do
           row :title
           row :created_at
@@ -114,7 +114,7 @@ RSpec.describe ActiveAdmin::Views::AttributesTable do
     end
 
     it "should allow html options for the row itself" do
-      table = render_arbre_component(assigns) {
+      table = render_component(assigns) {
         attributes_table_for(post) do
           row("Wee", class: "custom_row", style: "custom_style") { }
         end
@@ -124,7 +124,7 @@ RSpec.describe ActiveAdmin::Views::AttributesTable do
     end
 
     it "should allow html content inside the attributes table" do
-      table = render_arbre_component(assigns) {
+      table = render_component(assigns) {
         attributes_table_for(post) do
           row("ID"){ span(post.id, class: 'id') }
         end
@@ -138,14 +138,14 @@ RSpec.describe ActiveAdmin::Views::AttributesTable do
         post.author = User.new username: 'john_doe', first_name: 'John', last_name: 'Doe'
       end
       it 'should call the association if one exists' do
-        table = render_arbre_component assigns do
+        table = render_component assigns do
           attributes_table_for post, :author
         end
         expect(table.find_by_tag('th').first.content).to eq 'Author'
         expect(table.find_by_tag('td').first.content).to eq 'John Doe'
       end
       it 'should not attempt to call a nonexistant association' do
-        table = render_arbre_component assigns do
+        table = render_component assigns do
           attributes_table_for post, :foo_id
         end
         expect(table.find_by_tag('th').first.content).to eq 'Foo'
@@ -164,7 +164,7 @@ RSpec.describe ActiveAdmin::Views::AttributesTable do
       let(:assigns) { { posts: posts } }
 
       let(:table) do
-        render_arbre_component(assigns) do
+        render_component(assigns) do
           attributes_table_for posts, :id, :title
         end
       end
@@ -237,7 +237,7 @@ RSpec.describe ActiveAdmin::Views::AttributesTable do
 
     context "when using a single Hash" do
       let(:table) do
-        render_arbre_component nil, helpers do
+        render_component nil, helpers do
           attributes_table_for foo: 1, bar: 2 do
             row :foo
             row :bar
@@ -254,7 +254,7 @@ RSpec.describe ActiveAdmin::Views::AttributesTable do
 
     context "when using an Array of Hashes" do
       let(:table) do
-        render_arbre_component nil, helpers do
+        render_component nil, helpers do
           attributes_table_for [{foo: 1}, {foo: 2}] do
             row :foo
           end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ActiveAdmin::Views::Panel do
   let(:arbre_panel) do
-    render_arbre_component do
+    render_component do
       panel "My Title" do
         header_action link_to("My Link", "https://www.github.com/activeadmin/activeadmin")
         span("Hello World")
@@ -33,7 +33,7 @@ RSpec.describe ActiveAdmin::Views::Panel do
   context "with html-safe title" do
     let(:arbre_panel) do
       title_with_html = %q[Title with <abbr>HTML</abbr>].html_safe
-      render_arbre_component do
+      render_component do
         panel(title_with_html)
       end
     end
@@ -46,7 +46,7 @@ RSpec.describe ActiveAdmin::Views::Panel do
 
   describe "#children?" do
     let(:arbre_panel) do
-      render_arbre_component do
+      render_component do
         panel("A Panel")
       end
     end
