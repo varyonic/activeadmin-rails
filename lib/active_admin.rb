@@ -10,7 +10,7 @@ require 'sass-rails'
 require 'inherited_resources'
 require 'jquery-rails'
 require 'jquery-ui-rails'
-require 'arbre'
+require 'arbo'
 require 'sprockets/es6'
 
 require 'active_admin/helpers/i18n'

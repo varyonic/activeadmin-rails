@@ -8,7 +8,7 @@ RSpec.describe ActiveAdmin::Views::Menu do
   let(:helpers){ mock_action_view }
 
   let(:menu_component) do
-    arbre(assigns, helpers) {
+    arbo(assigns, helpers) {
       insert_tag(ActiveAdmin::Views::Menu, active_admin_menu)
     }.children.first
   end

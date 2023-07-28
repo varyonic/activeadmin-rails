@@ -8,7 +8,7 @@ RSpec.describe ActiveAdmin::Component do
   let(:component){ component_class.new }
 
   it "should be a subclass of an html div" do
-    expect(ActiveAdmin::Component.ancestors).to include(Arbre::HTML::Div)
+    expect(ActiveAdmin::Component.ancestors).to include(Arbo::HTML::Div)
   end
 
   it "should render to a div, even as a subclass" do

@@ -43,10 +43,10 @@ module ActiveAdmin
       def format_attribute(resource, attr)
         value = find_value resource, attr
 
-        if value.is_a?(Arbre::Element)
+        if value.is_a?(Arbo::Element)
           value
         elsif boolean_attr?(resource, attr, value)
-          Arbre::Context.new { status_tag value }
+          Arbo::Context.new { status_tag value }
         else
           pretty_format value
         end
@@ -65,7 +65,7 @@ module ActiveAdmin
       # Attempts to create a human-readable string for any object
       def pretty_format(object)
         case object
-        when String, Numeric, Symbol, Arbre::Element
+        when String, Numeric, Symbol, Arbo::Element
           object.to_s
         when Date, Time
           I18n.localize object, format: active_admin_application.localize_format

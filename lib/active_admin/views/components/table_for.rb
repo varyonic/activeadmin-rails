@@ -1,6 +1,6 @@
 module ActiveAdmin
   module Views
-    class TableFor < Arbre::HTML::Table
+    class TableFor < Arbo::HTML::Table
       builder_method :table_for
 
       def tag_name
@@ -64,7 +64,7 @@ module ActiveAdmin
       end
 
       def build_table_header(col)
-        classes  = Arbre::HTML::ClassList.new
+        classes  = Arbo::HTML::ClassList.new
         sort_key = sortable? && col.sortable? && col.sort_key
         params   = request.query_parameters.except :page, :order, :commit, :format
 
@@ -100,7 +100,7 @@ module ActiveAdmin
         td class: col.html_class do
           html = helpers.format_attribute(resource, col.data)
           # Don't add the same Arbre twice, while still allowing format_attribute to call status_tag
-          current_arbre_element << html unless current_arbre_element.children.include? html
+          current_arbo_element << html unless current_arbo_element.children.include? html
         end
       end
 

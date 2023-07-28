@@ -11,7 +11,7 @@ module ActiveAdmin
       end
 
       def body_classes
-        Arbre::HTML::ClassList.new [
+        Arbo::HTML::ClassList.new [
           params[:action],
           params[:controller].tr('/', '_'),
           'active_admin', 'logged_in',

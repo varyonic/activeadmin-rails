@@ -15,7 +15,7 @@ RSpec.describe ActiveAdmin::Views::PaginatedCollection do
       view
     end
 
-    # Helper to render paginated collections within an arbre context
+    # Helper to render paginated collections within an arbo context
     def paginated_collection(*args)
       render_component({paginated_collection_args: args}, view) do
         paginated_collection(*paginated_collection_args)

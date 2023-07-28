@@ -1,6 +1,6 @@
 module ActiveAdmin
   module Views
-    class FormtasticProxy < ::Arbre::Rails::Forms::FormBuilderProxy
+    class FormtasticProxy < ::Arbo::Rails::Forms::FormBuilderProxy
       def split_string_on(string, match)
         return "" unless string && match
         part_1 = string.split(Regexp.new("#{match}\\z")).first
@@ -15,7 +15,7 @@ module ActiveAdmin
         @closing_tag || ""
       end
 
-      def render_in(context = arbre_context)
+      def render_in(context = arbo_context)
         pos = context.output_buffer.length
         context.output_buffer << opening_tag.html_safe
         children.map { |element| element.render_in(context) }
@@ -93,7 +93,7 @@ module ActiveAdmin
 
       def add_create_another_checkbox
         if %w(new create).include?(helpers.action_name) && active_admin_config && active_admin_config.create_another
-          current_arbre_element.add_child(create_another_checkbox)
+          current_arbo_element.add_child(create_another_checkbox)
         end
       end
 
@@ -118,7 +118,7 @@ module ActiveAdmin
       def create_another_checkbox
         create_another = params[:create_another]
         label = @resource.class.model_name.human
-        Arbre::Context.new do
+        Arbo::Context.new do
           li class: 'create_another' do
             input(
               checked: create_another,

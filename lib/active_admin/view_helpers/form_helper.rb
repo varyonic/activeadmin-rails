@@ -3,7 +3,7 @@ module ActiveAdmin
     module FormHelper
 
       def active_admin_form_for(resource, options = {}, &block)
-        Arbre::Context.new({}, self) do
+        Arbo::Context.new({}, self) do
           active_admin_form_for resource, options, &block
         end.render_in.html_safe
       end

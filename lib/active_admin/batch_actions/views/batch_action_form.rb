@@ -27,7 +27,7 @@ module ActiveAdmin
         content + closing_form_tag
       end
 
-      def render_in(context = arbre_context)
+      def render_in(context = arbo_context)
         children.collect do |element|
           element.render_in_or_to_s(context)
         end
