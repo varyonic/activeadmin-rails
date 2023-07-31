@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ActiveAdmin::Views::Panel do
-  let(:arbre_panel) do
-    render_arbre_component do
+  let(:arbo_panel) do
+    render_component do
       panel "My Title" do
         header_action link_to("My Link", "https://www.github.com/activeadmin/activeadmin")
         span("Hello World")
@@ -10,7 +10,7 @@ RSpec.describe ActiveAdmin::Views::Panel do
     end
   end
 
-  let(:panel_html) { Capybara.string(arbre_panel.to_s) }
+  let(:panel_html) { Capybara.string(arbo_panel.to_s) }
 
   it "should have a title h3" do
     expect(panel_html).to have_css 'h3', text: "My Title"
@@ -31,9 +31,9 @@ RSpec.describe ActiveAdmin::Views::Panel do
   end
 
   context "with html-safe title" do
-    let(:arbre_panel) do
+    let(:arbo_panel) do
       title_with_html = %q[Title with <abbr>HTML</abbr>].html_safe
-      render_arbre_component do
+      render_component do
         panel(title_with_html)
       end
     end
@@ -45,14 +45,14 @@ RSpec.describe ActiveAdmin::Views::Panel do
   end
 
   describe "#children?" do
-    let(:arbre_panel) do
-      render_arbre_component do
+    let(:arbo_panel) do
+      render_component do
         panel("A Panel")
       end
     end
 
     it "returns false if no children have been added to the panel" do
-      expect(arbre_panel.children?).to eq false
+      expect(arbo_panel.children?).to eq false
     end
   end
 end

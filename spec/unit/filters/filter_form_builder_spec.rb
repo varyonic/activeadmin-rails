@@ -22,7 +22,7 @@ RSpec.describe ActiveAdmin::Filters::ViewHelper do
   end
 
   def render_filter(search, filters)
-    render_arbre_component({filter_args: [search, filters]}, helpers) do
+    render_component({filter_args: [search, filters]}, helpers) do
       text_node active_admin_filters_form_for *assigns[:filter_args]
     end.to_s
   end

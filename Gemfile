@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'arbre', git: 'https://github.com/varyonic/arbre'
+gem 'arbo'
 
 # Optional dependencies
 gem 'cancan'

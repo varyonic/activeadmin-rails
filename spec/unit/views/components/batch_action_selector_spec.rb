@@ -4,7 +4,7 @@ require 'active_admin/batch_actions/views/batch_action_selector'
 RSpec.describe ActiveAdmin::BatchActions::BatchActionSelector do
 
   let(:dropdown) do
-    render_arbre_component do
+    render_component do
       batch_action_selector [
         ActiveAdmin::BatchAction.new(:action_1, "Action 1"),
         ActiveAdmin::BatchAction.new(:action_2, "Action 2"),

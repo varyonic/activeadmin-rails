@@ -15,7 +15,7 @@ RSpec.describe ActiveAdmin::Views::MenuItem do
   end
 
   let(:arbe_menu_item) do
-    render_arbre_component(item: item) do
+    render_component(item: item) do
       menu_item(item)
     end
   end

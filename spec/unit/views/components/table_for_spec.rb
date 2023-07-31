@@ -16,7 +16,7 @@ RSpec.describe ActiveAdmin::Views::TableFor do
 
     context "when creating a column using symbol argument" do
       let(:table) do
-        render_arbre_component assigns, helpers do
+        render_component assigns, helpers do
           table_for(collection, :title)
         end
       end
@@ -38,7 +38,7 @@ RSpec.describe ActiveAdmin::Views::TableFor do
 
     context "when creating many columns using symbol arguments" do
       let(:table) do
-        render_arbre_component assigns, helpers do
+        render_component assigns, helpers do
           table_for(collection, :title, :created_at)
         end
       end
@@ -69,7 +69,7 @@ RSpec.describe ActiveAdmin::Views::TableFor do
 
     context "when creating a column using symbol arguments and another using block" do
       let(:table) do
-        render_arbre_component assigns, helpers do
+        render_component assigns, helpers do
           table_for(collection, :title) do
             column :created_at
           end
@@ -102,7 +102,7 @@ RSpec.describe ActiveAdmin::Views::TableFor do
 
     context "when creating a column with a symbol" do
       let(:table) do
-        render_arbre_component assigns, helpers do
+        render_component assigns, helpers do
           table_for(collection) do
             column :title
           end
@@ -126,7 +126,7 @@ RSpec.describe ActiveAdmin::Views::TableFor do
 
     context "when creating many columns with symbols" do
       let(:table) do
-        render_arbre_component assigns, helpers do
+        render_component assigns, helpers do
           table_for(collection) do
             column :title
             column :created_at
@@ -160,7 +160,7 @@ RSpec.describe ActiveAdmin::Views::TableFor do
 
     context "when creating a column with block content" do
       let(:table) do
-        render_arbre_component assigns, helpers do
+        render_component assigns, helpers do
           table_for(collection) do
             column :title do |post|
               span(post.title)
@@ -185,7 +185,7 @@ RSpec.describe ActiveAdmin::Views::TableFor do
 
     context "when creating a column with multiple block content" do
       let(:table) do
-        render_arbre_component assigns, helpers do
+        render_component assigns, helpers do
           table_for(collection) do
             column :title do |post|
               span(post.title)
@@ -204,7 +204,7 @@ RSpec.describe ActiveAdmin::Views::TableFor do
 
     context "when creating many columns with symbols, blocks and strings" do
       let(:table) do
-        render_arbre_component assigns, helpers do
+        render_component assigns, helpers do
           table_for(collection) do
             column "My Custom Title", :title
             column :created_at, class: "datetime"
@@ -225,7 +225,7 @@ RSpec.describe ActiveAdmin::Views::TableFor do
 
     context "when using a single record instead of a collection" do
       let(:table) do
-        render_arbre_component nil, helpers do
+        render_component nil, helpers do
           table_for Post.new do
             column :title
           end
@@ -239,7 +239,7 @@ RSpec.describe ActiveAdmin::Views::TableFor do
 
     context "when using a single Hash" do
       let(:table) do
-        render_arbre_component nil, helpers do
+        render_component nil, helpers do
           table_for foo: 1, bar: 2 do
             column :foo
             column :bar
@@ -257,7 +257,7 @@ RSpec.describe ActiveAdmin::Views::TableFor do
 
     context "when using an Array of Hashes" do
       let(:table) do
-        render_arbre_component nil, helpers do
+        render_component nil, helpers do
           table_for [{foo: 1}, {foo: 2}] do
             column :foo
           end
@@ -273,7 +273,7 @@ RSpec.describe ActiveAdmin::Views::TableFor do
 
     context "when record attribute is boolean" do
       let(:table) do
-        render_arbre_component assigns, helpers do
+        render_component assigns, helpers do
           table_for(collection) do
             column :starred
           end
@@ -290,7 +290,7 @@ RSpec.describe ActiveAdmin::Views::TableFor do
 
     context 'when row_class' do
       let(:table) do
-        render_arbre_component assigns, helpers do
+        render_component assigns, helpers do
           table_for(collection, row_class: -> e { 'starred' if e.starred }) do
             column :starred
           end
@@ -315,7 +315,7 @@ RSpec.describe ActiveAdmin::Views::TableFor do
       end
 
       let(:table) do
-        render_arbre_component assigns, helpers do
+        render_component assigns, helpers do
           table_for(collection, i18n: Post) do
             column :title
           end
@@ -343,7 +343,7 @@ RSpec.describe ActiveAdmin::Views::TableFor do
       end
 
       let(:table) do
-        render_arbre_component assigns, helpers do
+        render_component assigns, helpers do
           table_for(collection) do
             column :title
           end

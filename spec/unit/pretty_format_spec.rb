@@ -48,8 +48,8 @@ RSpec.describe "#pretty_format" do
     it_behaves_like 'an object convertible to string'
   end
 
-  context 'when given an arbre element' do
-    let(:obj) { Arbre::Element.new.br }
+  context 'when given an arbo element' do
+    let(:obj) { Arbo::Element.new.br }
 
     it_behaves_like 'an object convertible to string'
   end

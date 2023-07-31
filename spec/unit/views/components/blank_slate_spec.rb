@@ -4,7 +4,7 @@ RSpec.describe ActiveAdmin::Views::BlankSlate do
 
   describe "#blank_slate" do
     subject do
-      render_arbre_component do
+      render_component do
         blank_slate("There are no Posts yet. <a href=\"/posts/new\">Create one</a></span>")
       end
     end

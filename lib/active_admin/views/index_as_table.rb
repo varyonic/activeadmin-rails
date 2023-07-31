@@ -87,7 +87,7 @@ module ActiveAdmin
     # end
     # ```
     #
-    # Or append custom action with custom html via arbre:
+    # Or append custom action with custom html via arbo:
     #
     # ```ruby
     # index do
@@ -301,7 +301,7 @@ module ActiveAdmin
         #   item 'Grant User', grant_user_admin_user_path(admin_user)
         # end
         #
-        # # Append some actions onto the end of the default actions using arbre dsl.
+        # # Append some actions onto the end of the default actions using arbo dsl.
         # actions do |admin_user|
         #   a 'Grant Admin', href: grant_admin_admin_user_path(admin_user)
         # end
@@ -341,7 +341,7 @@ module ActiveAdmin
                 defaults(resource, css_class: :member_link) if defaults
                 if block_given?
                   block_result = instance_exec(resource, &block)
-                  text_node block_result unless block_result.is_a? Arbre::Element
+                  text_node block_result unless block_result.is_a? Arbo::Element
                 end
               end
             end

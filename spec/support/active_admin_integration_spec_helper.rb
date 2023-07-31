@@ -35,12 +35,12 @@ module ActiveAdminIntegrationSpecHelper
     reload_routes!
   end
 
-  def arbre(assigns = {}, helpers = mock_action_view, &block)
-    Arbre::Context.new(assigns, helpers, &block)
+  def arbo(assigns = {}, helpers = mock_action_view, &block)
+    Arbo::Context.new(assigns, helpers, &block)
   end
 
-  def render_arbre_component(assigns = {}, helpers = mock_action_view, &block)
-    arbre(assigns, helpers, &block).children.first
+  def render_component(assigns = {}, helpers = mock_action_view, &block)
+    arbo(assigns, helpers, &block).children.first
   end
 
   # A mock action view to test view helpers

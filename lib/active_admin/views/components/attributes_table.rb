@@ -58,7 +58,7 @@ module ActiveAdmin
         within @table do
           col # column for row headers
           @collection.each do |record|
-            classes = Arbre::HTML::ClassList.new
+            classes = Arbo::HTML::ClassList.new
             classes << cycle(:even, :odd, name: self.class.to_s)
             classes << dom_class_name_for(record)
             col(id: dom_id_for(record), class: classes)
@@ -80,9 +80,9 @@ module ActiveAdmin
 
       def content_for(record, attr)
         value = helpers.format_attribute record, attr
-        value.blank? && current_arbre_element.children.to_s.empty? ? empty_value : value
+        value.blank? && current_arbo_element.children.to_s.empty? ? empty_value : value
         # Don't add the same Arbre twice, while still allowing format_attribute to call status_tag
-        current_arbre_element << value unless current_arbre_element.children.include? value
+        current_arbo_element << value unless current_arbo_element.children.include? value
       end
 
       def single_record?

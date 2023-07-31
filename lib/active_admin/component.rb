@@ -1,5 +1,5 @@
 module ActiveAdmin
-  class Component < Arbre::Component
+  class Component < Arbo::Component
 
   end
 end

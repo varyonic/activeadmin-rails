@@ -11,7 +11,7 @@ RSpec.describe ActiveAdmin::Views::SidebarSection do
   end
 
   let(:html) do
-    render_arbre_component section: section do
+    render_component section: section do
       sidebar_section(assigns[:section])
     end
   end
@@ -55,7 +55,7 @@ RSpec.describe ActiveAdmin::Views::SidebarSection do
     end
     let(:assigns) { { resource: post, section: section } }
     let(:html) do
-      render_arbre_component assigns do
+      render_component assigns do
         sidebar_section(assigns[:section])
       end
     end

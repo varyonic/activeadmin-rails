@@ -1,7 +1,7 @@
 div id: "main_content" do
   if page_presenter.block
     block_result = instance_exec(&page_presenter.block)
-    text_node block_result unless block_result.is_a? Arbre::Element
+    text_node block_result unless block_result.is_a? Arbo::Element
   else
     render 'content'
   end

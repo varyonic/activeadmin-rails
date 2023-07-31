@@ -8,7 +8,7 @@ RSpec.describe ActiveAdmin::Views::Tabs do
       end
 
       let(:tabs) do
-        render_arbre_component do
+        render_component do
           tabs do
             tab :overview
             tab I18n.t(:tab_key), id: :something_unique, html_options: { class: :some_css_class }
@@ -50,7 +50,7 @@ RSpec.describe ActiveAdmin::Views::Tabs do
 
     context "when creating a tab with a block" do
       let(:tabs) do
-        render_arbre_component do
+        render_component do
           tabs do
             tab :overview do
               span 'tab 1'
@@ -70,7 +70,7 @@ RSpec.describe ActiveAdmin::Views::Tabs do
 
     context "when creating a tab with non-transliteratable string" do
       let(:tabs) do
-        render_arbre_component do
+        render_component do
           tabs do
             tab '🤗' do
               'content'
