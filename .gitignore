@@ -9,6 +9,8 @@ pkg
 
 ## Project (specific)
 .bundle
+docs/.sass-cache
+docs/_site
 spec/rails
 Gemfile.lock
 gemfiles/rails_*.gemfile.lock
