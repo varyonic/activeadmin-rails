@@ -2,10 +2,23 @@
 ---
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
-  {% include head.html %}
+  <head>
+    <title>Active Admin | The administration framework for Ruby on Rails</title>
+    <link href='//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:extralight,light,regular,bold' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <link href="{{ site.baseurl }}/stylesheets/main.css" media="screen" rel="stylesheet" type="text/css" />
+  </head>
   <body>
     <div id="wrapper">
-      {% include top-menu.html %}
+      <div id="header">
+          <h1><a href="{{ site.baseurl }}/index.html"><span>Active Admin</span></a></h1>
+
+          <div id="nav">
+              <a href="{{ site.baseurl }}/documentation.html">Documentation</a>
+              <a href="http://demo.activeadmin.info/admin">Try It Now!</a>
+              <a href="http://github.com/varyonic/activeadmin">Get the Code</a>
+          </div>
+      </div>
       <div id="main-content">
         <p class="intro">
           The <strong>administration framework</strong> for business critical <strong>Ruby on Rails</strong> applications.
@@ -108,18 +121,20 @@
 <span class="k">end</span>
 </code>
 </pre>
-          </div>
         </div>
-        <h2 class="getting-started-heading">
-          3 Ways to Get Started:
-        </h2>
-        <p class="getting-started">
-          <a href="http://demo.activeadmin.info/admin">Check Out the Live Demo</a> <a href="{{ site.baseurl }}/documentation.html">Read The Documentation</a> <a href="http://github.com/activeadmin/activeadmin">Visit the Git Repository</a>
-        </p>
-      </div>{% include footer.html %}
+      </div>
+      <h2 class="getting-started-heading">
+        3 Ways to Get Started:
+      </h2>
+      <p class="getting-started">
+        <a href="http://demo.activeadmin.info/admin">Check Out the Live Demo</a> <a href="{{ site.baseurl }}/documentation.html">Read The Documentation</a> <a href="http://github.com/activeadmin/activeadmin">Visit the Git Repository</a>
+      </p>
     </div>
-    <p>
-      {% include google-analytics.html %}
-    </p>
+      <p id="footer">
+        <div class="left">
+            Copyright 2011 <a href="http://gregbell.ca/">Greg Bell</a> and <a href="http://www.versapay.com/">VersaPay</a>
+        </div>
+      </p>
+    </div>
   </body>
 </html>
