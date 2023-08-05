@@ -1,4 +1,7 @@
 ---
+layout: default
+nav_order: 0
+title: Installation
 redirect_from: /docs/0-installation.html
 ---
 

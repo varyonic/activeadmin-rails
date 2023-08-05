@@ -1,4 +1,7 @@
 ---
+layout: default
+nav_order: 2
+title: Working with Resources
 redirect_from: /docs/2-resource-customization.html
 ---
 

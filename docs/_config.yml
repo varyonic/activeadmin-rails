@@ -1,2 +1,15 @@
-gems:
+plugins:
+  - jekyll-default-layout
   - jekyll-redirect-from
+
+theme: just-the-docs
+# title: Active Admin | The administration framework for Ruby on Rails
+title: Active Admin
+# Aux links for the upper right navigation
+aux_links:
+  "Documentation":
+    - "/documentation"
+  "Try It Now!":
+    - "//demo.activeadmin.info/admin"
+  "Get the Code":
+    - "//github.com/varyonic/activeadmin"

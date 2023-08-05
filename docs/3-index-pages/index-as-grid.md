@@ -1,4 +1,8 @@
 ---
+layout: default
+parent: Customizing the Index Page
+nav_order: 1
+title: Index as a Grid
 redirect_from: /docs/3-index-pages/index-as-grid.html
 ---
 

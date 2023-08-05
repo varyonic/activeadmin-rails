@@ -1,4 +1,8 @@
 ---
+layout: default
+parent: Customizing the Index Page
+nav_order: 3
+title: Index as a Blog
 redirect_from: /docs/3-index-pages/index-as-blog.html
 ---
 

@@ -1,4 +1,7 @@
 ---
+layout: default
+nav_order: 7
+title: Sidebars
 redirect_from: /docs/7-sidebars.html
 ---
 # Sidebar Sections

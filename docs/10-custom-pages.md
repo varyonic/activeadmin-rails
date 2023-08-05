@@ -1,4 +1,7 @@
 ---
+layout: default
+nav_order: 10
+title: Custom Pages
 redirect_from: /docs/10-custom-pages.html
 ---
 

@@ -1,4 +1,7 @@
 ---
+layout: default
+nav_order: 4
+title: CSV Format
 redirect_from: /docs/4-csv-format.html
 ---
 

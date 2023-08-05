@@ -1,4 +1,7 @@
 ---
+layout: default
+nav_order: 13
+title: Authorization Adapter
 redirect_from: /docs/13-authorization-adapter.html
 ---
 

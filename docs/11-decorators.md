@@ -1,4 +1,7 @@
 ---
+layout: default
+nav_order: 11
+title: Decorators
 redirect_from: /docs/11-decorators.html
 ---
 

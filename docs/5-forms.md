@@ -1,4 +1,7 @@
 ---
+layout: default
+nav_order: 5
+title: Forms
 redirect_from: /docs/5-forms.html
 ---
 

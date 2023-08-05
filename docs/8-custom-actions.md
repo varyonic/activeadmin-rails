@@ -1,4 +1,7 @@
 ---
+layout: default
+nav_order: 8
+title: Custom Actions
 redirect_from: /docs/8-custom-actions.html
 ---
 

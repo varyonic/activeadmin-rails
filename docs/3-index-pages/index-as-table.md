@@ -1,4 +1,8 @@
 ---
+layout: default
+parent: Customizing the Index Page
+nav_order: 0
+title: Index as a Table
 redirect_from: /docs/3-index-pages/index-as-table.html
 ---
 

@@ -1,4 +1,7 @@
 ---
+layout: default
+nav_order: 1
+title: General Configuration
 redirect_from: /docs/1-general-configuration.html
 ---
 

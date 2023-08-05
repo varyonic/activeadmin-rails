@@ -1,4 +1,8 @@
 ---
+layout: default
+parent: Customizing the Index Page
+nav_order: 4
+title: Custom Index
 redirect_from: /docs/3-index-pages/custom-index.html
 ---
 

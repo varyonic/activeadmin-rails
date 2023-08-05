@@ -1,4 +1,7 @@
 ---
+layout: default
+nav_order: 9
+title: Batch Actions
 redirect_from: /docs/9-batch-actions.html
 ---
 

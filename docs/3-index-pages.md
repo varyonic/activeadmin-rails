@@ -1,5 +1,9 @@
 ---
+layout: default
+nav_order: 3
+title: Customizing the Index Page
 redirect_from: /docs/3-index-pages.html
+has_children: true
 ---
 
 # Customizing the Index Page

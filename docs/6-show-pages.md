@@ -1,4 +1,7 @@
 ---
+layout: default
+nav_order: 6
+title: Show Pages
 redirect_from: /docs/6-show-pages.html
 ---
 # Customize the Show Page

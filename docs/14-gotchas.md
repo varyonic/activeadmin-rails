@@ -1,4 +1,7 @@
 ---
+layout: default
+nav_order: 14
+title: Gotchas
 redirect_from: /docs/14-gotchas.html
 ---
 

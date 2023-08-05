@@ -1,4 +1,7 @@
 ---
+layout: default
+nav_order: 12
+title: Arbre Components
 redirect_from: /docs/12-arbre-components.html
 ---
 
