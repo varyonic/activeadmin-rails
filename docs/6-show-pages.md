@@ -6,72 +6,49 @@ redirect_from: /docs/6-show-pages.html
 ---
 # Customize the Show Page
 
-The show block is rendered within the context of the view and uses
-[Arbre](https://github.com/activeadmin/arbre) syntax.
+Active Admin renders `:show` using partial `show`
 
-With the `show` block, you can render anything you want.
+The default partial is located in `app/views/active_admin/resource/_show.html.arb` and simply renders `attributes_panel`
+
+A customized `app/views/admin/posts/_show.html.arb` keeping the default AA look might look like:
 
 ```ruby
-ActiveAdmin.register Post do
-  show do
-    h3 post.title
-    div do
-      simple_format post.body
-    end
+content_for(:page_title) { resource.name }
+attributes_table do
+  row :title
+  row :image do |ad|
+    image_tag ad.image.url
   end
 end
+active_admin_comments
 ```
 
-You can render a partial at any point:
+A more generic partial might look like:
 
 ```ruby
-ActiveAdmin.register Post do
-  show do
-    # renders app/views/admin/posts/_some_partial.html.erb
-    render 'some_partial', { post: post }
-  end
-end
-```
-
-If you'd like to keep the default AA look, you can use `attributes_table`:
-
-```ruby
-ActiveAdmin.register Ad do
-  show do
-    attributes_table do
-      row :title
-      row :image do |ad|
-        image_tag ad.image.url
-      end
-    end
-    active_admin_comments
-  end
-end
-```
-
-You can also customize the title of the object in the show screen:
-
-```ruby
-show title: :name do
-  # ...
+h3 post.title
+div do
+  simple_format post.body
 end
 ```
 
 If you want a more data-dense page, you can combine a sidebar:
 
 ```ruby
-ActiveAdmin.register Book do
-  show do
-    panel "Table of Contents" do
-      table_for book.chapters do
-        column :number
-        column :title
-        column :page
-      end
-    end
-    active_admin_comments
+panel "Table of Contents" do
+  table_for book.chapters do
+    column :number
+    column :title
+    column :page
   end
+end
+active_admin_comments
+```
 
+and
+
+```ruby
+ActiveAdmin.register Book do
   sidebar "Details", only: :show do
     attributes_table_for book do
       row :title

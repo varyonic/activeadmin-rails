@@ -18,17 +18,13 @@ these elements into the page inside of other Arbre components or resource
 controller functions.
 
 ```ruby
-ActiveAdmin.register Post do
-  show do
-    panel "Post Details" do
-      attributes_table_for post do
-        row :id
-        row 'Tags' do
-          post.tags.each do |tag|
-            a tag, href: admin_post_path(q: {tagged_with_contains: tag})
-            text_node "&nbsp;".html_safe
-          end
-        end
+panel "Post Details" do
+  attributes_table_for post do
+    row :id
+    row 'Tags' do
+      post.tags.each do |tag|
+        a tag, href: admin_post_path(q: {tagged_with_contains: tag})
+        text_node "&nbsp;".html_safe
       end
     end
   end
@@ -44,14 +40,12 @@ will take up the remaining space.
 This will create two stacked panels:
 
 ```ruby
-show do
-  panel "Post Details" do
-    render partial: "details", locals: {post: post}
-  end
+panel "Post Details" do
+  render partial: "details", locals: {post: post}
+end
 
-  panel "Post Tags" do
-    render partial: "tags",    locals: {post: post}
-  end
+panel "Post Tags" do
+  render partial: "tags",    locals: {post: post}
 end
 ```
 
