@@ -60,7 +60,7 @@ translation, you can copy
 [config/locales/en.yml](https://github.com/activeadmin/activeadmin/blob/master/config/locales/en.yml)
 to your application's `config/locales` folder and update it. We welcome
 new/updated translations, so feel free to
-[contribute](https://github.com/activeadmin/activeadmin/blob/master/CONTRIBUTING.md)!
+[contribute](https://github.com/varyonic/activeadmin/blob/master/CONTRIBUTING.md)!
 
 When using [devise](https://github.com/plataformatec/devise) for authentication,
 you can use the [devise-i18n](https://github.com/tigrish/devise-i18n)

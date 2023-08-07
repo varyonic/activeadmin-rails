@@ -10,7 +10,7 @@ redirect_from: /docs/0-installation.html
 Active Admin is a Ruby Gem.
 
 ```ruby
-gem 'activeadmin'
+gem 'activeadmin-rb'
 
 # Plus integrations with:
 gem 'devise'
@@ -115,7 +115,7 @@ Draper::CollectionDecorator.send :delegate, :per_page_kaminari
 
 If you're getting the error `wrong number of arguments (6 for 4..5)`, [read #2703].
 
-[CHANGELOG]: https://github.com/activeadmin/activeadmin/blob/master/CHANGELOG.md
-[dashboard.rb]: https://github.com/activeadmin/activeadmin/blob/master/lib/generators/active_admin/install/templates/dashboard.rb
-[active_admin.rb]: https://github.com/activeadmin/activeadmin/blob/master/lib/generators/active_admin/install/templates/active_admin.rb.erb
+[CHANGELOG]: https://github.com/varyonic/activeadmin/blob/master/CHANGELOG.md
+[dashboard.rb]: https://github.com/varyonic/activeadmin/blob/master/lib/generators/active_admin/install/templates/dashboard.rb
+[active_admin.rb]: https://github.com/varyonic/activeadmin/blob/master/lib/generators/active_admin/install/templates/active_admin.rb.erb
 [read #2703]: https://github.com/activeadmin/activeadmin/issues/2703#issuecomment-38140864

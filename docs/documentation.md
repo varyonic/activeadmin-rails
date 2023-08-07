@@ -14,7 +14,7 @@ on Rails application. To install, simply add the following to your Gemfile:
 
 ```ruby
 # Gemfile
-gem 'activeadmin'
+gem 'activeadmin-rb'
 ```
 
 After updating your bundle, run the installer

@@ -4,7 +4,7 @@ plugins:
 
 theme: just-the-docs
 # title: Active Admin | The administration framework for Ruby on Rails
-title: Active Admin
+title: ActiveAdmin-rb 1.7
 # Aux links for the upper right navigation
 aux_links:
   "Documentation":
