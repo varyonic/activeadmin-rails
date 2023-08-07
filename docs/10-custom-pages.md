@@ -85,14 +85,15 @@ and examples.
 
 See the [Sidebars](7-sidebars.md) documentation.
 
-## Add an Action Item
+## Add an Action Link
 
-Just like other resources, you can add action items. The difference here being that
-`:only` and `:except` don't apply because there's only one page it could apply to.
+Just like other resources, you can add action links.
 
 ```ruby
-action_item :view_site do
-  link_to "View Site", "/"
+# app/views/admin/calendar/action_item.html.arb
+div(class: :action_items) do
+  ...
+  action_link "View Site", "/"
 end
 ```
 

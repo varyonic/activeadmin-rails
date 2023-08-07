@@ -155,9 +155,9 @@ If you are implementing a custom controller action, you can use the
 `#authorize!` method to raise an `ActiveAdmin::AccessDenied` exception.
 
 ```ruby
-ActiveAdmin.register Post do
+class Admin::Post < ActiveAdmin::ResourceController
 
-  member_action :publish, method: :post do
+  def publish
     post = Post.find(params[:id])
 
     authorize! :publish, post
@@ -166,10 +166,13 @@ ActiveAdmin.register Post do
     flash[:notice] = "Post has been published"
     redirect_to [:admin, post]
   end
+end
 
-  action_item :publish, only: :show do
+# app/views/admin/posts/_action_item.html.arb
+div(class: :action_items) do
+  if params[:action] == 'show'
     if !post.published? && authorized?(:publish, post)
-      link_to "Publish", publish_admin_post_path(post), method: :post
+      action_link :publish, publish_admin_post_path(post), method: :post
     end
   end
 

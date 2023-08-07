@@ -129,37 +129,31 @@ Alternately use `content_for(:page_title)` in the view template.
 
 # Action Items
 
-To include your own action items (like the New, Edit and Delete buttons), add an
-`action_item` block. The first parameter is just a name to identify the action,
-and is required. For example, to add a "View on site" button to view a blog
-post:
+By default action items (like the New, Edit and Delete buttons) are rendered in
+a partial included in the right hand side of the title bar.
+
+For example, to add a "View on site" button to view a blog post customize the `action_item` partial as follows:
 
 ```ruby
-action_item :view, only: :show do
-  link_to 'View on site', post_path(post) if post.published?
+# app/views/admin/posts/_action_item.html.arb
+div(class: :action_items) do
+  if params[:action] == 'index'
+    if controller.action_methods.include?('new') && authorized?(:create, Post)
+      action_link :new_model, new_resource_path
+    end
+  end
+
+  if params[:action] == 'show'
+    if controller.action_methods.include?('edit') && authorized?(:update, resource)
+      action_link :edit_model, edit_resource_path(resource)
+    end
+
+    if resource.published? && current_admin_user.super_admin?
+      action_link "View on site", post_path(resource)
+    end
+  end
 end
 ```
-
-Actions items also accept the `:if` option to conditionally display them:
-
-```ruby
-action_item :super_action,
-            only: :show,
-            if: proc{ current_admin_user.super_admin? } do
-  "Only display this to super admins on the show screen"
-end
-```
-
-By default action items are positioned in the same order as they defined (after default actions), 
-but it’s also possible to specify their position manually:
-
-```ruby
-action_item :help, priority: 0 do
-  "Display this action to the first position"
-end
-```
-
-Default action item priority is 10.
 
 # Modifying the Controller
 
