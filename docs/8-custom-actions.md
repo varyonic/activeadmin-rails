@@ -125,6 +125,7 @@ class Admin::PostsController < ActiveAdmin::ResourceController
   end
 end
 ```
+Alternately use `content_for(:page_title)` in the view template.
 
 # Action Items
 
