@@ -22,23 +22,12 @@ Creating a page is as simple as calling `register_page`:
 ```ruby
 # app/admin/calendar.rb
 ActiveAdmin.register_page "Calendar" do
-  content do
-    para "Hello World"
-  end
 end
 ```
 
-Anything rendered within `content` will be the main content on the page.
-Partials behave exactly the same way as they do for resources:
+and defining a partial:
 
 ```ruby
-# app/admin/calendar.rb
-ActiveAdmin.register_page "Calendar" do
-  content do
-    render partial: 'calendar'
-  end
-end
-
 # app/views/admin/calendar/_calendar.html.arb
 table do
   thead do
