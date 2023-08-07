@@ -17,7 +17,15 @@ The generator will produce an empty `app/admin/posts.rb` file like so:
 
 ```ruby
 ActiveAdmin.register Post do
-  # everything happens here :D
+  # ...
+end
+```
+
+TODO: and an empty `app/controllers/admin/posts_controller.rb` file like so:
+
+```ruby
+class Admin::PostsController < ActiveAdmin::ResourceController
+  # ...
 end
 ```
 
@@ -90,15 +98,14 @@ use this method when overriding `create` or `update` actions:
 
 ```ruby
 class Admin::PostsController < ActiveAdmin::ResourceController
-    def create
-      # Good
-      @post = Post.new(permitted_params[:post])
-      # Bad
-      @post = Post.new(params[:post])
+  def create
+    # Good
+    @post = Post.new(permitted_params[:post])
+    # Bad
+    @post = Post.new(params[:post])
 
-      if @post.save
-        # ...
-      end
+    if @post.save
+      # ...
     end
   end
 end
@@ -145,6 +152,7 @@ ActiveAdmin.register Post, as: "Article"
 ```
 
 The resource will then be available at `/admin/articles`.
+The controller and view names should be updated also.
 
 ## Customize the Namespace
 
@@ -354,11 +362,9 @@ If you need to customize the collection properties, you can overwrite the
 `scoped_collection` method.
 
 ```ruby
-ActiveAdmin.register Post do
-  controller do
-    def scoped_collection
-      end_of_association_chain.where(visibility: true)
-    end
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def scoped_collection
+    end_of_association_chain.where(visibility: true)
   end
 end
 ```
@@ -368,11 +374,9 @@ custom `to_param` implementation in your models), override the `resource` method
 on the controller:
 
 ```ruby
-ActiveAdmin.register Post do
-  controller do
-    def find_resource
-      scoped_collection.where(id: params[:id]).first!
-    end
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def find_resource
+    scoped_collection.where(id: params[:id]).first!
   end
 end
 ```
@@ -382,11 +386,9 @@ to not write code like this, otherwise **your authorization rules won't be
 applied**:
 
 ```ruby
-ActiveAdmin.register Post do
-  controller do
-    def find_resource
-      Post.where(id: params[:id]).first!
-    end
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def find_resource
+    Post.where(id: params[:id]).first!
   end
 end
 ```

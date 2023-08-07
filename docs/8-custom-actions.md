@@ -7,27 +7,27 @@ redirect_from: /docs/8-custom-actions.html
 
 # Custom Controller Actions
 
-Active Admin allows you to override and modify the underlying controller which
-is generated for you. There are helpers to add collection and member actions, or
-you can drop right in to the controller and modify its behavior.
+Add custom actions the Rails Way:
 
 ## Collection Actions
 
 A collection action is a controller action which operates on the collection of
-resources. This method adds both the action to the controller as well as
-generating a route for you.
-
-To add a collection action, use the collection_action method:
+resources. Add both the action to the controller as well as a route.
 
 ```ruby
-ActiveAdmin.register Post do
-
-  collection_action :import_csv, method: :post do
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def import_csv
     # Do some CSV importing work here...
     redirect_to collection_path, notice: "CSV imported successfully!"
   end
-
 end
+```
+and
+
+```ruby
+Rails.application.routes.draw do
+  post '/admin/posts/import_csv', controller: 'admin/posts', action: 'import_csv'
+  ...
 ```
 
 This collection action will generate a route at `/admin/posts/import_csv`
@@ -41,29 +41,26 @@ For example, to add a lock action to a user resource, you would do the
 following:
 
 ```ruby
-ActiveAdmin.register User do
-
-  member_action :lock, method: :put do
+class Admin::UsersController < ActiveAdmin::ResourceController
+  def lock
     resource.lock!
     redirect_to resource_path, notice: "Locked!"
   end
-
-end
 ```
-
-This will generate a route at `/admin/users/:id/lock` pointing to the
-`Admin::UserController#lock` controller action.
+and
+```ruby
+Rails.application.routes.draw do
+  put '/admin/users/:id/lock', controller: 'admin/users', action: 'lock'
+  ...
+```
 
 ## HTTP Verbs
 
-The `collection_action` and `member_action` methods both accept the `:method`
-argument to set the HTTP verb for the controller action and route.
-
-Sometimes you want to create an action with the same name, that handles multiple
+Sometimes you want to create an action that handles multiple
 HTTP verbs. In that case, this is the suggested approach:
 
 ```ruby
-member_action :foo, method: [:get, :post] do
+def foo
   if request.post?
     resource.update_attributes! foo: params[:foo] || {}
     head :ok
@@ -72,6 +69,13 @@ member_action :foo, method: [:get, :post] do
   end
 end
 ```
+and
+```ruby
+Rails.application.routes.draw do
+  get 'admin/users/:id/foo', container: 'admin/users', action: 'foo'
+  post 'admin/users/:id/foo', container: 'admin/users', action: 'foo'
+  ...
+```
 
 ## Rendering
 
@@ -79,14 +83,12 @@ Custom controller actions support rendering within the standard Active Admin
 layout.
 
 ```ruby
-ActiveAdmin.register Post do
-
+class Admin::PostsController < ActiveAdmin::ResourceController
   # /admin/posts/:id/comments
-  member_action :comments do
+  def comments
     @comments = resource.comments
     # This will render app/views/admin/posts/comments.html.erb
   end
-
 end
 ```
 
@@ -116,13 +118,11 @@ If this doesn't work for you, you can always set the `@page_title` instance
 variable in your controller action to customize the page title.
 
 ```ruby
-ActiveAdmin.register Post do
-
-  member_action :comments do
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def comments
     @comments   = resource.comments
     @page_title = "#{resource.title}: Comments" # Sets the page title
   end
-
 end
 ```
 
@@ -162,19 +162,4 @@ Default action item priority is 10.
 
 # Modifying the Controller
 
-The generated controller is available to you within the registration block by
-using the `controller` method.
-
-```ruby
-ActiveAdmin.register Post do
-
-  controller do
-    # This code is evaluated within the controller class
-
-    def define_a_method
-      # Instance method
-    end
-  end
-
-end
-```
+Using the `controller` method within the registration block is deprecated, create and modify the controller explicitly.
