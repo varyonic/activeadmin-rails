@@ -75,12 +75,13 @@ By default the index screen includes a "Filters" sidebar on the right hand side
 with a filter for each attribute of the registered model. You can customize the
 filters that are displayed as well as the type of widgets they use.
 
-To display a filter for an attribute, use the `filter` method
+To display a filter for an attribute, customize `filters_form.html.erb`
 
-```ruby
-ActiveAdmin.register Post do
-  filter :title
-end
+```erb
+# app/views/admin/posts/_filters_form.html.erb
+<%= active_admin_filters_form_for(@search,
+  title: { label: 'Title', as: :string },
+) %>
 ```
 
 Out of the box, Active Admin supports the following filter types:
@@ -97,22 +98,31 @@ Out of the box, Active Admin supports the following filter types:
 By default, Active Admin will pick the most relevant filter based on the
 attribute type. You can force the type by passing the `:as` option.
 
-```ruby
-filter :author, as: :check_boxes
+```erb
+# app/views/admin/posts/_filters_form.html.erb
+<%= active_admin_filters_form_for(@search,
+  author: { as: :check_boxes }
+) %>
 ```
 
 The `:check_boxes` and `:select` types accept options for the collection. By default
 it attempts to create a collection based on an association. But you can pass in
 the collection as a proc to be called at render time.
 
-```ruby
-filter :author, as: :check_boxes, collection: proc { Author.all }
+```erb
+# app/views/admin/posts/_filters_form.html.erb
+<%= active_admin_filters_form_for(@search,
+  author: { as: :check_boxes, collection: proc { Author.all } }
+) %>
 ```
 
 To override options for string or numeric filter pass `filters` option.
 
-```ruby
-  filter :title, filters: [:starts_with, :ends_with]
+```erb
+# app/views/admin/posts/_filters_form.html.erb
+<%= active_admin_filters_form_for(@search,
+  title: { filters: [:starts_with, :ends_with] },
+) %>
 ```
 
 Also, if you don't need the select with the options 'contains', 'equals',
@@ -121,16 +131,22 @@ underscore.
 
 For example:
 
-```ruby
-filter :name_equals
+```erb
+# app/views/admin/posts/_filters_form.html.erb
+<%= active_admin_filters_form_for(@search,
+  name_equals: { as: :string },
 # or
-filter :name_contains
+  name_contains: { as: :string },
+) %>
 ```
 
 You can change the filter label by passing a label option:
 
-```ruby
-filter :author, label: 'Something else'
+```erb
+# app/views/admin/posts/_filters_form.html.erb
+<%= active_admin_filters_form_for(@search,
+  author: { label: 'Something else' }
+) %>
 ```
 
 By default, Active Admin will try to use ActiveModel I18n to determine the label.
@@ -141,8 +157,11 @@ syntax](https://github.com/activerecord-hackery/ransack/wiki/Basic-Searching).
 If using a custom search method, you will also need to specify the field type
 using `:as` and the label.
 
-```ruby
-filter :first_name_or_last_name_cont, as: :string, label: "Name"
+```erb
+# app/views/admin/posts/_filters_form.html.erb
+<%= active_admin_filters_form_for(@search,
+  first_name_or_last_name_cont: { as: :string, label: "Name" }
+) %>
 ```
 
 Filters can also be disabled for a resource, a namespace or the entire
