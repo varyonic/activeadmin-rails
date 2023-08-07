@@ -23,22 +23,36 @@ end
 
 ## Setting up Strong Parameters
 
-Use the `permit_params` method to define which attributes may be changed:
+Override the [permitted_attr_names] method to define which attributes may be changed:
 
 ```ruby
-ActiveAdmin.register Post do
-  permit_params :title, :content, :publisher_id
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def permitted_attr_names
+    [:title, :content, :publisher_id]
+  end
+end
+```
+
+or more directly, override [permitted_params]:
+
+```ruby
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def permitted_params
+    params.permit(post: [:title, :content, :publisher_id])
+  end
 end
 ```
 
 Any form field that sends multiple values (such as a HABTM association, or an
-array attribute) needs to pass an empty array to `permit_params`:
+array attribute) needs to pass an empty array:
 
 If your HABTM is `roles`, you should permit `role_ids: []`
 
 ```ruby
-ActiveAdmin.register Post do
-  permit_params :title, :content, :publisher_id, role_ids: []
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def permitted_attr_names
+    [:title, :content, :publisher_id, role_ids: []]
+  end
 end
 ```
 
@@ -46,9 +60,11 @@ Nested associations in the same form also require an array, but it
 needs to be filled with any attributes used.
 
 ```ruby
-ActiveAdmin.register Post do
-  permit_params :title, :content, :publisher_id,
-    tags_attributes: [:id, :name, :description, :_destroy]
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def permitted_attr_names
+    [:title, :content, :publisher_id,
+    tags_attributes: [:id, :name, :description, :_destroy]]
+  end
 end
 
 # Note that `accepts_nested_attributes_for` is still required:
@@ -57,11 +73,11 @@ class Post < ActiveRecord::Base
 end
 ```
 
-If you want to dynamically choose which attributes can be set, pass a block:
+If you want to dynamically choose which attributes can be set:
 
 ```ruby
-ActiveAdmin.register Post do
-  permit_params do
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def permitted_attr_names
     params = [:title, :content, :publisher_id]
     params.push :author_id if current_user.admin?
     params
@@ -69,21 +85,11 @@ ActiveAdmin.register Post do
 end
 ```
 
-If your resource is nested, declare `permit_params` after `belongs_to`:
-
-```ruby
-ActiveAdmin.register Post do
-  belongs_to :user
-  permit_params :title, :content, :publisher_id
-end
-```
-
-The `permit_params` call creates a method called `permitted_params`. You should
+[permitted_attr_names] is called by a method called [permitted_params]. You should
 use this method when overriding `create` or `update` actions:
 
 ```ruby
-ActiveAdmin.register Post do
-  controller do
+class Admin::PostsController < ActiveAdmin::ResourceController
     def create
       # Good
       @post = Post.new(permitted_params[:post])
@@ -103,7 +109,7 @@ end
 All CRUD actions are enabled by default. These can be disabled for a given resource:
 
 ```ruby
-ActiveAdmin.register Post do
+class Admin::PostsController < ActiveAdmin::ResourceController
   actions :all, except: [:update, :destroy]
 end
 ```
@@ -467,3 +473,6 @@ ActiveAdmin.register Ticket do
   belongs_to :project, optional: true
 end
 ```
+
+[permitted_attr_names]: https://rubydoc.info/github/varyonic/activeadmin/master/ActiveAdmin%2FResourceController%2FDataAccess:permitted_attr_names
+[permitted_params]: https://rubydoc.info/github/varyonic/activeadmin/master/ActiveAdmin%2FResourceController%2FDataAccess:permitted_params
