@@ -49,14 +49,17 @@ end
 
 By default, ActiveAdmin does *not* decorate the resource used to render forms.
 If you need ActiveAdmin to decorate the forms, you can pass `decorate: true` to the
-form block.
+form page presenter.
 
 ```ruby
 ActiveAdmin.register Post do
   decorate_with PostDecorator
 
-  form decorate: true do |f|
-    # ...
-  end
+  form decorate: true
+end
+
+# app/views/admin/posts/_form.html.arb
+active_admin_form_for(resource) do |f|
+  # ...
 end
 ```
