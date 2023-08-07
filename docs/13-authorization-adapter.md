@@ -142,15 +142,12 @@ authorized to perform an action on a subject.
 Use the `#authorized?(action, subject)` method to check.
 
 ```ruby
-ActiveAdmin.register Post do
-
-  index do
-    column :title
-    column '' do |post|
-      link_to 'Edit', admin_post_path(post) if authorized? :update, post
-    end
+# /app/views/admin/posts/_index_as_table.html.arb
+index_table_for(collection, default_table_options) do |t|
+  column :title
+  column '' do |post|
+    link_to 'Edit', admin_post_path(post) if authorized? :update, post
   end
-
 end
 ```
 

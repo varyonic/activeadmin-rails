@@ -274,7 +274,7 @@ end
 You can change it per request / action too:
 
 ```ruby
-controller do
+class Admin::PostsController < ActiveAdmin::ResourceController
   before_action only: :index do
     @per_page = 100
   end
@@ -294,9 +294,7 @@ queries caused by the pagination info at the bottom of the page:
 
 ```ruby
 ActiveAdmin.register Post do
-  index pagination_total: false do
-    # ...
-  end
+  index pagination_total: false
 end
 ```
 

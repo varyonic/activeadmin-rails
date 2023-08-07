@@ -36,12 +36,13 @@ end
 # app/admin/post.rb
 ActiveAdmin.register Post do
   decorate_with PostDecorator
+end
 
-  index do
-    column :title
-    column :image
-    actions
-  end
+# /app/views/admin/posts/_index_as_table.html.arb
+index_table_for(collection, default_table_options) do |t|
+  column :title
+  column :image
+  actions
 end
 ```
 
