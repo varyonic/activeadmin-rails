@@ -8,8 +8,6 @@ end
 
 RSpec.describe ActiveAdmin::ViewFactory do
 
-  it_should_have_view :global_navigation,    ActiveAdmin::Views::TabbedNavigation
-  it_should_have_view :utility_navigation,   ActiveAdmin::Views::TabbedNavigation
   it_should_have_view :site_title,           ActiveAdmin::Views::SiteTitle
 
 end

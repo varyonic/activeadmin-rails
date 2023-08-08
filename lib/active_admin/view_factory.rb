@@ -4,9 +4,7 @@ module ActiveAdmin
   class ViewFactory < AbstractViewFactory
 
     # Register Helper Renderers
-    register  global_navigation:   ActiveAdmin::Views::TabbedNavigation,
-              utility_navigation:  ActiveAdmin::Views::TabbedNavigation,
-              site_title:          ActiveAdmin::Views::SiteTitle,
+    register  site_title:          ActiveAdmin::Views::SiteTitle,
               index_scopes:        ActiveAdmin::Views::Scopes
   end
 end

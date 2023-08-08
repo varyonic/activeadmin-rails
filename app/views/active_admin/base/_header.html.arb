@@ -1,5 +1,5 @@
 div(class: 'header', id: 'header') do
   site_title namespace
-  global_navigation menu, class: 'header-item tabs'
-  utility_navigation namespace.fetch_menu(:utility_navigation), id: 'utility_nav', class: 'header-item tabs'
+  insert_tag ActiveAdmin::Views::TabbedNavigation, menu, class: 'header-item tabs'
+  insert_tag ActiveAdmin::Views::TabbedNavigation, namespace.fetch_menu(:utility_navigation), id: 'utility_nav', class: 'header-item tabs'
 end
