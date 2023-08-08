@@ -93,7 +93,7 @@ end
 ```
 
 If you would like to use the same view syntax as the rest of Active Admin, you
-can use the Arbre file extension: .arb.
+can use the Arbo file extension: .arb.
 
 For example, create `app/views/admin/posts/comments.html.arb` with:
 

@@ -19,6 +19,6 @@
 - [Batch Actions](9-batch-actions.md)
 - [Custom Pages](10-custom-pages.md)
 - [Decorators](11-decorators.md)
-- [Arbre Components](12-arbre-components.md)
+- [Arbo Components](12-arbo-components.md)
 - [Authorization Adapter](13-authorization-adapter.md)
 - [Gotchas](14-gotchas.md)

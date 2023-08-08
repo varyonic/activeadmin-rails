@@ -43,14 +43,14 @@ We try not to reinvent the wheel, so Active Admin is built with other open sourc
 
 Tool                  | Description
 --------------------- | -----------
-[Arbre]               | Ruby -> HTML, just like that.
+[Arbo]                | HTML Views in Ruby.
 [Devise]              | Powerful, extensible user authentication
 [Formtastic]          | A Rails form builder plugin with semantically rich and accessible markup
 [Inherited Resources] | Simplifies controllers with pre-built RESTful controller actions
 [Kaminari]            | Elegant pagination for any sort of collection
 [Ransack]             | Provides a simple search API to query your data
 
-[Arbre]: https://github.com/activeadmin/arbre
+[Arbo]: https://github.com/varyonic/arbo
 [Devise]: https://github.com/plataformatec/devise
 [Formtastic]: https://github.com/justinfrench/formtastic
 [Inherited Resources]: https://github.com/activeadmin/inherited_resources

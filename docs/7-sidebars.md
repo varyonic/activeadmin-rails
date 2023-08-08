@@ -17,7 +17,7 @@ end
 This will generate a sidebar on every page for that resource. The first
 argument is used as the title, and can be a symbol, string, or lambda.
 
-You can also use [Arbre](https://github.com/activeadmin/arbre) to define HTML content.
+You can also use [Arbo](https://github.com/varyonic/arbo) to define HTML content.
 
 ```ruby
 sidebar :help do
