@@ -12,7 +12,7 @@
       <% if active_admin_namespace.unsupported_browser_matcher =~ controller.request.user_agent %>
         <%= render partial: 'unsupported_browser' %>
       <% end %>
-      <%= render partial: 'header', locals: { namespace: active_admin_namespace, menu: current_menu } %>
+      <%= render partial: 'header' %>
       <%= render partial: 'title_bar', locals: { page_title: content_for(:page_title) || @page_title || page_title } %>
       <div class='flashes'>
         <% flash_messages.each do |type, message| %>
