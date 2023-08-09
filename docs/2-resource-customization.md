@@ -173,11 +173,11 @@ the resource from being displayed in the global navigation:
 
 ```ruby
 ActiveAdmin.register Post do
-  menu false
+  config.menu_item_options = false
 end
 ```
 
-The menu method accepts a hash with the following options:
+Menu item options include:
 
 * `:label` - The string or proc label to display in the menu. If it's a proc, it
   will be called each time the menu is rendered.
@@ -192,7 +192,7 @@ To change the name of the label in the menu:
 
 ```ruby
 ActiveAdmin.register Post do
-  menu label: "My Posts"
+  config.menu_item_options = { label: "My Posts" }
 end
 ```
 
@@ -200,7 +200,7 @@ If you want something more dynamic, pass a proc instead:
 
 ```ruby
 ActiveAdmin.register Post do
-  menu label: proc{ I18n.t "mypost" }
+  config.menu_item_options = { label: proc{ I18n.t "mypost" } }
 end
 ```
 
@@ -213,7 +213,7 @@ You can easily customize this:
 
 ```ruby
 ActiveAdmin.register Post do
-  menu priority: 1 # so it's on the very left
+  config.menu_item_options = { priority: 1 } # so it's on the very left
 end
 ```
 
@@ -223,7 +223,7 @@ Menu items can be shown or hidden at runtime using the `:if` option.
 
 ```ruby
 ActiveAdmin.register Post do
-  menu if: proc{ current_user.can_edit_posts? }
+  config.menu_item_options = { if: proc{ current_user.can_edit_posts? } }
 end
 ```
 
@@ -237,7 +237,7 @@ application. In that case, you can group your menu items under a parent menu ite
 
 ```ruby
 ActiveAdmin.register Post do
-  menu parent: "Blog"
+  config.menu_item_options = { parent: "Blog" }
 end
 ```
 
@@ -260,7 +260,7 @@ end
 
 # app/admin/post.rb
 ActiveAdmin.register Post do
-  menu parent: 'Blog'
+  config.menu_item_options = { parent: 'Blog' }
 end
 ```
 
@@ -279,7 +279,7 @@ end
 
 # app/admin/post.rb
 ActiveAdmin.register Post do
-  menu parent: 'blog'
+  config.menu_item_options = { parent: 'blog' }
 end
 ```
 
