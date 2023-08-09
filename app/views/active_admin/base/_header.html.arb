@@ -1,5 +1,5 @@
 div(class: 'header', id: 'header') do
   site_title active_admin_namespace
-  insert_tag ActiveAdmin::Views::Menu, active_admin_config.navigation_menu, id: 'tabs', class: 'header-item tabs'
-  insert_tag ActiveAdmin::Views::Menu, active_admin_namespace.fetch_menu(:utility_navigation), id: 'utility_nav', class: 'header-item tabs'
+  menu(active_admin_config.navigation_menu, id: 'tabs', class: 'header-item tabs')
+  menu(active_admin_namespace.fetch_menu(:utility_navigation), id: 'utility_nav', class: 'header-item tabs')
 end
