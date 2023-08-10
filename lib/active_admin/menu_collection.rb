@@ -7,7 +7,6 @@ module ActiveAdmin
   class MenuCollection
     def initialize
       @menus = {}
-      @build_callbacks = []
     end
 
     # Add a new menu item to a menu in the collection
@@ -32,20 +31,6 @@ module ActiveAdmin
         raise NoMenuError, "No menu by the name of #{menu_name.inspect} in available menus: #{@menus.keys.join(", ")}"
     end
 
-    # Add callbacks that will be run when the menu is going to be built. This
-    # helps use with reloading and allows configurations to add items to menus.
-    #
-    # @param [Proc] block A block which will be ran when the menu is built. The
-    #                   will have the menu collection yielded.
-    def on_build(&block)
-      @build_callbacks << block
-    end
-
-    # Add callbacks that will be run before the menu is built
-    def before_build(&block)
-      @build_callbacks.unshift(block)
-    end
-
     def menu(menu_name)
       menu = find_or_create(menu_name)
 
@@ -62,13 +47,6 @@ module ActiveAdmin
       return if built?
 
       build_default_menu
-      run_on_build_callbacks
-    end
-
-    def run_on_build_callbacks
-      @build_callbacks.each do |callback|
-        callback.call(self)
-      end
     end
 
     def build_default_menu
