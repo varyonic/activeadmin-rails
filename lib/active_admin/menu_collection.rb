@@ -54,8 +54,6 @@ module ActiveAdmin
       menu
     end
 
-    private
-
     def built?
       @menus.present?
     end
@@ -76,6 +74,8 @@ module ActiveAdmin
     def build_default_menu
       find_or_create DEFAULT_MENU
     end
+
+    private
 
     def find_or_create(menu_name)
       menu_name ||= DEFAULT_MENU

@@ -119,6 +119,8 @@ module ActiveAdmin
     end
 
     def fetch_menu(name)
+      build_menus!
+
       @menus.fetch(name)
     end
 
@@ -175,13 +177,19 @@ module ActiveAdmin
 
     def build_menu_collection
       @menus = MenuCollection.new
+    end
 
-      @menus.on_build do
-        build_default_utility_nav
+    def build_menus!
+      return if @menus.built?
 
-        resources.each do |resource|
-          resource.add_to_menu(@menus)
-        end
+      @menus.build_default_menu
+
+      @menus.run_on_build_callbacks
+
+      build_default_utility_nav
+
+      resources.each do |resource|
+        resource.add_to_menu(@menus)
       end
     end
 
