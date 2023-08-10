@@ -8,7 +8,6 @@ module ActiveAdmin
     def initialize
       @menus = {}
       @build_callbacks = []
-      @built = false
     end
 
     # Add a new menu item to a menu in the collection
@@ -20,7 +19,6 @@ module ActiveAdmin
 
     def clear!
       @menus = {}
-      @built = false
     end
 
     def exists?(menu_name)
@@ -59,7 +57,7 @@ module ActiveAdmin
     private
 
     def built?
-      @built
+      @menus.present?
     end
 
     def build_menus!
@@ -67,8 +65,6 @@ module ActiveAdmin
 
       build_default_menu
       run_on_build_callbacks
-
-      @built = true
     end
 
     def run_on_build_callbacks
