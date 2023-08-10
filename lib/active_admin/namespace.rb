@@ -77,6 +77,28 @@ module ActiveAdmin
       config
     end
 
+    # Add or update resource configuration options.
+    #
+    # Assumes corresponding Rails Controller class already exists.
+    # Block is evaluated within config, not parsed as DSL.
+    #
+    # @param [Class] resource_class. ActiveRecord model.
+    #
+    # @return [Resource]
+    def configure_resource(resource_class, options = {}, &block)
+      config = find_or_build_resource(resource_class, options)
+
+      raise "#{config.controller_name} not found" unless Object.const_defined?(config.controller_name)
+      config.controller.active_admin_config = config
+
+      yield(config) if block_given?
+      reset_menu!
+
+      ActiveSupport::Notifications.publish ActiveAdmin::Resource::RegisterEvent, config
+
+      config
+    end
+
     def register_page(name, options = {}, &block)
       config = build_page(name, options)
 
