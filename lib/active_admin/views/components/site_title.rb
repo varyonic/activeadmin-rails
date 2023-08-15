@@ -9,46 +9,20 @@ module ActiveAdmin
 
       def build(namespace)
         super(id: "site_title")
-        @namespace = namespace
-
-        if site_title_link?
-          text_node site_title_with_link
-        else
-          text_node site_title_content
-        end
-      end
-
-      def site_title_link?
-        @namespace.site_title_link.present?
-      end
-
-      def site_title_image
-        @site_title_image ||= @namespace.site_title_image(helpers)
+        text_node site_title_content(namespace)
       end
 
       private
 
-      def site_title_with_link
-        helpers.link_to(site_title_content, @namespace.site_title_link)
+      def site_title_content(namespace)
+        content = namespace.site_title(helpers)
+        image = namespace.site_title_image(helpers)
+        link = namespace.site_title_link
+        
+        content = helpers.image_tag(image, id: "site_title_image", alt: content) if image.present?
+        content = helpers.link_to(content, link) if link.present?
+        content
       end
-
-      def site_title_content
-        if site_title_image.present?
-          title_image
-        else
-          title_text
-        end
-      end
-
-      def title_text
-        @title_text ||= @namespace.site_title(helpers)
-      end
-
-      def title_image
-        helpers.image_tag(site_title_image, id: "site_title_image", alt: title_text)
-      end
-
     end
-
   end
 end
