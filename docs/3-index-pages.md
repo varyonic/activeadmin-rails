@@ -214,22 +214,22 @@ the index table to quickly filter your collection on pre-defined scopes. There
 are a number of ways to define your scopes:
 
 ```ruby
-scope :all, default: true
+config.scope :all, default: true
 
 # assumes the model has a scope called ':active'
-scope :active
+config.scope :active
 
 # renames model scope ':leaves' to ':subcategories'
-scope "Subcategories", :leaves
+config.scope "Subcategories", :leaves
 
 # Dynamic scope name
-scope ->{ Date.today.strftime '%A' }, :published_today
+config.scope ->{ Date.today.strftime '%A' }, :published_today
 
 # custom scope not defined on the model
-scope("Inactive") { |scope| scope.where(active: false) }
+config.scope("Inactive") { |scope| scope.where(active: false) }
 
 # conditionally show a custom controller scope
-scope "Published", if: -> { current_admin_user.can? :manage, Posts } do |posts|
+config.scope "Published", if: -> { current_admin_user.can? :manage, Posts } do |posts|
   posts.published
 end
 ```
@@ -243,15 +243,15 @@ You can assign group names to scopes to keep related scopes together and separat
 
 ```ruby
 # a scope in the default group
-scope :all
+config.scope :all
 
 # two scopes used to filter by status
-scope :active, group: :status
-scope :inactive, group: :status
+config.scope :active, group: :status
+config.scope :inactive, group: :status
 
 # two scopes used to filter by date
-scope :today, group: :date
-scope :tomorrow, group: :date
+config.scope :today, group: :date
+config.scope :tomorrow, group: :date
 ```
 
 ## Index default sort order
