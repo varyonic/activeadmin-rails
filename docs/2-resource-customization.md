@@ -402,7 +402,7 @@ within another, you can use the `belongs_to` method:
 ```ruby
 ActiveAdmin.register Project
 ActiveAdmin.register Ticket do
-  belongs_to :project
+  config.belongs_to :project
 end
 ```
 
@@ -426,11 +426,11 @@ ActiveAdmin.register Project do
 end
 
 ActiveAdmin.register Ticket do
-  belongs_to :project
+  config.belongs_to :project
 end
 
 ActiveAdmin.register Milestone do
-  belongs_to :project
+  config.belongs_to :project
 end
 ```
 
@@ -441,12 +441,12 @@ separate menu which you can use if you so wish. To use:
 
 ```ruby
 ActiveAdmin.register Ticket do
-  belongs_to :project
+  config.belongs_to :project
   navigation_menu :project
 end
 
 ActiveAdmin.register Milestone do
-  belongs_to :project
+  config.belongs_to :project
   navigation_menu :project
 end
 ```
@@ -460,7 +460,7 @@ different menus, say perhaps based on user permissions. For example:
 
 ```ruby
 ActiveAdmin.register Ticket do
-  belongs_to :project
+  config.belongs_to :project
   navigation_menu do
     authorized?(:manage, SomeResource) ? :project : :restricted_menu
   end
@@ -472,7 +472,7 @@ and through non-nested routes, you can use the `:optional` option. For example:
 
 ```ruby
 ActiveAdmin.register Ticket do
-  belongs_to :project, optional: true
+  config.belongs_to :project, optional: true
 end
 ```
 

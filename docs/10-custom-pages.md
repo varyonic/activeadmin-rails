@@ -74,7 +74,7 @@ To nest the page within another resource, you can use the `belongs_to` method:
 ```ruby
 ActiveAdmin.register Project
 ActiveAdmin.register_page "Status" do
-  belongs_to :project
+  config.belongs_to :project
 end
 ```
 
