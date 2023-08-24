@@ -35,7 +35,7 @@ end
 
 # app/admin/post.rb
 ActiveAdmin.register Post do
-  decorate_with PostDecorator
+  config.decorator_class_name = "PostDecorator"
 end
 
 # /app/views/admin/posts/_index_as_table.html.arb
@@ -54,7 +54,7 @@ form page presenter.
 
 ```ruby
 ActiveAdmin.register Post do
-  decorate_with PostDecorator
+  config.decorator_class_name = "PostDecorator"
 
   form decorate: true
 end
