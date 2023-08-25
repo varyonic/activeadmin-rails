@@ -6,18 +6,13 @@ module ActiveAdmin
       # Set the menu options.
       # To disable this menu item, call `menu(false)` from the DSL
       def menu_item_options=(options)
-        if options == false
-          @include_in_menu   = false
-          @menu_item_options = {}
-        else
-          @include_in_menu = true
-          @navigation_menu_name = options[:menu_name]
-          @menu_item_options    = default_menu_options.merge options
-        end
+        @menu_item_options = options
+        @navigation_menu_name = options[:menu_name] if options
       end
 
       def menu_item_options
-        @menu_item_options ||= default_menu_options
+        @menu_item_options ||= {}
+        @menu_item_options.reverse_merge(default_menu_options)
       end
 
       def default_menu_options
@@ -49,6 +44,7 @@ module ActiveAdmin
         namespace.fetch_menu(navigation_menu_name)
       end
 
+      # Invoked by namespace when menu is about to be rendered.
       def add_to_menu(menu_collection)
         if include_in_menu?
           @menu_item = menu_collection.add navigation_menu_name, menu_item_options
@@ -59,7 +55,7 @@ module ActiveAdmin
 
       # Should this resource be added to the menu system?
       def include_in_menu?
-        @include_in_menu != false
+        @menu_item_options != false
       end
 
     end
