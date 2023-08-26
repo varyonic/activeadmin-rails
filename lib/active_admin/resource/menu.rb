@@ -7,7 +7,6 @@ module ActiveAdmin
       # To disable this menu item, call `menu(false)` from the DSL
       def menu_item_options=(options)
         @menu_item_options = options
-        @navigation_menu_name = options[:menu_name] if options
       end
 
       def menu_item_options
@@ -32,11 +31,14 @@ module ActiveAdmin
       end
 
       def navigation_menu_name
-        case @navigation_menu_name ||= DEFAULT_MENU
+        navigation_menu_name = @menu_item_options[:menu_name] if @menu_item_options
+        navigation_menu_name ||= DEFAULT_MENU
+
+        case navigation_menu_name
         when Proc
-          controller.instance_exec(&@navigation_menu_name).to_sym
+          controller.instance_exec(&navigation_menu_name).to_sym
         else
-          @navigation_menu_name
+          navigation_menu_name
         end
       end
 
