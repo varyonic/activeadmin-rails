@@ -1,6 +1,5 @@
 module ActiveAdmin
   class MenuItem
-    include Menu::MenuNode
 
     attr_reader :html_options, :parent, :priority
 
@@ -57,7 +56,7 @@ module ActiveAdmin
     end
 
     def id
-      @id ||= normalize_id @dirty_id
+      @id ||= Menu.normalize_id @dirty_id
     end
 
     attr_reader :label
@@ -65,5 +64,16 @@ module ActiveAdmin
 
     # Don't display if the :if option passed says so
     attr_reader :should_display
+
+    # Used in the UI to visually distinguish which menu item is selected.
+    def current?(item)
+      self == item || submenu.include?(item)
+    end
+
+    delegate :add, :children, :items, :[], to: :submenu
+
+    def submenu
+      @menu ||= Menu.new(self)
+    end
   end
 end

@@ -14,89 +14,93 @@ module ActiveAdmin
   #
   class Menu
 
-    def initialize
-      super # MenuNode
+    def initialize(parent = nil)
+      @parent_item = parent
+      @children = {}
       yield(self) if block_given?
     end
 
-    module MenuNode
-      def initialize
-        @children = {}
+    attr_reader :parent_item
+
+    def [](id)
+      @children[self.class.normalize_id(id)]
+    end
+
+    def []=(id, child)
+      @children[self.class.normalize_id(id)] = child
+    end
+
+    # Recursively builds any given menu items. There are two syntaxes supported,
+    # as shown in the below examples. Both create an identical menu structure.
+    #
+    # Example 1:
+    #   menu = Menu.new
+    #   menu.add label: 'Dashboard' do |dash|
+    #     dash.add label: 'My Child Dashboard'
+    #   end
+    #
+    # Example 2:
+    #   menu = Menu.new
+    #   menu.add label:  'Dashboard'
+    #   menu.add parent: 'Dashboard', label: 'My Child Dashboard'
+    #
+    def add(options, &block)
+      parent_id = options.delete(:parent)
+
+      if parent_id
+        parent_item = find_or_add_parent_item(parent_id)
+        item = parent_item.add(options)
+      else
+        item = new_item(options)
       end
 
-      def [](id)
-        @children[normalize_id(id)]
-      end
+      yield(item) if block_given?
 
-      def []=(id, child)
-        @children[normalize_id(id)] = child
-      end
+      item
+    end
 
-      # Recursively builds any given menu items. There are two syntaxes supported,
-      # as shown in the below examples. Both create an identical menu structure.
-      #
-      # Example 1:
-      #   menu = Menu.new
-      #   menu.add label: 'Dashboard' do |dash|
-      #     dash.add label: 'My Child Dashboard'
-      #   end
-      #
-      # Example 2:
-      #   menu = Menu.new
-      #   menu.add label:  'Dashboard'
-      #   menu.add parent: 'Dashboard', label: 'My Child Dashboard'
-      #
-      def add(options)
-        item = if parent = options.delete(:parent)
-                 (self[parent] || add(label: parent)).add options
-               else
-                 _add options.merge parent: self
-               end
+    # Whether any children match the given item.
+    def include?(item)
+      @children.values.include? item
+    end
 
-        yield(item) if block_given?
+    # Used in the UI to visually distinguish which menu item is selected.
+    def current?(item)
+      self == item || include?(item)
+    end
 
-        item
-      end
+    def items
+      @children.values
+    end
 
-      # Whether any children match the given item.
-      def include?(item)
-        @children.values.include? item
-      end
+    attr_reader :children
+    protected
+    attr_writer :children
 
-      # Used in the UI to visually distinguish which menu item is selected.
-      def current?(item)
-        self == item || include?(item)
-      end
-
-      def items
-        @children.values
-      end
-
-      attr_reader :children
-      private
-      attr_writer :children
-
-      # The method that actually adds new menu items. Called by the public method.
-      # If this ID is already taken, transfer the children of the existing item to the new item.
-      def _add(options)
-        item = ActiveAdmin::MenuItem.new(options)
-        item.send :children=, self[item.id].children if self[item.id]
-        self[item.id] = item
-      end
-
-      def normalize_id(id)
-        case id
-        when String, Symbol, ActiveModel::Name
-          id.to_s.downcase.tr ' ', '_'
-        when ActiveAdmin::Resource::Name
-          id.param_key
-        else
-          raise TypeError, "#{id.class} isn't supported as a Menu ID"
-        end
+    # The method that actually adds new menu items. Called by the public method.
+    # If this ID is already taken, transfer the children of the existing item to the new item.
+    def new_item(options)
+      ActiveAdmin::MenuItem.new(options.merge parent: parent_item).tap do |item|
+        item.submenu.children = children[item.id].children if children[item.id]
+        children[item.id] = item
       end
     end
 
-    include MenuNode
+    def self.normalize_id(id)
+      case id
+      when String, Symbol, ActiveModel::Name
+        id.to_s.downcase.tr ' ', '_'
+      when ActiveAdmin::Resource::Name
+        id.param_key
+      else
+        raise TypeError, "#{id.class} isn't supported as a Menu ID"
+      end
+    end
+
+    # fetch parent or add if not present
+    def find_or_add_parent_item(parent_id)
+      self[parent_id] || add(label: parent_id)
+    end
 
   end
 end
