@@ -12,6 +12,14 @@ module ActiveAdmin
         @page_presenters ||= {}
       end
 
+      # Sets page options for a given action
+      #
+      # @param [String, Symbol] action The action to store this configuration for
+      def set_page_options(action, options)
+        options[:as] ||= :table if action.to_sym == :index
+        set_page_presenter(action, PagePresenter.new(options))
+      end
+
       # Sets a page config for a given action
       #
       # @param [String, Symbol] action The action to store this configuration for
