@@ -119,6 +119,8 @@ module ActiveAdmin
     end
 
     def fetch_menu(name)
+      build_menus!
+
       @menus.fetch(name)
     end
 
@@ -132,12 +134,8 @@ module ActiveAdmin
     # @yield [ActiveAdmin::Menu] The block to be ran when the menu is built
     #
     # @return [void]
-    def build_menu(name = DEFAULT_MENU)
-      @menus.before_build do |menus|
-        menus.menu name do |menu|
-          yield menu
-        end
-      end
+    def build_menu(name = DEFAULT_MENU, &block)
+      extra_menus[name] = block
     end
 
     # The default logout menu item
@@ -175,13 +173,25 @@ module ActiveAdmin
 
     def build_menu_collection
       @menus = MenuCollection.new
+    end
 
-      @menus.on_build do
-        build_default_utility_nav
+    def extra_menus
+      @extra_menus ||= {}
+    end
 
-        resources.each do |resource|
-          resource.add_to_menu(@menus)
-        end
+    def build_menus!
+      return if @menus.built?
+
+      @menus.build_default_menu
+
+      extra_menus.each_pair do |key, block|
+        @menus.menu(key, &block)
+      end
+
+      build_default_utility_nav
+
+      resources.each do |resource|
+        resource.add_to_menu(@menus)
       end
     end
 
