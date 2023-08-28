@@ -217,8 +217,8 @@ Assuming you're on the Books index page, and Book has_one Publisher:
 
 ```ruby
 Admin::PostsController < ActiveAdmin::ResourceController
-  def scoped_collection
-    super.includes :publisher # prevents N+1 queries to your database
+  def apply_includes(collection)
+    collection.includes :publisher # prevents N+1 queries to your database
   end
 end
 ```

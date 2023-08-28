@@ -346,8 +346,10 @@ A common way to increase page performance is to eliminate N+1 queries by eager
 loading associations:
 
 ```ruby
-ActiveAdmin.register Post do
-  includes :author, :categories
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def apply_includes(collection)
+    collection.includes :author, :categories
+  end
 end
 ```
 
