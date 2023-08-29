@@ -66,17 +66,29 @@ module ActiveAdmin
 
     # Configure the index page for the resource
     def index(options = {}, &block)
-      options[:as] ||= :table
-      config.set_page_presenter :index, ActiveAdmin::PagePresenter.new(options, &block)
+      if block_given?
+        options[:as] ||= :table
+        config.set_page_presenter :index, ActiveAdmin::PagePresenter.new(options, &block)
+      else
+        config.set_page_options :index, options
+      end
     end
 
     # Configure the show page for the resource
     def show(options = {}, &block)
-      config.set_page_presenter :show, ActiveAdmin::PagePresenter.new(options, &block)
+      if block_given?
+        config.set_page_presenter :show, ActiveAdmin::PagePresenter.new(options, &block)
+      else
+        config.set_page_options :show, options
+      end
     end
 
     def form(options = {}, &block)
-      config.set_page_presenter :form, ActiveAdmin::PagePresenter.new(options, &block)
+      if block_given?
+        config.set_page_presenter :form, ActiveAdmin::PagePresenter.new(options, &block)
+      else
+        config.set_page_options :form, options
+      end
     end
 
     # Configure the CSV format

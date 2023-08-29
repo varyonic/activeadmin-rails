@@ -15,7 +15,11 @@ module ActiveAdmin
     #   end
     #
     def content(options = {}, &block)
-      config.set_page_presenter :index, ActiveAdmin::PagePresenter.new(options, &block)
+      if block_given?
+        config.set_page_presenter :index, ActiveAdmin::PagePresenter.new(options, &block)
+      else
+        config.set_page_options :index, options
+      end
     end
 
     def page_action(name, options = {}, &block)
