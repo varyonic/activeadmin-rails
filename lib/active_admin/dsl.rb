@@ -160,7 +160,11 @@ module ActiveAdmin
     end
 
     def sidebar(name, options = {}, &block)
-      config.sidebar_sections << ActiveAdmin::SidebarSection.new(name, options, &block)
+      if block_given?
+        config.sidebar_sections << ActiveAdmin::SidebarSection.new(name, options, &block)
+      else
+        config.add_sidebar_section(name, options)
+      end
     end
 
   end

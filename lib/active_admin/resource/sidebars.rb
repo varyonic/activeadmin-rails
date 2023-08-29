@@ -5,6 +5,10 @@ module ActiveAdmin
   class Resource
     module Sidebars
 
+      def add_sidebar_section(name, options)
+        sidebar_sections << SidebarSection.new(name, options)
+      end
+
       def sidebar_sections
         @sidebar_sections ||= []
       end
