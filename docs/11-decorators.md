@@ -56,7 +56,7 @@ form page presenter.
 ActiveAdmin.register Post do
   config.decorator_class_name = "PostDecorator"
 
-  form decorate: true
+  config.set_page_options :form, decorate: true
 end
 
 # app/views/admin/posts/_form.html.arb

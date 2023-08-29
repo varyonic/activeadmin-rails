@@ -313,7 +313,7 @@ queries caused by the pagination info at the bottom of the page:
 
 ```ruby
 ActiveAdmin.register Post do
-  index pagination_total: false
+  config.set_page_options :index, pagination_total: false
 end
 ```
 
@@ -325,9 +325,9 @@ You can easily remove or customize the download links you want displayed:
 # Per resource:
 ActiveAdmin.register Post do
 
-  index download_links: false
-  index download_links: [:pdf]
-  index download_links: proc{ current_user.can_view_download_links? }
+  config.set_page_options :index, download_links: false
+  config.set_page_options :index, download_links: [:pdf]
+  config.set_page_options :index, download_links: proc{ current_user.can_view_download_links? }
 
 end
 
