@@ -129,35 +129,24 @@ module ActiveAdmin
     # You can treat everything within the block as a standard Rails controller
     # action.
     #
-    def action(set, name, options = {}, &block)
-      set << ControllerAction.new(name, options)
-      title = options.delete(:title)
-
-      if title
-        controller do
-          before_action(only: [name]) { @page_title = title }
-        end
-      end
-  
-      if block_given?
-        warn "Warning: method `#{name}` already defined in #{controller.name}" if controller.method_defined?(name)
-
-        controller do
-          define_method(name, &block)
-        end
-      elsif !controller.method_defined?(name)
-        controller do
-          define_method(name, Proc.new{})
-        end
-      end
-    end
-
     def member_action(name, options = {}, &block)
-      action config.member_actions, name, options, &block
+      if (title = options.delete(:title))
+        set_title_before_action(name, title)
+      end
+
+      define_controller_method(name, &block)
+
+      config.member_actions << ControllerAction.new(name, options)
     end
 
     def collection_action(name, options = {}, &block)
-      action config.collection_actions, name, options, &block
+      if (title = options.delete(:title))
+        set_title_before_action(name, title)
+      end
+
+      define_controller_method(name, &block)
+
+      config.collection_actions << ControllerAction.new(name, options)
     end
 
     def decorate_with(decorator_class)

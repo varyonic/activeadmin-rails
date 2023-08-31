@@ -167,5 +167,27 @@ module ActiveAdmin
       end
     end
 
+    protected
+
+    def set_title_before_action(name, title)
+      controller do
+        before_action(only: [name]) { @page_title = title }
+      end
+    end
+
+    def define_controller_method(name, &block)
+      if block_given?
+        warn "Warning: method `#{name}` already defined in #{controller.name}" if controller.method_defined?(name)
+
+        controller do
+          define_method(name, &block)
+        end
+      elsif !controller.method_defined?(name)
+        controller do
+          define_method(name, Proc.new{})
+        end
+      end
+    end
+
   end
 end
