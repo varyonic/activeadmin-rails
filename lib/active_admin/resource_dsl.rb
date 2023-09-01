@@ -136,7 +136,7 @@ module ActiveAdmin
 
       define_controller_method(name, &block)
 
-      config.member_actions << ControllerAction.new(name, options)
+      config.add_member_route(name, options)
     end
 
     def collection_action(name, options = {}, &block)
@@ -146,7 +146,7 @@ module ActiveAdmin
 
       define_controller_method(name, &block)
 
-      config.collection_actions << ControllerAction.new(name, options)
+      config.add_collection_route(name, options)
     end
 
     def decorate_with(decorator_class)

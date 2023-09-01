@@ -17,6 +17,9 @@ module ActiveAdmin
 
     # An array of custom actions defined for this page
     attr_reader :page_actions
+    def add_page_route(name, options)
+      page_actions << ControllerAction.new(name, options)
+    end
 
     # Set breadcrumb builder
     attr_accessor :breadcrumb

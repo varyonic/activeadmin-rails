@@ -23,9 +23,9 @@ module ActiveAdmin
     end
 
     def page_action(name, options = {}, &block)
-      config.page_actions << ControllerAction.new(name, options)
-
       define_controller_method(name, &block)
+
+      config.add_page_route(name, options)
     end
 
     def belongs_to(target, options = {})
