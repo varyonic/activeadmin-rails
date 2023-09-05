@@ -12,21 +12,40 @@ jobs:
     timeout-minutes: 15
 
     strategy:
-      fail-fast: false
-
       matrix:
-        ruby: [{ name: 3.1, value: 3.1.2 }, { name: 2.7, value: 2.7.2 }]
-
-        os: [ubuntu-22.04]
-
-        deps: [rails_70, rails_70_hotwire, rails_61, rails_61_turbolinks]
+        include:
+          - ruby: { name: 3.2, value: 3.2.2 }
+            deps: rails_70
+            os: ubuntu-22.04
+          - ruby: { name: 3.2, value: 3.2.2 }
+            deps: rails_70_hotwire
+            os: ubuntu-22.04
+          - ruby: { name: 3.0, value: 3.0.1 }
+            deps: rails_70
+            os: ubuntu-22.04
+          - ruby: { name: 3.0, value: 3.0.1 }
+            deps: rails_70_hotwire
+            os: ubuntu-22.04
+          - ruby: { name: 3.1, value: 3.1.2 }
+            deps: rails_61
+            os: ubuntu-22.04
+          - ruby: { name: 3.1, value: 3.1.2 }
+            deps: rails_61_turbolinks
+            os: ubuntu-22.04
+          - ruby: { name: 3.0, value: 3.0.1 }
+            deps: rails_61
+            os: ubuntu-22.04
+          - ruby: { name: 3.0, value: 3.0.1 }
+            deps: rails_61_turbolinks
+            os: ubuntu-22.04
+      fail-fast: false
 
     env:
       COVERAGE: false
       SUPPRESS_JASMINE_DEPRECATION: true
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Configure bundler
         run: |
