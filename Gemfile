@@ -23,8 +23,8 @@ gem 'i18n-tasks'
 
 # Documentation
 gem 'yard'                        # Documentation generator
-gem 'redcarpet', platforms: :mri  # Markdown implementation (for yard)
-gem 'kramdown', platforms: :jruby # Markdown implementation (for yard)
+gem 'kramdown'                    # Markdown implementation (for yard)
+gem 'rexml'
 
 group :development, :test do
   # Debugging
