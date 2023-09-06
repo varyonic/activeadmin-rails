@@ -103,17 +103,24 @@ Page actions are custom controller actions (which mirror the resource DSL for
 the same feature).
 
 ```ruby
-page_action :add_event, method: :post do
-  # ...
-  redirect_to admin_calendar_path, notice: "Your event was added"
+# admin/calendar.rb
+# Defines the route `/admin/calendar/add_event` which can handle HTTP POST requests.
+config.add_page_route :add_event, method: :post
+
+# app/controllers/admin/calendar_controller
+class Admin::CalendarController < ActiveAdmin::PageController
+  def add_event
+    # ...
+    redirect_to admin_calendar_path, notice: "Your event was added"
+  end
 end
 
-action_item :add do
-  link_to "Add Event", admin_calendar_add_event_path, method: :post
+# app/views/admin/calendar/action_item.html.arb
+div(class: :action_items) do
+  ...
+  action_link "Add Event", admin_calendar_add_event_path, method: :post
 end
 ```
-
-This defines the route `/admin/calendar/add_event` which can handle HTTP POST requests.
 
 Clicking on the action item will reload page and display the message "Your event
 was added"
@@ -121,7 +128,7 @@ was added"
 Page actions can handle multiple HTTP verbs.
 
 ```ruby
-page_action :add_event, method: [:get, :post] do
+config.add_page_route :add_event, method: [:get, :post] do
   # ...
 end
 ```
