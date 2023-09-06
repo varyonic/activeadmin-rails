@@ -36,9 +36,15 @@ module ActiveAdmin
 
     # An array of member actions defined for this resource
     attr_reader :member_actions
+    def add_member_route(name, options)
+      member_actions << ControllerAction.new(name, options)
+    end
 
     # An array of collection actions defined for this resource
     attr_reader :collection_actions
+    def add_collection_route(name, options)
+      collection_actions << ControllerAction.new(name, options)
+    end
 
     # The default sort order to use in the controller
     attr_writer :sort_order

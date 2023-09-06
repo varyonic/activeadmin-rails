@@ -23,17 +23,9 @@ module ActiveAdmin
     end
 
     def page_action(name, options = {}, &block)
-      config.page_actions << ControllerAction.new(name, options)
+      define_controller_method(name, &block)
 
-      if block_given?
-        controller do
-          define_method(name, &block)
-        end
-      elsif !controller.method_defined?(name)
-        controller do
-          define_method(name, Proc.new{})
-        end
-      end
+      config.add_page_route(name, options)
     end
 
     def belongs_to(target, options = {})
