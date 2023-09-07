@@ -15,6 +15,9 @@ module ActiveAdmin
         end
       end
 
+      GUID_REGEX = '(?:[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12})'
+      ID_REGEX = '\d+|[a-f0-9]{24}|' + GUID_REGEX
+
       def default_breadcrumb_links(path)
         # remove leading "/" and split up the URL
         # and remove last since it's used as the page title
@@ -24,7 +27,7 @@ module ActiveAdmin
           # 1. try using `display_name` if we can locate a DB object
           # 2. try using the model name translation
           # 3. default to calling `titlecase` on the URL fragment
-          if part =~ /\A(\d+|[a-f0-9]{24}|(?:[a-f0-9]{8}-(?:[a-f0-9]{4}-){3}[a-f0-9]{12}))\z/ && parts[index-1]
+          if part =~ /\A(#{ID_REGEX})\z/ && parts[index-1]
             parent = active_admin_config.belongs_to_config.try :target
             config = parent && parent.resource_name.route_key == parts[index-1] ? parent : active_admin_config
             name   = display_name config.find_resource part
