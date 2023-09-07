@@ -24,14 +24,12 @@ module ActiveAdmin
         parts = path.split('/').select(&:present?)[0..-2]
 
         parts.each_with_index.map do |part, index|
+          config = breadcrumb_part_config(parts[index-1]) if part.match?(/\A(#{ID_REGEX})\z/)
+
           # 1. try using `display_name` if we can locate a DB object
           # 2. try using the model name translation
           # 3. default to calling `titlecase` on the URL fragment
-          if part =~ /\A(#{ID_REGEX})\z/ && parts[index-1]
-            parent = active_admin_config.belongs_to_config.try :target
-            config = parent && parent.resource_name.route_key == parts[index-1] ? parent : active_admin_config
-            name   = display_name config.find_resource part
-          end
+          name = config && display_name(config.find_resource part)
           name ||= I18n.t "activerecord.models.#{part.singularize}", count: ::ActiveAdmin::Helpers::I18n::PLURAL_MANY_COUNT, default: part.titlecase
 
           # Don't create a link if the resource's show action is disabled
@@ -41,6 +39,12 @@ module ActiveAdmin
             name
           end
         end
+      end
+
+      def breadcrumb_part_config(parent_part)
+        config = active_admin_config
+        parent = config.belongs_to_config.try :target
+        parent && parent.resource_name.route_key == parent_part ? parent :  config
       end
 
     end
