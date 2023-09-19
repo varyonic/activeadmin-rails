@@ -110,6 +110,26 @@ module ActiveAdmin
       config
     end
 
+    # Add page configuration options.
+    #
+    # Assumes corresponding Rails Controller class already exists.
+    # Block is evaluated within config, not parsed as DSL.
+    #
+    # @param [String] name.
+    #
+    # @return [Resource]
+    def configure_page(name, options = {}, &block)
+      config = build_page(name, options)
+
+      raise "#{config.controller_name} not found" unless Object.const_defined?(config.controller_name)
+      config.controller.active_admin_config = config
+
+      yield(config) if block_given?
+      reset_menu!
+
+      config
+    end
+
     def root?
       name == :root
     end
