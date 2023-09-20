@@ -20,7 +20,7 @@ attributes_table do
     image_tag ad.image.url
   end
 end
-active_admin_comments
+active_admin_comments_for(resource)
 ```
 
 A more generic partial might look like:
@@ -42,7 +42,7 @@ panel "Table of Contents" do
     column :page
   end
 end
-active_admin_comments
+active_admin_comments_for(resource)
 ```
 
 and
