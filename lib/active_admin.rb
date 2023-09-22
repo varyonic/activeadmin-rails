@@ -72,6 +72,8 @@ module ActiveAdmin
       application.prepare!
     end
 
+    delegate :configure_resource, to: :application
+    delegate :configure_page,     to: :application
     delegate :register,      to: :application
     delegate :register_page, to: :application
     delegate :unload!,       to: :application

@@ -65,6 +65,11 @@ module ActiveAdmin
       attach_reloader
     end
 
+    def configure_resource(resource, options = {}, &block)
+      ns = options.fetch(:namespace){ default_namespace }
+      namespace(ns).configure_resource resource, options, &block
+    end
+
     # Registers a brand new configuration for the given resource.
     def register(resource, options = {}, &block)
       ns = options.fetch(:namespace){ default_namespace }
@@ -88,6 +93,11 @@ module ActiveAdmin
       yield(namespace) if block_given?
 
       namespace
+    end
+
+    def configure_page(name, options = {}, &block)
+      ns = options.fetch(:namespace){ default_namespace }
+      namespace(ns).configure_page name, options, &block
     end
 
     # Register a page
