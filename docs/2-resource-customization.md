@@ -16,7 +16,7 @@ The basic command for creating a resource is `rails g active_admin:resource Post
 The generator will produce an empty `app/admin/posts.rb` file like so:
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   # ...
 end
 ```
@@ -148,7 +148,7 @@ interface will use the name of the class. You can rename the resource by using
 the `:as` option.
 
 ```ruby
-ActiveAdmin.register Post, as: "Article"
+ActiveAdmin.configure_resource Post, as: "Article"
 ```
 
 The resource will then be available at `/admin/articles`.
@@ -160,10 +160,10 @@ We use the `admin` namespace by default, but you can use anything:
 
 ```ruby
 # Available at /today/posts
-ActiveAdmin.register Post, namespace: :today
+ActiveAdmin.configure_resource Post, namespace: :today
 
 # Available at /posts
-ActiveAdmin.register Post, namespace: false
+ActiveAdmin.configure_resource Post, namespace: false
 ```
 
 ## Customize the Menu
@@ -172,7 +172,7 @@ The resource will be displayed in the global navigation by default. To disable
 the resource from being displayed in the global navigation:
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.menu_item_options = false
 end
 ```
@@ -191,7 +191,7 @@ Menu item options include:
 To change the name of the label in the menu:
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.menu_item_options = { label: "My Posts" }
 end
 ```
@@ -199,7 +199,7 @@ end
 If you want something more dynamic, pass a proc instead:
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.menu_item_options = { label: proc{ I18n.t "mypost" } }
 end
 ```
@@ -212,7 +212,7 @@ every menu by default has a priority of `10`, the menu is normally alphabetical.
 You can easily customize this:
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.menu_item_options = { priority: 1 } # so it's on the very left
 end
 ```
@@ -222,7 +222,7 @@ end
 Menu items can be shown or hidden at runtime using the `:if` option.
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.menu_item_options = { if: proc{ current_user.can_edit_posts? } }
 end
 ```
@@ -236,7 +236,7 @@ In many cases, a single level navigation will not be enough to manage a large
 application. In that case, you can group your menu items under a parent menu item.
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.menu_item_options = { parent: "Blog" }
 end
 ```
@@ -259,7 +259,7 @@ config.namespace :admin do |admin|
 end
 
 # app/admin/post.rb
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.menu_item_options = { parent: 'Blog' }
 end
 ```
@@ -278,7 +278,7 @@ config.namespace :admin do |admin|
 end
 
 # app/admin/post.rb
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.menu_item_options = { parent: 'blog' }
 end
 ```
@@ -318,7 +318,7 @@ scope what they have access to. Assuming your User model has the proper
 has_many relationships, you can simply scope the listings and finders like so:
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.scope_to :current_user # limits the accessible posts to `current_user.posts`
 
   # Or if the association doesn't have the default name:
@@ -334,7 +334,7 @@ end
 You can also conditionally apply the scope:
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.scope_to :current_user, if:     proc{ current_user.limited_access? }
   config.scope_to :current_user, unless: proc{ current_user.admin? }
 end
@@ -402,8 +402,8 @@ example a Project may have many Milestones and Tickets. To nest the resource
 within another, you can use the `belongs_to` method:
 
 ```ruby
-ActiveAdmin.register Project
-ActiveAdmin.register Ticket do
+ActiveAdmin.configure_resource Project
+ActiveAdmin.configure_resource Ticket do |config|
   config.belongs_to :project
 end
 ```
@@ -427,11 +427,11 @@ ActiveAdmin.register Project do
   end
 end
 
-ActiveAdmin.register Ticket do
+ActiveAdmin.configure_resource Ticket do |config|
   config.belongs_to :project
 end
 
-ActiveAdmin.register Milestone do
+ActiveAdmin.configure_resource Milestone do |config|
   config.belongs_to :project
 end
 ```
@@ -442,14 +442,14 @@ project. To accomplish this, Active Admin stores the `belongs_to` resources in a
 separate menu which you can use if you so wish. To use:
 
 ```ruby
-ActiveAdmin.register Ticket do
+ActiveAdmin.configure_resource Ticket do |config|
   config.belongs_to :project
-  navigation_menu :project
+  config.navigation_menu_name = :project
 end
 
-ActiveAdmin.register Milestone do
+ActiveAdmin.configure_resource Milestone do |config|
   config.belongs_to :project
-  navigation_menu :project
+  config.navigation_menu_name = :project
 end
 ```
 
@@ -461,11 +461,9 @@ You can also defer the menu lookup until runtime so that you can dynamically sho
 different menus, say perhaps based on user permissions. For example:
 
 ```ruby
-ActiveAdmin.register Ticket do
+ActiveAdmin.configure_resource Ticket do |config|
   config.belongs_to :project
-  navigation_menu do
-    authorized?(:manage, SomeResource) ? :project : :restricted_menu
-  end
+  config.navigation_menu_name = -> { authorized?(:manage, SomeResource) ? :project : :restricted_menu }
 end
 ```
 
@@ -473,7 +471,7 @@ If you still want your `belongs_to` resources to be available in the default men
 and through non-nested routes, you can use the `:optional` option. For example:
 
 ```ruby
-ActiveAdmin.register Ticket do
+ActiveAdmin.configure_resource Ticket do |config|
   config.belongs_to :project, optional: true
 end
 ```

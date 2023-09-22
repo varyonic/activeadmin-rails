@@ -34,7 +34,7 @@ class PostDecorator < Draper::Decorator
 end
 
 # app/admin/post.rb
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.decorator_class_name = "PostDecorator"
 end
 
@@ -53,7 +53,7 @@ If you need ActiveAdmin to decorate the forms, you can pass `decorate: true` to 
 form page presenter.
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.decorator_class_name = "PostDecorator"
 
   config.set_page_options :form, decorate: true

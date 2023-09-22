@@ -82,7 +82,7 @@ The default namespace is "admin".
 
 ```ruby
 # app/admin/posts.rb
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   # ...
 end
 ```
@@ -142,7 +142,7 @@ ActiveAdmin.setup do |config|
 end
 
 # For a given resource:
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.comments = false
 end
 ```

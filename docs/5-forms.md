@@ -224,7 +224,7 @@ end
 or for the particular resource:
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.create_another = true
 end
 ```

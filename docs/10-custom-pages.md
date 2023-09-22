@@ -72,7 +72,7 @@ ActiveAdmin.register_page "Calendar", namespace: false
 To nest the page within another resource, you can use the `belongs_to` method:
 
 ```ruby
-ActiveAdmin.register Project
+ActiveAdmin.configure_resource Project
 ActiveAdmin.register_page "Status" do
   config.belongs_to :project
 end

@@ -170,7 +170,7 @@ application.
 To disable for a specific resource:
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.filters = false
 end
 ```
@@ -259,7 +259,7 @@ config.scope :tomorrow, group: :date
 You can define the default sort order for index pages:
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.sort_order = 'name_asc'
 end
 ```
@@ -277,7 +277,7 @@ end
 You can set the number of records per page per resources:
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.per_page = 10
 end
 ```
@@ -285,7 +285,7 @@ end
 Or allow users to choose themselves using dropdown with values
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.per_page = [10, 50, 100]
 end
 ```
@@ -303,7 +303,7 @@ end
 You can also disable pagination:
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.paginate = false
 end
 ```
@@ -312,7 +312,7 @@ If you have a very large database, you might want to disable `SELECT COUNT(*)`
 queries caused by the pagination info at the bottom of the page:
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.set_page_options :index, pagination_total: false
 end
 ```
@@ -323,7 +323,7 @@ You can easily remove or customize the download links you want displayed:
 
 ```ruby
 # Per resource:
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
 
   config.set_page_options :index, download_links: false
   config.set_page_options :index, download_links: [:pdf]
