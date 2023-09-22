@@ -133,10 +133,8 @@ See also the [Custom Actions](8-custom-actions.md#http-verbs) example.
 You can use custom parameter instead of id
 
 ```ruby
-ActiveAdmin.register User do
-  controller do
-    defaults :finder => :find_by_name
-  end
+class Admin::User < ActiveAdmin::ResourceController
+  defaults finder: :find_by_name
 end
 ```
 
