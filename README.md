@@ -63,13 +63,13 @@ Tool                  | Description
 [actions]: https://github.com/varyonic/activeadmin/actions
 [codeclimate_badge]: https://api.codeclimate.com/v1/badges/1698787497cc7d4c7c88/maintainability
 [codeclimate]: https://codeclimate.com/github/varyonic/activeadmin/maintainability
-[codecov_badge]: https://codecov.io/gh/varyonic/activeadmin/branch/master/graph/badge.svg
+[codecov_badge]: https://codecov.io/gh/varyonic/activeadmin/branch/main/graph/badge.svg
 [codecov]: https://codecov.io/gh/varyonic/activeadmin
-[inch_badge]: http://inch-ci.org/github/varyonic/activeadmin.svg?branch=master
+[inch_badge]: http://inch-ci.org/github/varyonic/activeadmin.svg?branch=main
 [inch]: http://inch-ci.org/github/varyonic/activeadmin
 
 [docs]: http://activeadmin.info/0-installation.html
 [demo]: http://demo.activeadmin.info/admin
 [wiki]: https://github.com/varyonic/activeadmin/wiki
 [stackoverflow]: http://stackoverflow.com/questions/tagged/activeadmin
-[contributing]: https://github.com/varyonic/activeadmin/blob/master/CONTRIBUTING.md
+[contributing]: https://github.com/varyonic/activeadmin/blob/main/CONTRIBUTING.md

@@ -68,7 +68,7 @@ rm -rf spec/rails && bundle update
   Simply copy the content of the appropriate template into a .rb file, make the
   necessary changes to demonstrate the issue, and **paste the content into the
   issue description**:
-  * [**ActiveAdmin** master issues][master template]
+  * [**ActiveAdmin** main issues][main template]
 
 ### 5. Implement your fix or feature
 
@@ -117,20 +117,20 @@ it locally using [Codeclimate's CLI][codeclimate cli], via `codeclimate analyze`
 
 ### 8. Make a Pull Request
 
-At this point, you should switch back to your master branch and make sure it's
-up to date with Active Admin's master branch:
+At this point, you should switch back to your main branch and make sure it's
+up to date with Active Admin's main branch:
 
 ```sh
 git remote add upstream git@github.com:activeadmin/activeadmin.git
-git checkout master
-git pull upstream master
+git checkout main
+git pull upstream main
 ```
 
-Then update your feature branch from your local copy of master, and push it!
+Then update your feature branch from your local copy of main, and push it!
 
 ```sh
 git checkout 325-add-japanese-translations
-git rebase master
+git rebase main
 git push --set-upstream origin 325-add-japanese-translations
 ```
 
@@ -153,19 +153,19 @@ To learn more about rebasing in Git, there are a lot of [good][git rebasing]
 
 ```sh
 git checkout 325-add-japanese-translations
-git pull --rebase upstream master
+git pull --rebase upstream main
 git push --force-with-lease 325-add-japanese-translations
 ```
 
 ### 10. Merging a PR (maintainers only)
 
-A PR can only be merged into master by a maintainer if:
+A PR can only be merged into main by a maintainer if:
 
 * It is passing CI.
 * It has been approved by at least two maintainers. If it was a maintainer who
   opened the PR, only one extra approval is needed.
 * It has no requested changes.
-* It is up to date with current master.
+* It is up to date with current main.
 
 Any maintainer is allowed to merge a PR if all of these conditions are
 met.
@@ -176,7 +176,7 @@ met.
 [new issue]: https://github.com/activeadmin/activeadmin/issues/new
 [fork Active Admin]: https://help.github.com/articles/fork-a-repo
 [searching all issues]: https://github.com/activeadmin/activeadmin/issues?q=
-[master template]: https://github.com/activeadmin/activeadmin/blob/master/lib/bug_report_templates/active_admin_master.rb
+[main template]: https://github.com/varyonic/activeadmin/blob/main/lib/bug_report_templates/active_admin_main.rb
 [codeclimate]: https://codeclimate.com
 [codeclimate cli]: https://github.com/codeclimate/codeclimate
 [make a pull request]: https://help.github.com/articles/creating-a-pull-request

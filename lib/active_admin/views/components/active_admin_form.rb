@@ -110,7 +110,7 @@ module ActiveAdmin
       end
 
       def form_buffers
-        raise "'form_buffers' has been removed from ActiveAdmin::FormBuilder, please read https://github.com/activeadmin/activeadmin/blob/master/docs/5-forms.md for details."
+        raise "'form_buffers' has been removed from ActiveAdmin::FormBuilder, please read https://github.com/varyonic/activeadmin/blob/main/docs/5-forms.md for details."
       end
 
       private
