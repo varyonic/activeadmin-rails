@@ -53,7 +53,7 @@ module ActiveAdmin
             a class instead. For example, `status_tag(status, :#{type}, class: "abc")`
             would change to `status_tag(status, class: "#{type} abc")`. Also note that
             the "#{type}" CSS rule will be removed too, so you'll have to provide
-            the styles yourself. See https://github.com/activeadmin/activeadmin/blob/master/CHANGELOG.md#110-
+            the styles yourself. See https://github.com/varyonic/activeadmin/blob/main/CHANGELOG.md#110-
             for more information.
           MSG
           add_class(type.to_s)

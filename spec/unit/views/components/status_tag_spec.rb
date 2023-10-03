@@ -144,7 +144,7 @@ RSpec.describe ActiveAdmin::Views::StatusTag do
               a class instead. For example, `status_tag(status, :ok, class: "abc")`
               would change to `status_tag(status, class: "ok abc")`. Also note that
               the "ok" CSS rule will be removed too, so you'll have to provide
-              the styles yourself. See https://github.com/activeadmin/activeadmin/blob/master/CHANGELOG.md#110-
+              the styles yourself. See https://github.com/varyonic/activeadmin/blob/main/CHANGELOG.md#110-
               for more information.
             MSG
             )

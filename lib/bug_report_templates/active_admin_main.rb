@@ -8,7 +8,7 @@ end
 gemfile(true) do
   source 'https://rubygems.org'
 
-  # Use local changes or ActiveAdmin master.
+  # Use local changes or ActiveAdmin main.
   if ENV['ACTIVE_ADMIN_PATH']
     gem 'activeadmin-rb', path: ENV['ACTIVE_ADMIN_PATH'], require: false
   else
