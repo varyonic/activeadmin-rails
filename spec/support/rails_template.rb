@@ -29,6 +29,16 @@ create_file 'app/models/post.rb', <<-RUBY.strip_heredoc, force: true
       # nothing to see here
     end
 
+    def self.ransackable_attributes(auth_object = nil)
+      ["author_id", "body", "created_at", "custom_category_id",
+       "custom_created_at_searcher", "custom_searcher_numeric",
+       "custom_title_searcher", "foo_id", "id", "position",
+       "published_date", "starred", "title", "updated_at"]
+    end
+
+    def self.ransackable_associations(auth_object = nil)
+      ["author", "category", "taggings", "kategory"]
+    end
   end
 RUBY
 copy_file File.expand_path('../templates/post_decorator.rb', __FILE__), 'app/models/post_decorator.rb'
@@ -43,6 +53,15 @@ create_file 'app/models/blog/post.rb', <<-RUBY.strip_heredoc, force: true
     accepts_nested_attributes_for :author
     accepts_nested_attributes_for :taggings, allow_destroy: true
 
+    def self.ransackable_attributes(auth_object = nil)
+      ["author_id", "body", "created_at",
+       "custom_category_id", "foo_id", "id",
+       "position", "published_date", "starred", "title", "updated_at"]
+    end
+
+    def self.ransackable_associations(auth_object = nil)
+      ["author", "category", "taggings"]
+    end
   end
 RUBY
 
@@ -62,6 +81,15 @@ create_file 'app/models/user.rb', <<-RUBY.strip_heredoc, force: true
       parent.table[:age]
     end
 
+    def self.ransackable_attributes(auth_object = nil)
+      ["age", "age_in_five_years", "created_at",
+       "first_name", "id", "last_name", "type", "updated_at", "username"]
+    end
+
+    def self.ransackable_associations(auth_object = nil)
+      ["posts", "profile"]
+    end
+
     def display_name
       "\#{first_name} \#{last_name}"
     end
@@ -71,6 +99,10 @@ RUBY
 create_file 'app/models/profile.rb', <<-RUBY.strip_heredoc, force: true
   class Profile < ActiveRecord::Base
     belongs_to :user
+
+    def self.ransackable_attributes(auth_object = nil)
+      ["bio", "created_at", "id", "updated_at", "user_id"]
+    end
   end
 RUBY
 
@@ -82,10 +114,25 @@ create_file 'app/models/category.rb', <<-RUBY.strip_heredoc, force: true
     has_many :posts, foreign_key: :custom_category_id
     has_many :authors, through: :posts
     accepts_nested_attributes_for :posts
+
+    def self.ransackable_attributes(auth_object = nil)
+      ["created_at", "description", "id", "name", "updated_at"]
+    end
+
+    def self.ransackable_associations(auth_object = nil)
+      ["authors", "posts"]
+    end
   end
 RUBY
 
 generate :model, 'store name:string user_id:integer'
+create_file 'app/models/store.rb', <<-RUBY.strip_heredoc, force: true
+  class Store < ActiveRecord::Base
+    def self.ransackable_attributes(auth_object = nil)
+      ["created_at", "id", "name", "updated_at", "user_id"]
+    end
+  end
+RUBY
 
 generate :model, 'tag name:string'
 create_file 'app/models/tag.rb', <<-RUBY.strip_heredoc, force: true
@@ -100,6 +147,10 @@ create_file 'app/models/tagging.rb', <<-RUBY.strip_heredoc, force: true
     belongs_to :tag, optional: true
 
     delegate :name, to: :tag, prefix: true
+
+    def self.ransackable_attributes(auth_object = nil)
+      ["created_at", "id", "position", "post_id", "tag_id", "updated_at"]
+    end
   end
 RUBY
 
@@ -138,6 +189,15 @@ generate 'active_admin:install'
 inject_into_file 'config/application.rb', after: 'class Application < Rails::Application' do
   "\n    config.action_controller.action_on_unpermitted_parameters = :raise\n"
 end
+
+inject_into_file 'app/models/admin_user.rb', '
+
+    def self.ransackable_attributes(auth_object = nil)
+      ["created_at", "email", "id", 
+       "remember_created_at", "reset_password_sent_at",
+       "updated_at"]
+    end
+', after: 'class AdminUser < ApplicationRecord'
 
 # Add some translations
 append_file 'config/locales/en.yml', File.read(File.expand_path('../templates/en.yml', __FILE__))

@@ -195,6 +195,10 @@ RSpec.describe ActiveAdmin::Filters::ActiveFilter do
         def self.name
           'SubStore'
         end
+
+        def self.ransackable_attributes(auth_object = nil)
+          ["user_id"]
+        end
       end
     end
 
