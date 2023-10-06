@@ -23,6 +23,10 @@ module ActiveAdmin
       ).order(ActiveAdmin.application.namespaces[namespace.to_sym].comments_order)
     end
 
+    def self.ransackable_attributes(auth_object = nil)
+       ["author_id", "author_type", "body", "created_at", "id", "namespace", "resource_id", "resource_type", "updated_at"]
+     end
+
     def set_resource_type
       self.resource_type = self.class.resource_type(resource)
     end
