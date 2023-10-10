@@ -17,7 +17,7 @@ module ActiveAdmin
     def define_root_routes
       namespaces.each do |namespace|
         if namespace.root?
-          router.root namespace.root_to_options.merge(to: namespace.root_to)
+          router.root namespace.root_to_options.merge(to: namespace.root_to, as: nil)
         else
           router.namespace namespace.name, namespace.route_options.dup do
             router.root namespace.root_to_options.merge(to: namespace.root_to, as: :root)
