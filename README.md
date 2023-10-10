@@ -61,7 +61,7 @@ Tool                  | Description
 [rubygems]: https://rubygems.org/gems/activeadmin-rb
 [actions_badge]: https://github.com/varyonic/activeadmin/workflows/ci/badge.svg
 [actions]: https://github.com/varyonic/activeadmin/actions
-[codeclimate_badge]: https://api.codeclimate.com/v1/badges/779e407d22bacff19733/maintainability
+[codeclimate_badge]: https://api.codeclimate.com/v1/badges/1698787497cc7d4c7c88/maintainability
 [codeclimate]: https://codeclimate.com/github/varyonic/activeadmin/maintainability
 [codecov_badge]: https://codecov.io/gh/varyonic/activeadmin/branch/master/graph/badge.svg
 [codecov]: https://codecov.io/gh/varyonic/activeadmin
