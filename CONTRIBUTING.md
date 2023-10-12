@@ -1,7 +1,15 @@
 ## Contributing
 
-First off, thank you for considering contributing to Active Admin. It's people
-like you that make Active Admin such a great tool.
+This is probably not a beginner friendly project: it has a long history, complex functionality, 
+and too much cleverness, eg. metaprogramming.
+
+If you are using, or intending to use this project in production it would be great to hear about that in the discussions area.
+Fixes are welcome, if you have ideas for improvements reach out to the maintainer first.
+
+Translations and documentation tweaks are welcome, but not a priority, don't expect a quick response.
+
+Linting has become very popular in recent years, eg. rubocop, but depending on the team or project it can quickly
+become a couterproductive distraction.  By all means make suggestions, but don't expect a quick response.
 
 ### 1. Where do I go from here?
 
@@ -23,13 +31,12 @@ git checkout -b 325-add-japanese-translations
 
 ### 3. Get the test suite running
 
-Make sure you're using a recent ruby and have the `bundler` gem installed, at
-least version `1.14.3`.
+Make sure you're using a recent ruby and have the `bundler` gem installed.
 
 Select the Gemfile for your preferred Rails version, preferably the latest:
 
 ```sh
-export BUNDLE_GEMFILE=gemfiles/rails_51.gemfile
+export BUNDLE_GEMFILE=gemfiles/rails_71.gemfile
 ```
 
 Now install the development dependencies:
@@ -47,7 +54,7 @@ bundle exec rake
 The test run will generate a sample Rails application in `spec/rails` to run the
 tests against.
 
-If your tests are passing locally but they're failing on Travis, reset your test
+If your tests are passing locally but they're failing on GitHub, reset your test
 environment:
 
 ```sh
@@ -72,8 +79,7 @@ rm -rf spec/rails && bundle update
 
 ### 5. Implement your fix or feature
 
-At this point, you're ready to make your changes! Feel free to ask for help;
-everyone is a beginner at first :smile_cat:
+At this point, you're ready to make your changes! Feel free to ask for help.
 
 ### 6. View your changes in a Rails application
 
