@@ -10,9 +10,9 @@ gemfile(true) do
 
   # Use local changes or ActiveAdmin main.
   if ENV['ACTIVE_ADMIN_PATH']
-    gem 'activeadmin-rb', path: ENV['ACTIVE_ADMIN_PATH'], require: false
+    gem 'activeadmin-rails', path: ENV['ACTIVE_ADMIN_PATH'], require: false
   else
-    gem 'activeadmin-rb', github: 'varyonic/activeadmin-rb', require: false
+    gem 'activeadmin-rails', github: 'varyonic/activeadmin-rails', require: false
   end
 
   # Change Rails version if necessary.

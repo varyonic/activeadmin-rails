@@ -57,8 +57,8 @@ Tool                  | Description
 [Kaminari]: https://github.com/kaminari/kaminari
 [Ransack]: https://github.com/activerecord-hackery/ransack
 
-[rubygems_badge]: http://img.shields.io/gem/v/activeadmin-rb.svg
-[rubygems]: https://rubygems.org/gems/activeadmin-rb
+[rubygems_badge]: http://img.shields.io/gem/v/activeadmin-rails.svg
+[rubygems]: https://rubygems.org/gems/activeadmin-rails
 [actions_badge]: https://github.com/varyonic/activeadmin/workflows/ci/badge.svg
 [actions]: https://github.com/varyonic/activeadmin/actions
 [codeclimate_badge]: https://api.codeclimate.com/v1/badges/1698787497cc7d4c7c88/maintainability

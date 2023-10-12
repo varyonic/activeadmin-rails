@@ -10,7 +10,7 @@ redirect_from: /docs/0-installation.html
 Active Admin is a Ruby Gem.
 
 ```ruby
-gem 'activeadmin-rb'
+gem 'activeadmin-rails'
 
 # Plus integrations with:
 gem 'devise'

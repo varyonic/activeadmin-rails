@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.6.0 [☰](https://github.com/varyonic/activeadmin-rb/compare/v1.5.2...v1.6.0)
+## 1.6.0 [☰](https://github.com/varyonic/activeadmin-rails/compare/v1.5.2...v1.6.0)
 
 ### Enhancements
 
@@ -10,16 +10,16 @@
 
 * Fix frozen string error when downloading CSV and streaming disabled. [#7332] by [@deivid-rodriguez]
 
-## 1.5.2 [☰](https://github.com/varyonic/activeadmin-rb/compare/v1.5.1...v1.5.2)
+## 1.5.2 [☰](https://github.com/varyonic/activeadmin-rails/compare/v1.5.1...v1.5.2)
 
 * Fix Ruby 2.7 warnings about keyword args. [#6000], [#6237] by [@vcsjones] and [@deivid-rodriguez]
 * Fix CSVBuilder not respecting `ActiveAdmin.application.csv_options = { humanize_name: false }` setting. [#5800] by [@HappyKadaver]
 
-## 1.5.1 [☰](https://github.com/varyonic/activeadmin-rb/compare/v1.5.0...v1.5.1)
+## 1.5.1 [☰](https://github.com/varyonic/activeadmin-rails/compare/v1.5.0...v1.5.1)
 
 * More fixes to support final release of Rails 6.0.
 
-## 1.5.0 [☰](https://github.com/varyonic/activeadmin-rb/compare/v1.4.0...v1.5.0)
+## 1.5.0 [☰](https://github.com/varyonic/activeadmin-rails/compare/v1.4.0...v1.5.0)
 
 ### Enhancements
 
@@ -27,7 +27,7 @@
 
 * Rails 6.0 support. [#5702] by [@ionut998]
  
-## 1.4.0 [☰](https://github.com/varyonic/activeadmin-rb/compare/v1.3.1...v1.4.0)
+## 1.4.0 [☰](https://github.com/varyonic/activeadmin-rails/compare/v1.3.1...v1.4.0)
 
 ### Enhancements
 

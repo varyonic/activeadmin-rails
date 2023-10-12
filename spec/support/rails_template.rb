@@ -180,7 +180,7 @@ inject_into_file 'config/environments/test.rb', "\n  config.autoloader = :classi
 gsub_file "config/database.yml", /storage\/(.+)\.sqlite3$/, 'db/\1.sqlite3'
 
 # Add our local Active Admin to the application
-gem 'activeadmin-rb', path: '../..'
+gem 'activeadmin-rails', path: '../..'
 gem 'devise', '~> 4.6'
 
 run 'bundle install'
