@@ -215,8 +215,9 @@ if ENV['RAILS_ENV'] != 'test'
   inject_into_file 'config/routes.rb', "\n  root to: redirect('admin')", after: /.*routes.draw do/
 end
 
-rake "db:drop db:create db:migrate", env: 'development'
-rake "db:drop db:create db:migrate", env: 'test'
+# Rails 7.1 doesn't write test.sqlite3 files if we run db:drop, db:create and db:migrate in a single command.
+rails_command "db:drop db:create", env: ENV["RAILS_ENV"]
+rails_command "db:migrate", env: ENV["RAILS_ENV"]
 
 if ENV['INSTALL_PARALLEL']
   inject_into_file 'config/database.yml', "<%= ENV['TEST_ENV_NUMBER'] %>", after: 'test.sqlite3'
