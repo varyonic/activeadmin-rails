@@ -103,7 +103,11 @@ Before do
 end
 
 # Force deprecations to raise an exception.
-ActiveSupport::Deprecation.behavior = :raise
+if Rails.gem_version >= Gem::Version.new("7.1.0")
+  Rails.application.deprecators.behavior = :raise
+else
+  ActiveSupport::Deprecation.behavior = :raise
+end
 
 # improve the performance of the specs suite by not logging anything
 # see http://blog.plataformatec.com.br/2011/12/three-tips-to-improve-the-performance-of-your-test-suite/

@@ -154,7 +154,7 @@ create_file 'app/models/tagging.rb', <<-RUBY.strip_heredoc, force: true
   end
 RUBY
 
-gsub_file 'config/environments/test.rb', /  config.cache_classes = .*$/, <<-RUBY
+gsub_file 'config/environments/test.rb', /  config.(cache_classes|enable_reloading) = .*$/, <<-RUBY
 
   config.cache_classes = !ENV['CLASS_RELOADING']
   config.action_mailer.default_url_options = {host: 'example.com'}
@@ -175,6 +175,9 @@ RUBY
 # TODO: remove this line after the STI pre-loading is fixed
 # The test commenting.feature/Commenting on a STI subclass fails with zeitwerk autoloader
 inject_into_file 'config/environments/test.rb', "\n  config.autoloader = :classic\n", after: 'Rails.application.configure do' if Rails::VERSION::MAJOR == 6
+
+# Override and revert rails/rails#46699 for now
+gsub_file "config/database.yml", /storage\/(.+)\.sqlite3$/, 'db/\1.sqlite3'
 
 # Add our local Active Admin to the application
 gem 'activeadmin-rb', path: '../..'
@@ -212,8 +215,9 @@ if ENV['RAILS_ENV'] != 'test'
   inject_into_file 'config/routes.rb', "\n  root to: redirect('admin')", after: /.*routes.draw do/
 end
 
-rake "db:drop db:create db:migrate", env: 'development'
-rake "db:drop db:create db:migrate", env: 'test'
+# Rails 7.1 doesn't write test.sqlite3 files if we run db:drop, db:create and db:migrate in a single command.
+rails_command "db:drop db:create", env: ENV["RAILS_ENV"]
+rails_command "db:migrate", env: ENV["RAILS_ENV"]
 
 if ENV['INSTALL_PARALLEL']
   inject_into_file 'config/database.yml', "<%= ENV['TEST_ENV_NUMBER'] %>", after: 'test.sqlite3'

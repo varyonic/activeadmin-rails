@@ -20,7 +20,7 @@ module ActiveAdmin
         context.output_buffer << opening_tag.html_safe
         children.map { |element| element.render_in(context) }
         context.output_buffer << closing_tag.html_safe
-        pos > 0 ? context.output_buffer[pos..] : context.output_buffer
+        pos > 0 ? context.output_buffer.to_str[pos..] : context.output_buffer
       end
 
       def to_s
