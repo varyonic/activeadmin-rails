@@ -4,6 +4,7 @@ RSpec.describe ActiveAdmin::Views::Tabs do
   describe "creating with the dsl" do
     context "when creating tabs with a symbol" do
       before do
+        allow(I18n).to receive(:t).with("i18n.transliterate.rule".to_sym, anything).and_call_original
         expect(I18n).to receive(:t).at_least(:once).with(:tab_key).and_return "テスト"
       end
 
