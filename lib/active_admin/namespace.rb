@@ -68,7 +68,6 @@ module ActiveAdmin
       # Register the resource
       register_resource_controller(config)
       parse_registration_block(config, &block) if block_given?
-      reset_menu!
 
       # Dispatch a registration event
       ActiveSupport::Notifications.publish ActiveAdmin::Resource::RegisterEvent, config
@@ -92,7 +91,6 @@ module ActiveAdmin
       config.controller.active_admin_config = config
 
       yield(config) if block_given?
-      reset_menu!
 
       ActiveSupport::Notifications.publish ActiveAdmin::Resource::RegisterEvent, config
 
@@ -105,7 +103,6 @@ module ActiveAdmin
       # Register the resource
       register_page_controller(config)
       parse_page_registration_block(config, &block) if block_given?
-      reset_menu!
 
       config
     end
@@ -125,7 +122,6 @@ module ActiveAdmin
       config.controller.active_admin_config = config
 
       yield(config) if block_given?
-      reset_menu!
 
       config
     end
@@ -218,6 +214,9 @@ module ActiveAdmin
     end
 
     def build_menus!
+      # reset if any resources registered since last build
+      @menus.clear! if resources.any? { |r| r.include_in_menu? && !r.menu_item }
+
       return if @menus.built?
 
       @menus.build_default_menu
