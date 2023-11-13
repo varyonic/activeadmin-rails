@@ -40,7 +40,7 @@ module ActiveAdmin
       @name = name.to_s.underscore
       @resources = ResourceCollection.new
       register_module unless root?
-      build_menu_collection
+      @menus = MenuCollection.new
     end
 
     def name
@@ -212,10 +212,6 @@ module ActiveAdmin
     end
 
     protected
-
-    def build_menu_collection
-      @menus = MenuCollection.new
-    end
 
     def extra_menus
       @extra_menus ||= {}
