@@ -147,8 +147,8 @@ module ActiveAdmin
 
     # Unload all the registered resources for this namespace
     def unload!
+      @menus.clear!
       unload_resources!
-      reset_menu!
     end
 
     # Returns the first registered ActiveAdmin::Resource instance for a given class
@@ -160,10 +160,6 @@ module ActiveAdmin
       build_menus!
 
       @menus.fetch(name)
-    end
-
-    def reset_menu!
-      @menus.clear!
     end
 
     # Add a callback to be ran when we build the menu
