@@ -40,7 +40,7 @@ module ActiveAdmin
       @name = name.to_s.underscore
       @resources = ResourceCollection.new
       register_module unless root?
-      build_menu_collection
+      @menus = MenuCollection.new
     end
 
     def name
@@ -68,7 +68,6 @@ module ActiveAdmin
       # Register the resource
       register_resource_controller(config)
       parse_registration_block(config, &block) if block_given?
-      reset_menu!
 
       # Dispatch a registration event
       ActiveSupport::Notifications.publish ActiveAdmin::Resource::RegisterEvent, config
@@ -92,7 +91,6 @@ module ActiveAdmin
       config.controller.active_admin_config = config
 
       yield(config) if block_given?
-      reset_menu!
 
       ActiveSupport::Notifications.publish ActiveAdmin::Resource::RegisterEvent, config
 
@@ -105,7 +103,6 @@ module ActiveAdmin
       # Register the resource
       register_page_controller(config)
       parse_page_registration_block(config, &block) if block_given?
-      reset_menu!
 
       config
     end
@@ -125,7 +122,6 @@ module ActiveAdmin
       config.controller.active_admin_config = config
 
       yield(config) if block_given?
-      reset_menu!
 
       config
     end
@@ -151,8 +147,8 @@ module ActiveAdmin
 
     # Unload all the registered resources for this namespace
     def unload!
+      @menus.clear!
       unload_resources!
-      reset_menu!
     end
 
     # Returns the first registered ActiveAdmin::Resource instance for a given class
@@ -164,10 +160,6 @@ module ActiveAdmin
       build_menus!
 
       @menus.fetch(name)
-    end
-
-    def reset_menu!
-      @menus.clear!
     end
 
     # Add a callback to be ran when we build the menu
@@ -213,15 +205,14 @@ module ActiveAdmin
 
     protected
 
-    def build_menu_collection
-      @menus = MenuCollection.new
-    end
-
     def extra_menus
       @extra_menus ||= {}
     end
 
     def build_menus!
+      # reset if any resources registered since last build
+      @menus.clear! if resources.any? { |r| r.include_in_menu? && !r.menu_item }
+
       return if @menus.built?
 
       @menus.build_default_menu

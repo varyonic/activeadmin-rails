@@ -7,11 +7,6 @@ module ActiveAdminIntegrationSpecHelper
     ActiveAdmin.register(Category)
     ActiveAdmin.register(User)
     ActiveAdmin.register(Post){ belongs_to :user, optional: true }
-    reload_menus!
-  end
-
-  def reload_menus!
-    ActiveAdmin.application.namespaces.each{|n| n.reset_menu! }
   end
 
   # Sometimes we need to reload the routes within
@@ -31,7 +26,6 @@ module ActiveAdminIntegrationSpecHelper
   def load_resources
     ActiveAdmin.unload!
     yield
-    reload_menus!
     reload_routes!
   end
 

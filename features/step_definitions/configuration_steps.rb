@@ -4,7 +4,6 @@ module ActiveAdminReloading
     eval(config_content)
     ActiveSupport::Notifications.publish ActiveAdmin::Application::AfterLoadEvent, ActiveAdmin.application
     Rails.application.reload_routes!
-    ActiveAdmin.application.namespaces.each &:reset_menu!
   end
 end
 
