@@ -246,9 +246,15 @@ module ActiveAdmin
       resources.add Page.new(self, name, options)
     end
 
-    # TODO: replace `eval` with `Class.new`
     def register_page_controller(config)
-      eval "class ::#{config.controller_name} < ActiveAdmin::PageController; end"
+      if Object.const_defined?("::#{config.controller_name}")
+        unless config.controller.ancestors.include?(ActiveAdmin::PageController)
+          raise "#{config.controller_name} not a PageController"
+        end
+      else
+        eval "class ::#{config.controller_name} < ActiveAdmin::PageController; end"
+        config.controller.const_set('DISPOSABLE', true)
+      end
       config.controller.active_admin_config = config
     end
 
@@ -256,7 +262,11 @@ module ActiveAdmin
       resources.each do |resource|
         parent = (module_name || 'Object').constantize
         name   = resource.controller_name.split('::').last
-        parent.send(:remove_const, name) if parent.const_defined?(name, false)
+        if parent.const_defined?(name, false)
+          if resource.controller.const_defined?(:DISPOSABLE)
+            parent.send(:remove_const, name)
+          end
+        end
 
         # Remove circular references
         resource.controller.active_admin_config = nil
@@ -274,9 +284,15 @@ module ActiveAdmin
       end
     end
 
-    # TODO: replace `eval` with `Class.new`
     def register_resource_controller(config)
-      eval "class ::#{config.controller_name} < ActiveAdmin::ResourceController; end"
+      if Object.const_defined?("::#{config.controller_name}")
+        unless config.controller.ancestors.include?(ActiveAdmin::ResourceController)
+          raise "#{config.controller_name} not a ResourceController"
+        end
+      else
+        eval "class ::#{config.controller_name} < ActiveAdmin::ResourceController; end"
+        config.controller.const_set(:DISPOSABLE, true)
+      end
       config.controller.active_admin_config = config
     end
 
