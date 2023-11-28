@@ -1,4 +1,7 @@
 ---
+layout: default
+nav_order: 2
+title: Working with Resources
 redirect_from: /docs/2-resource-customization.html
 ---
 
@@ -13,29 +16,51 @@ The basic command for creating a resource is `rails g active_admin:resource Post
 The generator will produce an empty `app/admin/posts.rb` file like so:
 
 ```ruby
-ActiveAdmin.register Post do
-  # everything happens here :D
+ActiveAdmin.configure_resource Post do |config|
+  # ...
+end
+```
+
+TODO: and an empty `app/controllers/admin/posts_controller.rb` file like so:
+
+```ruby
+class Admin::PostsController < ActiveAdmin::ResourceController
+  # ...
 end
 ```
 
 ## Setting up Strong Parameters
 
-Use the `permit_params` method to define which attributes may be changed:
+Override the [permitted_attr_names] method to define which attributes may be changed:
 
 ```ruby
-ActiveAdmin.register Post do
-  permit_params :title, :content, :publisher_id
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def permitted_attr_names
+    [:title, :content, :publisher_id]
+  end
+end
+```
+
+or more directly, override [permitted_params]:
+
+```ruby
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def permitted_params
+    params.permit(post: [:title, :content, :publisher_id])
+  end
 end
 ```
 
 Any form field that sends multiple values (such as a HABTM association, or an
-array attribute) needs to pass an empty array to `permit_params`:
+array attribute) needs to pass an empty array:
 
 If your HABTM is `roles`, you should permit `role_ids: []`
 
 ```ruby
-ActiveAdmin.register Post do
-  permit_params :title, :content, :publisher_id, role_ids: []
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def permitted_attr_names
+    [:title, :content, :publisher_id, role_ids: []]
+  end
 end
 ```
 
@@ -43,9 +68,11 @@ Nested associations in the same form also require an array, but it
 needs to be filled with any attributes used.
 
 ```ruby
-ActiveAdmin.register Post do
-  permit_params :title, :content, :publisher_id,
-    tags_attributes: [:id, :name, :description, :_destroy]
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def permitted_attr_names
+    [:title, :content, :publisher_id,
+    tags_attributes: [:id, :name, :description, :_destroy]]
+  end
 end
 
 # Note that `accepts_nested_attributes_for` is still required:
@@ -54,11 +81,11 @@ class Post < ActiveRecord::Base
 end
 ```
 
-If you want to dynamically choose which attributes can be set, pass a block:
+If you want to dynamically choose which attributes can be set:
 
 ```ruby
-ActiveAdmin.register Post do
-  permit_params do
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def permitted_attr_names
     params = [:title, :content, :publisher_id]
     params.push :author_id if current_user.admin?
     params
@@ -66,30 +93,19 @@ ActiveAdmin.register Post do
 end
 ```
 
-If your resource is nested, declare `permit_params` after `belongs_to`:
-
-```ruby
-ActiveAdmin.register Post do
-  belongs_to :user
-  permit_params :title, :content, :publisher_id
-end
-```
-
-The `permit_params` call creates a method called `permitted_params`. You should
+[permitted_attr_names] is called by a method called [permitted_params]. You should
 use this method when overriding `create` or `update` actions:
 
 ```ruby
-ActiveAdmin.register Post do
-  controller do
-    def create
-      # Good
-      @post = Post.new(permitted_params[:post])
-      # Bad
-      @post = Post.new(params[:post])
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def create
+    # Good
+    @post = Post.new(permitted_params[:post])
+    # Bad
+    @post = Post.new(params[:post])
 
-      if @post.save
-        # ...
-      end
+    if @post.save
+      # ...
     end
   end
 end
@@ -100,7 +116,7 @@ end
 All CRUD actions are enabled by default. These can be disabled for a given resource:
 
 ```ruby
-ActiveAdmin.register Post do
+class Admin::PostsController < ActiveAdmin::ResourceController
   actions :all, except: [:update, :destroy]
 end
 ```
@@ -132,10 +148,11 @@ interface will use the name of the class. You can rename the resource by using
 the `:as` option.
 
 ```ruby
-ActiveAdmin.register Post, as: "Article"
+ActiveAdmin.configure_resource Post, as: "Article"
 ```
 
 The resource will then be available at `/admin/articles`.
+The controller and view names should be updated also.
 
 ## Customize the Namespace
 
@@ -143,10 +160,10 @@ We use the `admin` namespace by default, but you can use anything:
 
 ```ruby
 # Available at /today/posts
-ActiveAdmin.register Post, namespace: :today
+ActiveAdmin.configure_resource Post, namespace: :today
 
 # Available at /posts
-ActiveAdmin.register Post, namespace: false
+ActiveAdmin.configure_resource Post, namespace: false
 ```
 
 ## Customize the Menu
@@ -155,12 +172,12 @@ The resource will be displayed in the global navigation by default. To disable
 the resource from being displayed in the global navigation:
 
 ```ruby
-ActiveAdmin.register Post do
-  menu false
+ActiveAdmin.configure_resource Post do |config|
+  config.menu_item_options = false
 end
 ```
 
-The menu method accepts a hash with the following options:
+Menu item options include:
 
 * `:label` - The string or proc label to display in the menu. If it's a proc, it
   will be called each time the menu is rendered.
@@ -174,16 +191,16 @@ The menu method accepts a hash with the following options:
 To change the name of the label in the menu:
 
 ```ruby
-ActiveAdmin.register Post do
-  menu label: "My Posts"
+ActiveAdmin.configure_resource Post do |config|
+  config.menu_item_options = { label: "My Posts" }
 end
 ```
 
 If you want something more dynamic, pass a proc instead:
 
 ```ruby
-ActiveAdmin.register Post do
-  menu label: proc{ I18n.t "mypost" }
+ActiveAdmin.configure_resource Post do |config|
+  config.menu_item_options = { label: proc{ I18n.t "mypost" } }
 end
 ```
 
@@ -195,8 +212,8 @@ every menu by default has a priority of `10`, the menu is normally alphabetical.
 You can easily customize this:
 
 ```ruby
-ActiveAdmin.register Post do
-  menu priority: 1 # so it's on the very left
+ActiveAdmin.configure_resource Post do |config|
+  config.menu_item_options = { priority: 1 } # so it's on the very left
 end
 ```
 
@@ -205,8 +222,8 @@ end
 Menu items can be shown or hidden at runtime using the `:if` option.
 
 ```ruby
-ActiveAdmin.register Post do
-  menu if: proc{ current_user.can_edit_posts? }
+ActiveAdmin.configure_resource Post do |config|
+  config.menu_item_options = { if: proc{ current_user.can_edit_posts? } }
 end
 ```
 
@@ -219,8 +236,8 @@ In many cases, a single level navigation will not be enough to manage a large
 application. In that case, you can group your menu items under a parent menu item.
 
 ```ruby
-ActiveAdmin.register Post do
-  menu parent: "Blog"
+ActiveAdmin.configure_resource Post do |config|
+  config.menu_item_options = { parent: "Blog" }
 end
 ```
 
@@ -242,8 +259,8 @@ config.namespace :admin do |admin|
 end
 
 # app/admin/post.rb
-ActiveAdmin.register Post do
-  menu parent: 'Blog'
+ActiveAdmin.configure_resource Post do |config|
+  config.menu_item_options = { parent: 'Blog' }
 end
 ```
 
@@ -261,8 +278,8 @@ config.namespace :admin do |admin|
 end
 
 # app/admin/post.rb
-ActiveAdmin.register Post do
-  menu parent: 'blog'
+ActiveAdmin.configure_resource Post do |config|
+  config.menu_item_options = { parent: 'blog' }
 end
 ```
 
@@ -301,14 +318,14 @@ scope what they have access to. Assuming your User model has the proper
 has_many relationships, you can simply scope the listings and finders like so:
 
 ```ruby
-ActiveAdmin.register Post do
-  scope_to :current_user # limits the accessible posts to `current_user.posts`
+ActiveAdmin.configure_resource Post do |config|
+  config.scope_to :current_user # limits the accessible posts to `current_user.posts`
 
   # Or if the association doesn't have the default name:
-  scope_to :current_user, association_method: :blog_posts
+  config.scope_to :current_user, association_method: :blog_posts
 
   # Finally, you can pass a block to be called:
-  scope_to do
+  config.scope_to do
     User.most_popular_posts
   end
 end
@@ -317,9 +334,9 @@ end
 You can also conditionally apply the scope:
 
 ```ruby
-ActiveAdmin.register Post do
-  scope_to :current_user, if:     proc{ current_user.limited_access? }
-  scope_to :current_user, unless: proc{ current_user.admin? }
+ActiveAdmin.configure_resource Post do |config|
+  config.scope_to :current_user, if:     proc{ current_user.limited_access? }
+  config.scope_to :current_user, unless: proc{ current_user.admin? }
 end
 ```
 
@@ -329,8 +346,10 @@ A common way to increase page performance is to eliminate N+1 queries by eager
 loading associations:
 
 ```ruby
-ActiveAdmin.register Post do
-  includes :author, :categories
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def apply_includes(collection)
+    collection.includes :author, :categories
+  end
 end
 ```
 
@@ -345,11 +364,9 @@ If you need to customize the collection properties, you can overwrite the
 `scoped_collection` method.
 
 ```ruby
-ActiveAdmin.register Post do
-  controller do
-    def scoped_collection
-      end_of_association_chain.where(visibility: true)
-    end
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def scoped_collection
+    end_of_association_chain.where(visibility: true)
   end
 end
 ```
@@ -359,11 +376,9 @@ custom `to_param` implementation in your models), override the `resource` method
 on the controller:
 
 ```ruby
-ActiveAdmin.register Post do
-  controller do
-    def find_resource
-      scoped_collection.where(id: params[:id]).first!
-    end
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def find_resource
+    scoped_collection.where(id: params[:id]).first!
   end
 end
 ```
@@ -373,11 +388,9 @@ to not write code like this, otherwise **your authorization rules won't be
 applied**:
 
 ```ruby
-ActiveAdmin.register Post do
-  controller do
-    def find_resource
-      Post.where(id: params[:id]).first!
-    end
+class Admin::PostsController < ActiveAdmin::ResourceController
+  def find_resource
+    Post.where(id: params[:id]).first!
   end
 end
 ```
@@ -389,9 +402,9 @@ example a Project may have many Milestones and Tickets. To nest the resource
 within another, you can use the `belongs_to` method:
 
 ```ruby
-ActiveAdmin.register Project
-ActiveAdmin.register Ticket do
-  belongs_to :project
+ActiveAdmin.configure_resource Project
+ActiveAdmin.configure_resource Ticket do |config|
+  config.belongs_to :project
 end
 ```
 
@@ -414,12 +427,12 @@ ActiveAdmin.register Project do
   end
 end
 
-ActiveAdmin.register Ticket do
-  belongs_to :project
+ActiveAdmin.configure_resource Ticket do |config|
+  config.belongs_to :project
 end
 
-ActiveAdmin.register Milestone do
-  belongs_to :project
+ActiveAdmin.configure_resource Milestone do |config|
+  config.belongs_to :project
 end
 ```
 
@@ -429,14 +442,14 @@ project. To accomplish this, Active Admin stores the `belongs_to` resources in a
 separate menu which you can use if you so wish. To use:
 
 ```ruby
-ActiveAdmin.register Ticket do
-  belongs_to :project
-  navigation_menu :project
+ActiveAdmin.configure_resource Ticket do |config|
+  config.belongs_to :project
+  config.navigation_menu_name = :project
 end
 
-ActiveAdmin.register Milestone do
-  belongs_to :project
-  navigation_menu :project
+ActiveAdmin.configure_resource Milestone do |config|
+  config.belongs_to :project
+  config.navigation_menu_name = :project
 end
 ```
 
@@ -448,11 +461,9 @@ You can also defer the menu lookup until runtime so that you can dynamically sho
 different menus, say perhaps based on user permissions. For example:
 
 ```ruby
-ActiveAdmin.register Ticket do
-  belongs_to :project
-  navigation_menu do
-    authorized?(:manage, SomeResource) ? :project : :restricted_menu
-  end
+ActiveAdmin.configure_resource Ticket do |config|
+  config.belongs_to :project
+  config.navigation_menu_name = -> { authorized?(:manage, SomeResource) ? :project : :restricted_menu }
 end
 ```
 
@@ -460,7 +471,10 @@ If you still want your `belongs_to` resources to be available in the default men
 and through non-nested routes, you can use the `:optional` option. For example:
 
 ```ruby
-ActiveAdmin.register Ticket do
-  belongs_to :project, optional: true
+ActiveAdmin.configure_resource Ticket do |config|
+  config.belongs_to :project, optional: true
 end
 ```
+
+[permitted_attr_names]: https://rubydoc.info/github/varyonic/activeadmin/master/ActiveAdmin%2FResourceController%2FDataAccess:permitted_attr_names
+[permitted_params]: https://rubydoc.info/github/varyonic/activeadmin/master/ActiveAdmin%2FResourceController%2FDataAccess:permitted_params

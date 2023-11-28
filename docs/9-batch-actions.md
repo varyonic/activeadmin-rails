@@ -1,4 +1,7 @@
 ---
+layout: default
+nav_order: 9
+title: Batch Actions
 redirect_from: /docs/9-batch-actions.html
 ---
 
@@ -17,14 +20,17 @@ end
 
 ## Creating your own
 
-Use the `batch_action` DSL method to create your own. It behaves just like a
-controller method, so you can send the client whatever data you like. Your block
-is passed an array of the record IDs that the user selected, so you can perform
-your desired batch action on all of them:
+Use the `batch_action` DSL method to declare your own, eg:
 
 ```ruby
 ActiveAdmin.register Post do
-  batch_action :flag do |ids|
+  batch_action :flag
+```
+and
+```ruby
+class Admin::PostsController < ActiveAdmin::ResourceController
+  protected
+  def batch_action_flag(ids, inputs)
     batch_action_collection.find(ids).each do |post|
       post.flag! :hot
     end
@@ -32,6 +38,10 @@ ActiveAdmin.register Post do
   end
 end
 ```
+
+The controller method
+is passed an array of the record IDs that the user selected, so you can perform
+your desired batch action on all of them.
 
 ### Disabling Batch Actions
 
@@ -63,8 +73,9 @@ end
 If you want, you can override the default batch action to do whatever you want:
 
 ```ruby
-ActiveAdmin.register Post do
-  batch_action :destroy do |ids|
+class Admin::PostsController < ActiveAdmin::ResourceController
+  protected
+  def batch_action_destroy(ids, inputs)
     redirect_to collection_path, alert: "Didn't really delete these!"
   end
 end

@@ -1,4 +1,8 @@
 ---
+layout: default
+parent: Customizing the Index Page
+nav_order: 2
+title: Index as a Block
 redirect_from: /docs/3-index-pages/index-as-block.html
 ---
 

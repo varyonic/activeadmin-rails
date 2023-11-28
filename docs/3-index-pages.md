@@ -1,5 +1,9 @@
 ---
+layout: default
+nav_order: 3
+title: Customizing the Index Page
 redirect_from: /docs/3-index-pages.html
+has_children: true
 ---
 
 # Customizing the Index Page
@@ -71,12 +75,13 @@ By default the index screen includes a "Filters" sidebar on the right hand side
 with a filter for each attribute of the registered model. You can customize the
 filters that are displayed as well as the type of widgets they use.
 
-To display a filter for an attribute, use the `filter` method
+To display a filter for an attribute, customize `filters_form.html.erb`
 
-```ruby
-ActiveAdmin.register Post do
-  filter :title
-end
+```erb
+# app/views/admin/posts/_filters_form.html.erb
+<%= active_admin_filters_form_for(@search,
+  title: { label: 'Title', as: :string },
+) %>
 ```
 
 Out of the box, Active Admin supports the following filter types:
@@ -93,22 +98,31 @@ Out of the box, Active Admin supports the following filter types:
 By default, Active Admin will pick the most relevant filter based on the
 attribute type. You can force the type by passing the `:as` option.
 
-```ruby
-filter :author, as: :check_boxes
+```erb
+# app/views/admin/posts/_filters_form.html.erb
+<%= active_admin_filters_form_for(@search,
+  author: { as: :check_boxes }
+) %>
 ```
 
 The `:check_boxes` and `:select` types accept options for the collection. By default
 it attempts to create a collection based on an association. But you can pass in
 the collection as a proc to be called at render time.
 
-```ruby
-filter :author, as: :check_boxes, collection: proc { Author.all }
+```erb
+# app/views/admin/posts/_filters_form.html.erb
+<%= active_admin_filters_form_for(@search,
+  author: { as: :check_boxes, collection: proc { Author.all } }
+) %>
 ```
 
 To override options for string or numeric filter pass `filters` option.
 
-```ruby
-  filter :title, filters: [:starts_with, :ends_with]
+```erb
+# app/views/admin/posts/_filters_form.html.erb
+<%= active_admin_filters_form_for(@search,
+  title: { filters: [:starts_with, :ends_with] },
+) %>
 ```
 
 Also, if you don't need the select with the options 'contains', 'equals',
@@ -117,16 +131,22 @@ underscore.
 
 For example:
 
-```ruby
-filter :name_equals
+```erb
+# app/views/admin/posts/_filters_form.html.erb
+<%= active_admin_filters_form_for(@search,
+  name_equals: { as: :string },
 # or
-filter :name_contains
+  name_contains: { as: :string },
+) %>
 ```
 
 You can change the filter label by passing a label option:
 
-```ruby
-filter :author, label: 'Something else'
+```erb
+# app/views/admin/posts/_filters_form.html.erb
+<%= active_admin_filters_form_for(@search,
+  author: { label: 'Something else' }
+) %>
 ```
 
 By default, Active Admin will try to use ActiveModel I18n to determine the label.
@@ -137,8 +157,11 @@ syntax](https://github.com/activerecord-hackery/ransack/wiki/Basic-Searching).
 If using a custom search method, you will also need to specify the field type
 using `:as` and the label.
 
-```ruby
-filter :first_name_or_last_name_cont, as: :string, label: "Name"
+```erb
+# app/views/admin/posts/_filters_form.html.erb
+<%= active_admin_filters_form_for(@search,
+  first_name_or_last_name_cont: { as: :string, label: "Name" }
+) %>
 ```
 
 Filters can also be disabled for a resource, a namespace or the entire
@@ -147,7 +170,7 @@ application.
 To disable for a specific resource:
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.filters = false
 end
 ```
@@ -191,22 +214,22 @@ the index table to quickly filter your collection on pre-defined scopes. There
 are a number of ways to define your scopes:
 
 ```ruby
-scope :all, default: true
+config.scope :all, default: true
 
 # assumes the model has a scope called ':active'
-scope :active
+config.scope :active
 
 # renames model scope ':leaves' to ':subcategories'
-scope "Subcategories", :leaves
+config.scope "Subcategories", :leaves
 
 # Dynamic scope name
-scope ->{ Date.today.strftime '%A' }, :published_today
+config.scope ->{ Date.today.strftime '%A' }, :published_today
 
 # custom scope not defined on the model
-scope("Inactive") { |scope| scope.where(active: false) }
+config.scope("Inactive") { |scope| scope.where(active: false) }
 
 # conditionally show a custom controller scope
-scope "Published", if: -> { current_admin_user.can? :manage, Posts } do |posts|
+config.scope "Published", if: -> { current_admin_user.can? :manage, Posts } do |posts|
   posts.published
 end
 ```
@@ -220,15 +243,15 @@ You can assign group names to scopes to keep related scopes together and separat
 
 ```ruby
 # a scope in the default group
-scope :all
+config.scope :all
 
 # two scopes used to filter by status
-scope :active, group: :status
-scope :inactive, group: :status
+config.scope :active, group: :status
+config.scope :inactive, group: :status
 
 # two scopes used to filter by date
-scope :today, group: :date
-scope :tomorrow, group: :date
+config.scope :today, group: :date
+config.scope :tomorrow, group: :date
 ```
 
 ## Index default sort order
@@ -236,7 +259,7 @@ scope :tomorrow, group: :date
 You can define the default sort order for index pages:
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.sort_order = 'name_asc'
 end
 ```
@@ -254,7 +277,7 @@ end
 You can set the number of records per page per resources:
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.per_page = 10
 end
 ```
@@ -262,7 +285,7 @@ end
 Or allow users to choose themselves using dropdown with values
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.per_page = [10, 50, 100]
 end
 ```
@@ -270,7 +293,7 @@ end
 You can change it per request / action too:
 
 ```ruby
-controller do
+class Admin::PostsController < ActiveAdmin::ResourceController
   before_action only: :index do
     @per_page = 100
   end
@@ -280,7 +303,7 @@ end
 You can also disable pagination:
 
 ```ruby
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
   config.paginate = false
 end
 ```
@@ -289,10 +312,8 @@ If you have a very large database, you might want to disable `SELECT COUNT(*)`
 queries caused by the pagination info at the bottom of the page:
 
 ```ruby
-ActiveAdmin.register Post do
-  index pagination_total: false do
-    # ...
-  end
+ActiveAdmin.configure_resource Post do |config|
+  config.set_page_options :index, pagination_total: false
 end
 ```
 
@@ -302,11 +323,11 @@ You can easily remove or customize the download links you want displayed:
 
 ```ruby
 # Per resource:
-ActiveAdmin.register Post do
+ActiveAdmin.configure_resource Post do |config|
 
-  index download_links: false
-  index download_links: [:pdf]
-  index download_links: proc{ current_user.can_view_download_links? }
+  config.set_page_options :index, download_links: false
+  config.set_page_options :index, download_links: [:pdf]
+  config.set_page_options :index, download_links: proc{ current_user.can_view_download_links? }
 
 end
 

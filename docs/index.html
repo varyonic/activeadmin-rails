@@ -2,10 +2,23 @@
 ---
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
-  {% include head.html %}
+  <head>
+    <title>Active Admin | The administration framework for Ruby on Rails</title>
+    <link href='//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:extralight,light,regular,bold' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <link href="{{ site.baseurl }}/index.css" media="screen" rel="stylesheet" type="text/css" />
+  </head>
   <body>
     <div id="wrapper">
-      {% include top-menu.html %}
+      <div id="header">
+          <h1><a href="{{ site.baseurl }}/index.html"><span>Active Admin</span></a></h1>
+
+          <div id="nav">
+              <a href="{{ site.baseurl }}/documentation.html">Documentation</a>
+              <a href="http://demo.activeadmin.info/admin">Try It Now!</a>
+              <a href="http://github.com/varyonic/activeadmin">Get the Code</a>
+          </div>
+      </div>
       <div id="main-content">
         <p class="intro">
           The <strong>administration framework</strong> for business critical <strong>Ruby on Rails</strong> applications.
@@ -73,53 +86,20 @@
         <p>
           Active Admin’s interface was designed from the ground up for non-technical users. It makes it easy for developers to build highly usable interfaces that customers will actually enjoy using.
         </p>
-        <h2>
-          An elegant <span class="caps">DSL</span> built for developer productivity.
-        </h2>
-        <p>
-          Get started with one line of code or customize the entire interface with the provided <span class="caps">DSL</span>.
-        </p>
-        <div id="dsl">
-          <div class="highlight">
-            <pre>
-<code class="ruby"><span class="c1"># app/admin/products.rb</span>
-<span class="no">ActiveAdmin</span><span class="o">.</span><span class="n">register</span> <span class="no">Product</span> <span class="k">do</span>
-
-  <span class="c1"># Create sections on the index screen</span>
-  <span class="n">scope</span> <span class="ss">:all</span><span class="p">,</span> <span class="ss">default:</span> <span class="kp">true</span>
-  <span class="n">scope</span> <span class="ss">:available</span>
-  <span class="n">scope</span> <span class="ss">:drafts</span>
-
-  <span class="c1"># Filterable attributes on the index screen</span>
-  <span class="n">filter</span> <span class="ss">:title</span>
-  <span class="n">filter</span> <span class="ss">:author</span><span class="p">,</span> <span class="ss">as:</span> <span class="ss">:select</span><span class="p">,</span> <span class="ss">collection:</span> <span class="nb">-></span><span class="p">{</span> <span class="no">Product</span><span class="o">.</span><span class="n">authors</span> <span class="p">}</span>
-  <span class="n">filter</span> <span class="ss">:price</span>
-  <span class="n">filter</span> <span class="ss">:created_at</span>
-
-  <span class="c1"># Customize columns displayed on the index screen in the table</span>
-  <span class="n">index</span> <span class="k">do</span>
-    <span class="n">column</span> <span class="ss">:title</span>
-    <span class="n">column</span> <span class="s2">"Price"</span><span class="p">,</span> <span class="ss">sortable:</span> <span class="ss">:price</span> <span class="k">do</span> <span class="o">|</span><span class="n">product</span><span class="o">|</span>
-      <span class="n">number_to_currency</span> <span class="n">product</span><span class="o">.</span><span class="n">price</span>
-    <span class="k">end</span>
-    <span class="n">default_actions</span>
-  <span class="k">end</span>
-
-<span class="k">end</span>
-</code>
-</pre>
-          </div>
         </div>
-        <h2 class="getting-started-heading">
-          3 Ways to Get Started:
-        </h2>
-        <p class="getting-started">
-          <a href="http://demo.activeadmin.info/admin">Check Out the Live Demo</a> <a href="{{ site.baseurl }}/documentation.html">Read The Documentation</a> <a href="http://github.com/activeadmin/activeadmin">Visit the Git Repository</a>
-        </p>
-      </div>{% include footer.html %}
+      </div>
+      <h2 class="getting-started-heading">
+        3 Ways to Get Started:
+      </h2>
+      <p class="getting-started">
+        <a href="http://demo.activeadmin.info/admin">Check Out the Live Demo</a> <a href="{{ site.baseurl }}/documentation.html">Read The Documentation</a> <a href="http://github.com/varyonic/activeadmin">Visit the Git Repository</a>
+      </p>
     </div>
-    <p>
-      {% include google-analytics.html %}
-    </p>
+      <p id="footer">
+        <div class="left">
+            Copyright 2011 <a href="http://gregbell.ca/">Greg Bell</a> and <a href="http://www.versapay.com/">VersaPay</a>
+        </div>
+      </p>
+    </div>
   </body>
 </html>

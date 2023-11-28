@@ -1,31 +1,30 @@
 ---
-redirect_from: /docs/12-arbre-components.html
+layout: default
+nav_order: 12
+title: Arbo Components
+redirect_from: /docs/12-arbo-components.html
 ---
 
-# Arbre Components
+# Arbo Components
 
-Arbre allows the creation of shareable and extendable HTML components and is
+Arbo allows the creation of shareable and extendable HTML components and is
 used throughout Active Admin to create view components.
 
 ## Text Node
 
 Sometimes it makes sense to insert something into a registered resource like a
 non-breaking space or some text. The text_node method can be used to insert
-these elements into the page inside of other Arbre components or resource
+these elements into the page inside of other Arbo components or resource
 controller functions.
 
 ```ruby
-ActiveAdmin.register Post do
-  show do
-    panel "Post Details" do
-      attributes_table_for post do
-        row :id
-        row 'Tags' do
-          post.tags.each do |tag|
-            a tag, href: admin_post_path(q: {tagged_with_contains: tag})
-            text_node "&nbsp;".html_safe
-          end
-        end
+panel "Post Details" do
+  attributes_table_for post do
+    row :id
+    row 'Tags' do
+      post.tags.each do |tag|
+        a tag, href: admin_post_path(q: {tagged_with_contains: tag})
+        text_node "&nbsp;".html_safe
       end
     end
   end
@@ -41,14 +40,12 @@ will take up the remaining space.
 This will create two stacked panels:
 
 ```ruby
-show do
-  panel "Post Details" do
-    render partial: "details", locals: {post: post}
-  end
+panel "Post Details" do
+  render partial: "details", locals: {post: post}
+end
 
-  panel "Post Tags" do
-    render partial: "tags",    locals: {post: post}
-  end
+panel "Post Tags" do
+  render partial: "tags",    locals: {post: post}
 end
 ```
 
@@ -183,7 +180,7 @@ status_tag 'active', class: 'important', id: 'status_123', label: 'on'
 
 The Tabs component is helpful for saving page real estate. The first tab will be
 the one open when the page initially loads and the rest hidden. You can click
-each tab to toggle back and forth between them. Arbre supports unlimited number
+each tab to toggle back and forth between them. Arbo supports unlimited number
 of tabs.
 
 ```ruby

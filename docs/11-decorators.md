@@ -1,4 +1,7 @@
 ---
+layout: default
+nav_order: 11
+title: Decorators
 redirect_from: /docs/11-decorators.html
 ---
 
@@ -31,14 +34,15 @@ class PostDecorator < Draper::Decorator
 end
 
 # app/admin/post.rb
-ActiveAdmin.register Post do
-  decorate_with PostDecorator
+ActiveAdmin.configure_resource Post do |config|
+  config.decorator_class_name = "PostDecorator"
+end
 
-  index do
-    column :title
-    column :image
-    actions
-  end
+# /app/views/admin/posts/_index_as_table.html.arb
+index_table_for(collection, default_table_options) do |t|
+  column :title
+  column :image
+  actions
 end
 ```
 
@@ -46,14 +50,17 @@ end
 
 By default, ActiveAdmin does *not* decorate the resource used to render forms.
 If you need ActiveAdmin to decorate the forms, you can pass `decorate: true` to the
-form block.
+form page presenter.
 
 ```ruby
-ActiveAdmin.register Post do
-  decorate_with PostDecorator
+ActiveAdmin.configure_resource Post do |config|
+  config.decorator_class_name = "PostDecorator"
 
-  form decorate: true do |f|
-    # ...
-  end
+  config.set_page_options :form, decorate: true
+end
+
+# app/views/admin/posts/_form.html.arb
+active_admin_form_for(resource) do |f|
+  # ...
 end
 ```

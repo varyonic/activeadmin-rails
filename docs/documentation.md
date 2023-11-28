@@ -1,4 +1,5 @@
 ---
+layout: default
 redirect_from: /docs/documentation.html
 ---
 
@@ -13,7 +14,7 @@ on Rails application. To install, simply add the following to your Gemfile:
 
 ```ruby
 # Gemfile
-gem 'activeadmin'
+gem 'activeadmin-rb'
 ```
 
 After updating your bundle, run the installer

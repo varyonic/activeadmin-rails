@@ -1,4 +1,7 @@
 ---
+layout: default
+nav_order: 10
+title: Custom Pages
 redirect_from: /docs/10-custom-pages.html
 ---
 
@@ -19,23 +22,12 @@ Creating a page is as simple as calling `register_page`:
 ```ruby
 # app/admin/calendar.rb
 ActiveAdmin.register_page "Calendar" do
-  content do
-    para "Hello World"
-  end
 end
 ```
 
-Anything rendered within `content` will be the main content on the page.
-Partials behave exactly the same way as they do for resources:
+and defining a partial:
 
 ```ruby
-# app/admin/calendar.rb
-ActiveAdmin.register_page "Calendar" do
-  content do
-    render partial: 'calendar'
-  end
-end
-
 # app/views/admin/calendar/_calendar.html.arb
 table do
   thead do
@@ -80,9 +72,9 @@ ActiveAdmin.register_page "Calendar", namespace: false
 To nest the page within another resource, you can use the `belongs_to` method:
 
 ```ruby
-ActiveAdmin.register Project
+ActiveAdmin.configure_resource Project
 ActiveAdmin.register_page "Status" do
-  belongs_to :project
+  config.belongs_to :project
 end
 ```
 
@@ -93,14 +85,15 @@ and examples.
 
 See the [Sidebars](7-sidebars.md) documentation.
 
-## Add an Action Item
+## Add an Action Link
 
-Just like other resources, you can add action items. The difference here being that
-`:only` and `:except` don't apply because there's only one page it could apply to.
+Just like other resources, you can add action links.
 
 ```ruby
-action_item :view_site do
-  link_to "View Site", "/"
+# app/views/admin/calendar/action_item.html.arb
+div(class: :action_items) do
+  ...
+  action_link "View Site", "/"
 end
 ```
 
@@ -110,17 +103,24 @@ Page actions are custom controller actions (which mirror the resource DSL for
 the same feature).
 
 ```ruby
-page_action :add_event, method: :post do
-  # ...
-  redirect_to admin_calendar_path, notice: "Your event was added"
+# admin/calendar.rb
+# Defines the route `/admin/calendar/add_event` which can handle HTTP POST requests.
+config.add_page_route :add_event, method: :post
+
+# app/controllers/admin/calendar_controller
+class Admin::CalendarController < ActiveAdmin::PageController
+  def add_event
+    # ...
+    redirect_to admin_calendar_path, notice: "Your event was added"
+  end
 end
 
-action_item :add do
-  link_to "Add Event", admin_calendar_add_event_path, method: :post
+# app/views/admin/calendar/action_item.html.arb
+div(class: :action_items) do
+  ...
+  action_link "Add Event", admin_calendar_add_event_path, method: :post
 end
 ```
-
-This defines the route `/admin/calendar/add_event` which can handle HTTP POST requests.
 
 Clicking on the action item will reload page and display the message "Your event
 was added"
@@ -128,7 +128,7 @@ was added"
 Page actions can handle multiple HTTP verbs.
 
 ```ruby
-page_action :add_event, method: [:get, :post] do
+config.add_page_route :add_event, method: [:get, :post] do
   # ...
 end
 ```
@@ -140,10 +140,8 @@ See also the [Custom Actions](8-custom-actions.md#http-verbs) example.
 You can use custom parameter instead of id
 
 ```ruby
-ActiveAdmin.register User do
-  controller do
-    defaults :finder => :find_by_name
-  end
+class Admin::User < ActiveAdmin::ResourceController
+  defaults finder: :find_by_name
 end
 ```
 

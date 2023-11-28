@@ -1,67 +1,55 @@
 ---
+layout: default
+nav_order: 7
+title: Sidebars
 redirect_from: /docs/7-sidebars.html
 ---
 # Sidebar Sections
 
-Sidebars allow you to put whatever content you want on the side the page.
+Sidebars allow you to put whatever content you want on the side of the page.
 
 ```ruby
-sidebar :help do
-  "Need help? Email us at help@example.com"
-end
+config.add_sidebar_section :help
+
+# app/views/admin/posts/_help_sidebar.html.arb
+"Need help? Email us at help@example.com"
 ```
 
 This will generate a sidebar on every page for that resource. The first
 argument is used as the title, and can be a symbol, string, or lambda.
 
-You can also use [Arbre](https://github.com/activeadmin/arbre) to define HTML content.
-
-```ruby
-sidebar :help do
-  ul do
-    li "Second List First Item"
-    li "Second List Second Item"
-  end
-end
-```
-
 Sidebars can be rendered on a specific action by passing `:only` or `:except`.
 
 ```ruby
-sidebar :help, only: :index do
-  "Need help? Email us at help@example.com"
-end
+config.add_sidebar_section :help, only: :index
 ```
 
 If you want to conditionally display a sidebar section, use the :if option and
 pass it a proc which will be rendered within the view context.
 
 ```ruby
-sidebar :help, if: proc{ current_admin_user.super_admin? } do
-  "Only for super admins!"
-end
+config.add_sidebar_section :help, if: proc{ current_admin_user.super_admin? }
 ```
 
 You can access your model as resource in the sidebar too:
 
 ```ruby
-sidebar :custom, only: :show do
-  resource.a_method
-end
+# app/views/admin/posts/_custom_sidebar.html.arb
+resource.a_method
 ```
 
-You can also render a partial:
+You can also override the partial name:
 
 ```ruby
-sidebar :help                    # app/views/admin/posts/_help_sidebar.html.erb
-sidebar :help, partial: 'custom' # app/views/admin/posts/_custom.html.erb
+config.add_sidebar_section :help                    # app/views/admin/posts/_help_sidebar.html.erb
+config.add_sidebar_section :help, partial: 'custom' # app/views/admin/posts/_custom.html.erb
 ```
 
 It's possible to add custom class name to the sidebar parent element by passing
 `class` option:
 
 ```ruby
-sidebar :help, class: 'custom_class'
+config.add_sidebar_section :help, class: 'custom_class'
 ```
 
 By default sidebars are positioned in the same order as they defined, but it's also
@@ -69,7 +57,7 @@ possible to specify their position manually:
 
 ```ruby
 # will push Help section to the top (above default Filters section)
-sidebar :help, priority: 0
+config.add_sidebar_section :help, priority: 0
 ```
 
 Default sidebar priority is `10`.

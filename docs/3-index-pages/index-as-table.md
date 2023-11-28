@@ -1,12 +1,31 @@
 ---
+layout: default
+parent: Customizing the Index Page
+nav_order: 0
+title: Index as a Table
 redirect_from: /docs/3-index-pages/index-as-table.html
 ---
 
 # Index as a Table
 
-By default, the index page is a table with each of the models content columns and links to
-show, edit and delete the object. There are many ways to customize what gets
-displayed.
+The index page is a table with each of the models content columns and links to
+show, edit and delete the object.
+
+By default ActiveAdmin renders :index using `/app/views/active_admin/resource/index.html.arb`,
+which passes a paginated collection to `/app/views/active_admin/resource/_index_as_table.html.arb`:
+
+```ruby
+index_table_for(collection, default_table_options) do |t|
+  selectable_column
+  id_column if resource_class.primary_key
+  active_admin_config.resource_columns.each do |attribute|
+    column attribute
+  end
+  actions
+end
+```
+
+There are many ways to customize what gets displayed.
 
 ## Defining Columns
 
@@ -14,7 +33,8 @@ To display an attribute or a method on a resource, simply pass a symbol into the
 column method:
 
 ```ruby
-index do
+# /app/views/admin/posts/_index_as_table.html.arb
+index_table_for(collection, default_table_options) do |t|
   selectable_column
   column :title
 end
@@ -32,7 +52,8 @@ This can be customized in `config/initializers/active_admin.rb`.
 If the default title does not work for you, pass it as the first argument:
 
 ```ruby
-index do
+# /app/views/admin/posts/_index_as_table.html.arb
+index_table_for(collection, default_table_options) do |t|
   selectable_column
   column "My Custom Title", :title
 end
@@ -45,7 +66,8 @@ For example, say we wanted a "Title" column that links to the posts admin screen
 The block is called once for each resource, which is passed as an argument to the block.
 
 ```ruby
-index do
+# /app/views/admin/posts/_index_as_table.html.arb
+index_table_for(collection, default_table_options) do |t|
   selectable_column
   column "Title" do |post|
     link_to post.title, admin_post_path(post)
@@ -58,7 +80,8 @@ end
 To setup links to View, Edit and Delete a resource, use the `actions` method:
 
 ```ruby
-index do
+# /app/views/admin/posts/_index_as_table.html.arb
+index_table_for(collection, default_table_options) do |t|
   selectable_column
   column :title
   actions
@@ -68,7 +91,8 @@ end
 You can also append custom links to the default links:
 
 ```ruby
-index do
+# /app/views/admin/posts/_index_as_table.html.arb
+index_table_for(collection, default_table_options) do |t|
   selectable_column
   column :title
   actions do |post|
@@ -80,7 +104,8 @@ end
 Or forego the default links entirely:
 
 ```ruby
-index do
+# /app/views/admin/posts/_index_as_table.html.arb
+index_table_for(collection, default_table_options) do |t|
   column :title
   actions defaults: false do |post|
     item "View", admin_post_path(post)
@@ -91,7 +116,8 @@ end
 Or append custom action with custom html via arbre:
 
 ```ruby
-index do
+# /app/views/admin/posts/_index_as_table.html.arb
+index_table_for(collection, default_table_options) do |t|
   column :title
   actions do |post|
     a "View", href: admin_post_path(post)
@@ -102,7 +128,8 @@ end
 In case you prefer to list actions links in a dropdown menu:
 
 ```ruby
-index do
+# /app/views/admin/posts/_index_as_table.html.arb
+index_table_for(collection, default_table_options) do |t|
   selectable_column
   column :title
   actions dropdown: true do |post|
@@ -114,7 +141,8 @@ end
 In addition, you can insert the position of the row in the greater collection by using the index_column special command:
 
 ```ruby
-index do
+# /app/views/admin/posts/_index_as_table.html.arb
+index_table_for(collection, default_table_options) do |t|
   selectable_column
   index_column
   column :title
@@ -134,7 +162,8 @@ By default, this is the column on the resource's table that the attribute corres
 Otherwise, any attribute that the resource collection responds to can be used.
 
 ```ruby
-index do
+# /app/views/admin/posts/_index_as_table.html.arb
+index_table_for(collection, default_table_options) do |t|
   column :title, sortable: :title do |post|
     link_to post.title, admin_post_path(post)
   end
@@ -144,7 +173,8 @@ end
 You can turn off sorting on any column by passing false:
 
 ```ruby
-index do
+# /app/views/admin/posts/_index_as_table.html.arb
+index_table_for(collection, default_table_options) do |t|
   column :title, sortable: false
 end
 ```
@@ -153,7 +183,8 @@ It's also possible to sort by PostgreSQL's hstore column key. You should set `so
 option to a `column->'key'` value:
 
 ```ruby
-index do
+# /app/views/admin/posts/_index_as_table.html.arb
+index_table_for(collection, default_table_options) do |t|
   column :keywords, sortable: "meta->'keywords'"
 end
 ```
@@ -163,6 +194,7 @@ end
 It is also possible to use database specific expressions and options for sorting by column
 
 ```ruby
+# /app/views/admin/posts/_index_as_table.html.arb
 order_by(:title) do |order_clause|
    if order_clause.order == 'desc'
      [order_clause.to_sql, 'NULLS LAST'].join(' ')
@@ -171,7 +203,7 @@ order_by(:title) do |order_clause|
    end
 end
 
-index do
+index_table_for(collection, table_options) do |t|
   column :title
 end
 ```
@@ -184,9 +216,9 @@ can't sort by associated objects. Though with a few simple changes, you can.
 Assuming you're on the Books index page, and Book has_one Publisher:
 
 ```ruby
-controller do
-  def scoped_collection
-    super.includes :publisher # prevents N+1 queries to your database
+Admin::PostsController < ActiveAdmin::ResourceController
+  def apply_includes(collection)
+    collection.includes :publisher # prevents N+1 queries to your database
   end
 end
 ```
@@ -194,7 +226,8 @@ end
 Then it's simple to sort by any Publisher attribute from within the index table:
 
 ```ruby
-index do
+# /app/views/admin/posts/_index_as_table.html.arb
+index_table_for(collection, default_table_options) do |t|
   column :publisher, sortable: 'publishers.name'
 end
 ```
@@ -207,7 +240,8 @@ easily do things that show or hide columns based on the current context.
 For example, if you were using CanCan:
 
 ```ruby
-index do
+# /app/views/admin/posts/_index_as_table.html.arb
+index_table_for(collection, default_table_options) do |t|
   column :title, sortable: false
   column :secret_data if can? :manage, Post
 end

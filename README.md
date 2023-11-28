@@ -43,14 +43,14 @@ We try not to reinvent the wheel, so Active Admin is built with other open sourc
 
 Tool                  | Description
 --------------------- | -----------
-[Arbre]               | Ruby -> HTML, just like that.
+[Arbo]                | HTML Views in Ruby.
 [Devise]              | Powerful, extensible user authentication
 [Formtastic]          | A Rails form builder plugin with semantically rich and accessible markup
 [Inherited Resources] | Simplifies controllers with pre-built RESTful controller actions
 [Kaminari]            | Elegant pagination for any sort of collection
 [Ransack]             | Provides a simple search API to query your data
 
-[Arbre]: https://github.com/activeadmin/arbre
+[Arbo]: https://github.com/varyonic/arbo
 [Devise]: https://github.com/plataformatec/devise
 [Formtastic]: https://github.com/justinfrench/formtastic
 [Inherited Resources]: https://github.com/activeadmin/inherited_resources
@@ -61,15 +61,15 @@ Tool                  | Description
 [rubygems]: https://rubygems.org/gems/activeadmin-rb
 [actions_badge]: https://github.com/varyonic/activeadmin/workflows/ci/badge.svg
 [actions]: https://github.com/varyonic/activeadmin/actions
-[codeclimate_badge]: https://api.codeclimate.com/v1/badges/779e407d22bacff19733/maintainability
+[codeclimate_badge]: https://api.codeclimate.com/v1/badges/1698787497cc7d4c7c88/maintainability
 [codeclimate]: https://codeclimate.com/github/varyonic/activeadmin/maintainability
-[codecov_badge]: https://codecov.io/gh/varyonic/activeadmin/branch/master/graph/badge.svg
+[codecov_badge]: https://codecov.io/gh/varyonic/activeadmin/branch/main/graph/badge.svg
 [codecov]: https://codecov.io/gh/varyonic/activeadmin
-[inch_badge]: http://inch-ci.org/github/varyonic/activeadmin.svg?branch=master
+[inch_badge]: http://inch-ci.org/github/varyonic/activeadmin.svg?branch=main
 [inch]: http://inch-ci.org/github/varyonic/activeadmin
 
 [docs]: http://activeadmin.info/0-installation.html
 [demo]: http://demo.activeadmin.info/admin
 [wiki]: https://github.com/varyonic/activeadmin/wiki
 [stackoverflow]: http://stackoverflow.com/questions/tagged/activeadmin
-[contributing]: https://github.com/varyonic/activeadmin/blob/master/CONTRIBUTING.md
+[contributing]: https://github.com/varyonic/activeadmin/blob/main/CONTRIBUTING.md
