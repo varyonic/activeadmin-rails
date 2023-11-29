@@ -188,7 +188,7 @@ menu in the system; you can provide your own menu to be rendered in its place.
 ActiveAdmin.setup do |config|
   config.namespace :admin do |admin|
     admin.build_menu :utility_navigation do |menu|
-      menu.add label: "ActiveAdmin.info", url: "http://www.activeadmin.info",
+      menu.add label: "ActiveAdmin.org", url: "http://www.activeadmin.org",
                                           html_options: { target: :blank }
       admin.add_current_user_to_menu  menu
       admin.add_logout_button_to_menu menu

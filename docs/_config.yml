@@ -10,6 +10,6 @@ aux_links:
   "Documentation":
     - "/documentation"
   "Try It Now!":
-    - "//demo.activeadmin.info/admin"
+    - "//demo.activeadmin.org/admin"
   "Get the Code":
     - "//github.com/varyonic/activeadmin"

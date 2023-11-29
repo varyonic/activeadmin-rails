@@ -111,7 +111,7 @@ RSpec.describe ActiveAdmin::Namespace do
     let(:namespace){ ActiveAdmin::Namespace.new(application, :admin) }
     let(:menu) do
       namespace.build_menu :utility_navigation do |menu|
-        menu.add label: "ActiveAdmin.info", url: "http://www.activeadmin.info", html_options: { target: :blank }
+        menu.add label: "ActiveAdmin.org", url: "http://www.activeadmin.org", html_options: { target: :blank }
         namespace.add_logout_button_to_menu menu, 1, class: "matt"
       end
       namespace.fetch_menu(:utility_navigation)
@@ -123,8 +123,8 @@ RSpec.describe ActiveAdmin::Namespace do
     end
 
     it "should have a static link with a target of :blank" do
-      expect(menu["ActiveAdmin.info"]).to_not eq nil
-      expect(menu["ActiveAdmin.info"].html_options).to include(target: :blank)
+      expect(menu["ActiveAdmin.org"]).to_not eq nil
+      expect(menu["ActiveAdmin.org"].html_options).to include(target: :blank)
     end
 
   end

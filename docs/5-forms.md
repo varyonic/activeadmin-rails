@@ -122,7 +122,7 @@ end
 ```
 
 *NOTE: In addition to using `has_many` as illustrated above, you'll need to add 
-`accepts_nested_attributes` to your parent model and [configure strong parameters](https://activeadmin.info/2-resource-customization.html)*
+`accepts_nested_attributes` to your parent model and [configure strong parameters](https://activeadmin.org/2-resource-customization.html)*
 
 The `:allow_destroy` option adds a checkbox to the end of the nested form allowing
 removal of the child object upon submission. Be sure to set `allow_destroy: true`

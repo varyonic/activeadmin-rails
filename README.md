@@ -68,8 +68,8 @@ Tool                  | Description
 [inch_badge]: http://inch-ci.org/github/varyonic/activeadmin.svg?branch=main
 [inch]: http://inch-ci.org/github/varyonic/activeadmin
 
-[docs]: http://activeadmin.info/0-installation.html
-[demo]: http://demo.activeadmin.info/admin
+[docs]: http://activeadmin.org/0-installation.html
+[demo]: http://demo.activeadmin.org/admin
 [wiki]: https://github.com/varyonic/activeadmin/wiki
 [stackoverflow]: http://stackoverflow.com/questions/tagged/activeadmin
 [contributing]: https://github.com/varyonic/activeadmin/blob/main/CONTRIBUTING.md
