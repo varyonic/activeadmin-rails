@@ -649,7 +649,7 @@ body #nav a {
 body #features {
   padding-top: 0;
   clear: both;
-  background: url("../images/features.png") 0 0 no-repeat;
+  background: url("./images/features.png") 0 0 no-repeat;
   margin: 0 -35px;
   overflow: visible;
   min-height: 569px;
