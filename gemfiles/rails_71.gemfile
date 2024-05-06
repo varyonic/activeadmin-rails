@@ -11,7 +11,6 @@ gem 'devise', '>= 4.9.3'
 gem 'rack', '~> 2.2'
 gem 'bootsnap'
 gem 'draper'
-gem 'sqlite3', platforms: :mri
 gem 'activerecord-jdbcsqlite3-adapter', '>= 60.0.x', platform: :jruby
 
 gemspec path: '../'
