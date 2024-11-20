@@ -14,6 +14,9 @@ jobs:
     strategy:
       matrix:
         include:
+          - ruby: { name: 3.3, value: 3.3.6 }
+            deps: rails_71
+            os: ubuntu-24.04
           - ruby: { name: 3.2, value: 3.2.2 }
             deps: rails_71
             os: ubuntu-22.04
@@ -23,22 +26,16 @@ jobs:
           - ruby: { name: 3.2, value: 3.2.2 }
             deps: rails_70_hotwire
             os: ubuntu-22.04
-          - ruby: { name: 3.0, value: 3.0.1 }
+          - ruby: { name: 3.1, value: 3.1.6 }
             deps: rails_70
             os: ubuntu-22.04
-          - ruby: { name: 3.0, value: 3.0.1 }
+          - ruby: { name: 3.1, value: 3.1.6 }
             deps: rails_70_hotwire
             os: ubuntu-22.04
           - ruby: { name: 3.1, value: 3.1.2 }
             deps: rails_61
             os: ubuntu-22.04
           - ruby: { name: 3.1, value: 3.1.2 }
-            deps: rails_61_turbolinks
-            os: ubuntu-22.04
-          - ruby: { name: 3.0, value: 3.0.1 }
-            deps: rails_61
-            os: ubuntu-22.04
-          - ruby: { name: 3.0, value: 3.0.1 }
             deps: rails_61_turbolinks
             os: ubuntu-22.04
       fail-fast: false
