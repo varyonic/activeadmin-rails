@@ -2,8 +2,12 @@ module ActiveAdmin
   module Deprecation
     module_function
 
+    def deprecator # :nodoc:
+      @deprecator ||= ActiveSupport::Deprecation.new
+    end
+
     def warn(message, callstack = caller)
-      ActiveSupport::Deprecation.warn "Active Admin: #{message}", callstack
+      deprecator.warn "Active Admin: #{message}", callstack
     end
 
   end
