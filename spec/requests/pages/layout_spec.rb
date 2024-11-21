@@ -46,6 +46,7 @@ RSpec.describe 'layout', type: :request do
     it "should display appropriate text" do
       get edit_user_path(user), headers: { 'HTTP_USER_AGENT' => user_agent }
 
+      pending if ActiveAdmin::Dependency.rails >= '7.2' # Rails 7.2+ provides its own browser warning
       expect(page).to have_css 'div.unsupported_browser h1', text: /no longer supports Internet Explorer versions 8/
       expect(page).to have_css 'div.unsupported_browser p', text: /upgrade your browser/
       expect(page).to have_css 'div.unsupported_browser p', text: /turn off "Compatibility View"/
