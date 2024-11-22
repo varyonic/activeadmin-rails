@@ -211,6 +211,8 @@ directory File.expand_path('../templates/admin', __FILE__), 'app/admin'
 # Add predefined policies
 directory File.expand_path('../templates/policies', __FILE__), 'app/policies'
 
+directory File.expand_path("templates/public", __dir__), "public", force: true
+
 if ENV['RAILS_ENV'] != 'test'
   inject_into_file 'config/routes.rb', "\n  root to: redirect('admin')", after: /.*routes.draw do/
 end
