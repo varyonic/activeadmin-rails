@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.7.1 [☰](https://github.com/varyonic/activeadmin-rails/compare/v1.7.0...v1.7.1)
+
+#### Minor
+
+* Rails 7.2 support. [#53] by [@varyonic]
+* Verify Ruby 3.3 support. [#50] by [@varyonic]
+
+### Bug Fixes
+
+* Fix streaming CSV export. [#52] by [@varyonic]
+
+### Security Fixes
+
+* Don't restrict jquery-ui-rails upgrades. [#49] by [@varyonic]
+
 ## 1.7.0 [☰](https://github.com/varyonic/activeadmin-rails/compare/v1.6.0...v1.7.0)
 
 This release replaces Arbre::Pages with a conventional Rails layout and view partials.

@@ -17,7 +17,6 @@ but Varyonic has no plans to provide commercial support - let us know if you do.
 [![Github Actions  ][actions_badge]][actions]
 [![Quality         ][codeclimate_badge]][codeclimate]
 [![Coverage        ][codecov_badge]][codecov]
-[![Inch CI         ][inch_badge]][inch]
 
 ## Goals
 
@@ -72,8 +71,6 @@ Tool                  | Description
 [codeclimate]: https://codeclimate.com/github/varyonic/activeadmin/maintainability
 [codecov_badge]: https://codecov.io/gh/varyonic/activeadmin/branch/main/graph/badge.svg
 [codecov]: https://codecov.io/gh/varyonic/activeadmin
-[inch_badge]: http://inch-ci.org/github/varyonic/activeadmin.svg?branch=main
-[inch]: http://inch-ci.org/github/varyonic/activeadmin
 
 [docs]: http://activeadmin.org/0-installation.html
 [demo]: http://demo.activeadmin.org/admin
