@@ -20,6 +20,7 @@ When /^(.*) within (.*[^:]):$/ do |step_name, parent, table_or_string|
 end
 
 Given /^I am on (.+)$/ do |page_name|
+  Rails.application.reload_routes!
   visit path_to(page_name)
 end
 
