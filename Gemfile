@@ -5,7 +5,6 @@ gem 'arbo'
 # Optional dependencies
 gem 'cancan'
 gem 'pundit'
-gem 'sqlite3', '~> 1.x'
 gem 'jruby-openssl', '~> 0.10.1', platforms: :jruby
 
 # Utility gems used in both development & test environments
