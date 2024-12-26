@@ -15,6 +15,9 @@ jobs:
       matrix:
         include:
           - ruby: { name: 3.3, value: 3.3.6 }
+            deps: rails_80
+            os: ubuntu-24.04
+          - ruby: { name: 3.3, value: 3.3.6 }
             deps: rails_72
             os: ubuntu-24.04
           - ruby: { name: 3.3, value: 3.3.6 }
