@@ -7,7 +7,7 @@ module ActiveAdmin
     end
 
     def warn(message, callstack = caller)
-      deprecator.warn "Active Admin: #{message}", callstack
+      deprecator.warn "Active Admin: #{message}"
     end
 
   end
