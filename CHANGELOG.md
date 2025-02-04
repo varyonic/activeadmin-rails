@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.7.2 [☰](https://github.com/varyonic/activeadmin-rails/compare/v1.7.1...v1.7.2)
+
+#### Minor
+
+* Rails 8.0 support. [#54] by [@varyonic]
+
 ## 1.7.1 [☰](https://github.com/varyonic/activeadmin-rails/compare/v1.7.0...v1.7.1)
 
 #### Minor
@@ -462,6 +468,11 @@ Please check [0-6-stable] for previous changes.
 [#42]: https://github.com/varyonic/activeadmin-rails/pull/42
 [#43]: https://github.com/varyonic/activeadmin-rails/pull/43
 [#45]: https://github.com/varyonic/activeadmin-rails/pull/45
+[#49]: https://github.com/varyonic/activeadmin-rails/pull/49
+[#50]: https://github.com/varyonic/activeadmin-rails/pull/50
+[#52]: https://github.com/varyonic/activeadmin-rails/pull/52
+[#53]: https://github.com/varyonic/activeadmin-rails/pull/53
+[#54]: https://github.com/varyonic/activeadmin-rails/pull/54
 
 [@5t111111]: https://github.com/5t111111
 [@aarek]: https://github.com/aarek
