@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.5'
 
   s.add_dependency 'arbo'
+  s.add_dependency 'csv'
   s.add_dependency 'formtastic'
   s.add_dependency 'formtastic_i18n'
   s.add_dependency 'inherited_resources', '>= 1.13.1'
