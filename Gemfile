@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'arbo'
+gem 'jquery-ui-rails', '< 8.x' # Pending release of fixed version, see jquery/jquery-ui#2344
 
 # Optional dependencies
 gem 'cancan'
