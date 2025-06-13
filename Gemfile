@@ -43,7 +43,7 @@ group :test do
   gem 'simplecov', require: false # Test coverage generator. Go to /coverage/ after running tests
   gem 'codecov', require: false # Test coverage website. Go to https://codecov.io
   gem 'cucumber-rails', require: false
-  gem 'cucumber'
+  gem 'cucumber', '< 10'
   gem 'database_cleaner'
   gem 'jasmine'
   gem 'launchy'
