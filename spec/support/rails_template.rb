@@ -162,19 +162,13 @@ gsub_file 'config/environments/test.rb', /  config.(cache_classes|enable_reloadi
 
   config.active_record.maintain_test_schema = false
 
-  if Rails::VERSION::MAJOR >= 6
-    config.hosts = [
-      IPAddr.new("0.0.0.0/0"), # All IPv4 addresses.
-      IPAddr.new("::/0"),      # All IPv6 addresses.
-      "www.example.com",
-      "localhost"              # The localhost reserved domain.
-    ]
-  end
+  config.hosts = [
+    IPAddr.new("0.0.0.0/0"), # All IPv4 addresses.
+    IPAddr.new("::/0"),      # All IPv6 addresses.
+    "www.example.com",
+    "localhost"              # The localhost reserved domain.
+  ]
 RUBY
-
-# TODO: remove this line after the STI pre-loading is fixed
-# The test commenting.feature/Commenting on a STI subclass fails with zeitwerk autoloader
-inject_into_file 'config/environments/test.rb', "\n  config.autoloader = :classic\n", after: 'Rails.application.configure do' if Rails::VERSION::MAJOR == 6
 
 # Override and revert rails/rails#46699 for now
 gsub_file "config/database.yml", /storage\/(.+)\.sqlite3$/, 'db/\1.sqlite3'
