@@ -291,7 +291,7 @@ module ActiveAdmin
         end
       else
         eval "class ::#{config.controller_name} < ActiveAdmin::ResourceController; end"
-        config.controller.const_set(:DISPOSABLE, true)
+        config.controller.const_set(:DISPOSABLE, true) unless config.controller.const_defined?(:DISPOSABLE)
       end
       config.controller.active_admin_config = config
     end
