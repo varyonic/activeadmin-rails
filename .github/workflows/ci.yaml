@@ -26,18 +26,6 @@ jobs:
           - ruby: { name: 3.2, value: 3.2.2 }
             deps: rails_71
             os: ubuntu-22.04
-          - ruby: { name: 3.2, value: 3.2.2 }
-            deps: rails_70
-            os: ubuntu-22.04
-          - ruby: { name: 3.2, value: 3.2.2 }
-            deps: rails_70_hotwire
-            os: ubuntu-22.04
-          - ruby: { name: 3.1, value: 3.1.6 }
-            deps: rails_70
-            os: ubuntu-22.04
-          - ruby: { name: 3.1, value: 3.1.6 }
-            deps: rails_70_hotwire
-            os: ubuntu-22.04
       fail-fast: false
 
     env:
