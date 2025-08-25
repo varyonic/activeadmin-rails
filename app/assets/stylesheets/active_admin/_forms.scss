@@ -1,4 +1,5 @@
 @use "sass:color";
+@use "sass:math";
 // -------------------------------------- Active Admin Forms
 form {
   /* Reset margins & Padding */
@@ -288,10 +289,10 @@ $sidebar-inner-content-width: $sidebar-width - ($section-padding * 2);
 
 $filter-field-seperator-width: 12px;
 
-$side-by-side-filter-input-width: ($sidebar-inner-content-width / 2) - ($text-input-horizontal-padding * 2) - $filter-field-seperator-width;
-$side-by-side-filter-select-width: ($sidebar-inner-content-width / 2) - $filter-field-seperator-width;
+$side-by-side-filter-input-width: math.div($sidebar-inner-content-width, 2) - ($text-input-horizontal-padding * 2) - $filter-field-seperator-width;
+$side-by-side-filter-select-width: math.div($sidebar-inner-content-width, 2) - $filter-field-seperator-width;
 
-$date-range-filter-input-width: ($sidebar-inner-content-width / 2) - ($filter-field-seperator-width / 2);
+$date-range-filter-input-width: math.div($sidebar-inner-content-width, 2) - math.div($filter-field-seperator-width, 2);
 
 form.filter_form {
   .filter_form_field {
