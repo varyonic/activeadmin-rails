@@ -1,3 +1,4 @@
+@use "sass:color";
 // -------------------------------------- Active Admin Forms
 form {
   /* Reset margins & Padding */
@@ -218,7 +219,7 @@ form {
 
   /* semantic_errors */
   ul.errors {
-    background: lighten($error-color, 60%);
+    background: color.adjust($error-color, $lightness: 60%);
     @include rounded(4px);
     color: $error-color;
     font-weight: bold;

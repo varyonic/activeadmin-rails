@@ -1,5 +1,7 @@
+@use "sass:color";
+
 .status_tag {
-  background: darken($secondary-color, 15%);
+  background: color.adjust($secondary-color, $lightness: -15%);
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 0.15em;
