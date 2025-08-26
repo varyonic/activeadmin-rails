@@ -10,6 +10,7 @@
   margin: 0;
   padding: 10px $horizontal-page-margin;
   z-index: 800;
+  @include clearfix;
 
   #titlebar_left, #titlebar_right {
     height: 50px;
@@ -33,8 +34,11 @@
     span.action_item {
       & > a, & > .dropdown_menu > a {
         @include light-button;
-        padding: 12px 17px 10px;
-        margin: 0px;
+
+        & {
+          padding: 12px 17px 10px;
+          margin: 0px;
+        }
       }
     }
   }
