@@ -1,11 +1,16 @@
+@use "sass:color";
+
 .dropdown_menu {
   display: inline;
 
   .dropdown_menu_button {
     @include light-button;
-    position: relative;
-    padding-right: 22px !important;
-    cursor: pointer;
+
+    & {
+      position: relative;
+      padding-right: 22px !important;
+      cursor: pointer;
+    }
 
     &:before {
       content: ' ';
@@ -43,7 +48,7 @@
     height: 0;
     border-width: 0 6px 6px;
     border-style: solid;
-    border-color: darken($primary-color, 4%) transparent;
+    border-color: color.adjust($primary-color, $lightness: -4%) transparent;
     z-index: 100;
 
     // The nipple's inner shadow
@@ -55,7 +60,7 @@
       height: 0;
       border-width: 0 5px 5px;
       border-style: solid;
-      border-color: lighten($primary-color, 15%) transparent;
+      border-color: color.adjust($primary-color, $lightness: 15%) transparent;
       left: -5px;
       top: 1px;
     }
@@ -69,7 +74,7 @@
       height: 0;
       border-width: 0 5px 5px;
       border-style: solid;
-      border-color: lighten($primary-color, 4%) transparent;
+      border-color: color.adjust($primary-color, $lightness: 4%) transparent;
       left: -5px;
       top: 2px;
     }
@@ -80,12 +85,12 @@
     position: absolute;
     background-color: white;
     padding: 2px;
-    box-shadow: rgba(0,0,0,0.4) 0 1px 3px, lighten($primary-color, 15%) 0px 1px 0px 0px inset;
+    box-shadow: rgba(0,0,0,0.4) 0 1px 3px, color.adjust($primary-color, $lightness: 15%) 0px 1px 0px 0px inset;
     background-color: $primary-color;
-    @include gradient(lighten($primary-color, 4%), darken($primary-color, 5%));
-    border: solid 1px darken($primary-color, 10%);
-    border-top-color: darken($primary-color, 4%);
-    border-bottom-color: darken($primary-color, 17%);
+    @include gradient(color.adjust($primary-color, $lightness: 4%), color.adjust($primary-color, $lightness: -5%));
+    border: solid 1px color.adjust($primary-color, $lightness: -10%);
+    border-top-color: color.adjust($primary-color, $lightness: -4%);
+    border-bottom-color: color.adjust($primary-color, $lightness: -17%);
     border-radius: 4px;
     z-index: 2000;
     display: none;
@@ -93,8 +98,8 @@
     .dropdown_menu_list {
       display: block;
       background-color: #FFF;
-      border: solid 1px darken($primary-color, 10%);
-      box-shadow: lighten($primary-color, 5%) 0px 1px 0px 0px;
+      border: solid 1px color.adjust($primary-color, $lightness: -10%);
+      box-shadow: color.adjust($primary-color, $lightness: 5%) 0px 1px 0px 0px;
       border-radius: 3px;
       margin: 0;
       overflow: hidden;
@@ -140,11 +145,11 @@
         }
 
         &:last-child {
+          border: none;
           a {
             border-bottom-left-radius: 2px;
             border-bottom-right-radius: 2px;
           }
-          border: none;
         }
       }
     }

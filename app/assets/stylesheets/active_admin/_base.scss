@@ -2,6 +2,9 @@
 // Normalize
 @import "active_admin/normalize";
 
+// Load variables and mixins so components have access to them
+@import "active_admin/mixins";
+
 // Partials
 @import "active_admin/typography";
 @import "active_admin/header";

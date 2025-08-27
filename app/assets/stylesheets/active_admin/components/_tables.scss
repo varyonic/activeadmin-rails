@@ -1,3 +1,4 @@
+@use "sass:color";
 //= depend_on_asset "active_admin/orderable.png"
 // ----------------------------------- Tables
 
@@ -40,7 +41,7 @@ table.index_table {
     &.sorted-desc a {  background-position: 0 -56px;}
 
     &.sorted-asc, &.sorted-desc {
-      @include gradient(darken($secondary-gradient-start, 5%), darken($secondary-gradient-stop, 5%));
+      @include gradient(color.adjust($secondary-gradient-start, $lightness: -5%), color.adjust($secondary-gradient-stop, $lightness: -5%));
     }
 
     &:last-child {
@@ -75,7 +76,7 @@ table.index_table {
     text-transform: uppercase;
     border-bottom: 1px solid #ccc;
   }
-  tr.odd td { background: darken($table-stripe-color, 3%); }
+  tr.odd td { background: color.adjust($table-stripe-color, $lightness: -3%); }
   tr.even td { background: $table-stripe-color; }
 }
 
@@ -84,7 +85,7 @@ table.index_table {
 
 .attributes_table table {
   col.even { background: $table-stripe-color; }
-  col.odd  { background: darken($table-stripe-color, 3%); }
+  col.odd  { background: color.adjust($table-stripe-color, $lightness: -3%); }
   th, td {
     padding: 8px $cell-horizontal-padding 6px $cell-horizontal-padding;
     vertical-align: top;

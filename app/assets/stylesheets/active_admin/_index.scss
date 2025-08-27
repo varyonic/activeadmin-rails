@@ -1,0 +1,7 @@
+// Modern module entry for ActiveAdmin styles
+// Re-export mixins (variables and helpers) and the base bundle.
+// Consumers can:
+// - @use "active_admin";
+// - @use "active_admin" with ($sidebar-width: 242px);
+
+@forward "base";
